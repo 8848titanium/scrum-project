@@ -1,1 +1,2 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-c66648af7eb3fe8bc4f294546bfd86ef473780cde1dea487d3c4ff354943c9ae.svg)](https://classroom.github.com/online_ide?assignment_repo_id=8146192&assignment_repo_type=AssignmentRepo)
+# This is an learning application developed by Group A3. 
+Group A3 members: Fangyu Li, Xing Gao, Chenyuhan Shen, Jiawei Guo, Yue Cao, Weijun Chew, Junwen Zhang, Jiaqi Zhao.
