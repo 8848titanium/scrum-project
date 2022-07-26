@@ -1,0 +1,102 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:"Rubik",'Roboto'
+}
+
+body {
+    background-image:url('background.png');
+    background-size: 100% 100%;
+}
+
+.header{
+    width: 100%;
+    height: 100vh;
+    padding: 0 10%;
+}
+
+nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:20px 0;
+}
+
+nav h1{
+    font-size: 21px;
+    color:#FFF;
+    font-weight:bolder;
+    position:fixed;
+    left:106px;
+    top:53px;
+}
+
+nav ul li {
+    font-size: 21px;
+    color:#1E3A81;
+    font-weight:bold;
+    text-decoration: none;
+    display: inline-block;
+    list-style: none;
+    margin: 10px 30px;   
+}
+
+.btn {
+    background:#fff;
+    color:#1E3A81;
+    padding: 10px 30px;
+    border-radius: 3px;
+    cursor:pointer;
+}
+
+.content{
+    margin-top: 100px;
+    max-width: 600px;
+}
+
+.content h1 {
+    font-size: 90px;
+    margin-bottom: 20px;
+    color:#1E3A81;
+    white-space: nowrap;
+}
+
+.content p {
+    font-size: 20px;
+    color:#384770;
+    white-space: nowrap;
+    font-weight:bolder;
+}
+
+.Join-quiz {
+    position:fixed;
+    width:329px;
+    left:103px;
+    bottom:54px;
+    background-color: #FFF;
+}
+
+.Join-quiz button {
+    font-size:32px;
+    font-weight:bolder;
+    color:#FFF;
+    top:0;
+    right:0;
+    height:100%;
+    position:absolute;
+    background-color: #95B8BA;
+    border:none;
+    outline:none;
+    cursor: pointer;
+    border-radius:15%;
+}
+
+.Join-quiz input{
+    width:100%;
+    height: 54px;
+    outline: none;
+    border:none;
+    border-radius:15px;
+}
