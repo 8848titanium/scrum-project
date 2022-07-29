@@ -94,6 +94,7 @@ nav ul li {
     left:103px;
     bottom:54px;
     background-color: #FFF;
+    border-radius: 20%
 }
 
 .Join-quiz button {
@@ -119,6 +120,7 @@ nav ul li {
     border-radius:15px;
     font-size:32px;
 }
+
 
 .login{
     margin:0;
