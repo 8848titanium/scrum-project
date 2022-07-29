@@ -15,7 +15,7 @@ def sign_in_display():
     return render_template('login.html')
   
  
- @app.route('/register_display', methods=['POST', 'GET'])
+@app.route('/register_display', methods=['POST', 'GET'])
 def sign_up_display():
     return render_template('register.html')
  
