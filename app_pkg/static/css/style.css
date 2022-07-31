@@ -162,6 +162,11 @@ nav ul li {
     margin-bottom: 20px;
 }
 
+.loginbox input[type="checkbox"] {
+    width: 10px;
+    zoom: 150%;
+}
+
 .loginbox input[type="text"], input[type="password"] {
     width: 300px;
     border: none;
@@ -192,9 +197,9 @@ nav ul li {
 }
 
 .loginbox a {
-    text-align: right;
     text-decoration: none;
-    font-size: 12px;
+    text-align: center;
+    font-size: 15px;
     line-height: 10px;
     color: red;
 }
