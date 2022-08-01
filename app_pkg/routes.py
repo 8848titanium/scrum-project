@@ -21,4 +21,8 @@ def login():
 
 @app.route('/signup', methods=['POST', 'GET'])
 def register():
-    return render_template('Signup.html')
+    return render_template('signup.html')
+
+@app.route('/quizlist', methods=['POST', 'GET'])
+def register():
+    return render_template('quzilist.html')
