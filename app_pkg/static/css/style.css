@@ -151,6 +151,11 @@ nav ul li {
     font-size: 36px;
 }
 
+.loginbox h3{
+    padding: 0 0 10px;
+    text-align: center;
+}
+
 .loginbox p {
     margin: 0;
     padding: 0;
@@ -211,7 +216,7 @@ nav ul li {
 .signup {
     margin: 0;
     padding: 0;
-    background-image: url("../css/SignupBackground.png");
+    background-image: url("../css/SignupBackground.jpg");
     background-size: 100% 100%;
     background-position: center;
     font-family: "poppins";
@@ -237,6 +242,11 @@ nav ul li {
     font-size: 36px;
 }
 
+.signupbox h3 {  
+    padding: 0 0 10px;
+    text-align: center;
+}
+
 .signupbox p {
     margin: 0;
     padding: 0;
@@ -255,7 +265,7 @@ nav ul li {
     background: transparent;
     outline: none;
     height: 40px;
-    color: #fff;
+    color: #000;
     font-size: 16px;
 }
 
@@ -266,7 +276,7 @@ nav ul li {
     background: transparent;
     outline: none;
     height: 40px;
-    color: #fff;
+    color: #000;
     font-size: 16px;
 }
 
