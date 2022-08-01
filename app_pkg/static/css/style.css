@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url('../css/Background.png');
+    background-image: url('../css/background.png');
     background-size: 100% 100%;
 }
 
@@ -125,7 +125,7 @@ nav ul li {
 .login {
     margin: 0;
     padding: 0;
-    background-image: url("../css/LoginBackground.png");
+    background-image: url("../css/loginbackground.png");
     background-size: 100% 100%;
     background-position: center;
     font-family: "poppins";
@@ -216,7 +216,7 @@ nav ul li {
 .signup {
     margin: 0;
     padding: 0;
-    background-image: url("../css/SignupBackground.jpg");
+    background-image: url("../css/signupbackground.png");
     background-size: 100% 100%;
     background-position: center;
     font-family: "poppins";
