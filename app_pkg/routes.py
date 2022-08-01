@@ -21,4 +21,4 @@ def login():
 
 @app.route('/signup', methods=['POST', 'GET'])
 def register():
-    return render_template('signup.html')
+    return render_template('Signup.html')
