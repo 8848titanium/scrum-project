@@ -1,0 +1,90 @@
+/* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
+import React from 'react';
+import cn from 'classnames';
+
+import styles from './UntitledPage.module.scss';
+
+export default function UntitledPage(props) {
+  return (
+    <div className={`untitled-page ${cn(styles.block, styles.block_layout)}`}>
+      /*This group structure is not ready for flow layout, please resolve the ❗alone items in pxCode editor.*/
+      <div className={cn(styles.box, styles.box_layout)} />
+      <div className={cn(styles.box, styles.box_layout)} />
+      <div className={cn(styles.box1, styles.box1_layout)} />
+      <div className={cn(styles.box1, styles.box1_layout1)} />
+      <px-posize x="205px 43fr 1192fr" y="629px minmax(0px, 58fr) 213fr" absolute>
+        <h1 className={styles.hero_title}>{'3'}</h1>
+      </px-posize>
+      <div className={cn(styles.box2, styles.box2_layout)} />
+      <h1 className={cn(styles.hero_title1, styles.hero_title1_layout)}>{'Submit'}</h1>
+      <px-posize x="603px 42fr 795fr" y="537px minmax(0px, 58fr) 305fr" absolute>
+        <h1 className={styles.hero_title}>{'2'}</h1>
+      </px-posize>
+      <px-posize x="603px 43fr 794fr" y="631px minmax(0px, 58fr) 211fr" absolute>
+        <h1 className={styles.hero_title}>{'4'}</h1>
+      </px-posize>
+      <px-posize x="69.1% 15.97% 14.93%" y="14px minmax(0px, 48fr) 838fr" absolute>
+        <h1 className={styles.hero_title2_box}>
+          <pre className={styles.hero_title2}>{'30 min  left'}</pre>
+        </h1>
+      </px-posize>
+      <px-posize x="6.53% 25.9% 67.57%" y="14px minmax(0px, 48fr) 838fr" absolute>
+        <h1 className={styles.hero_title3}>{'10 questions in total'}</h1>
+      </px-posize>
+      <div className={cn(styles.block1, styles.block1_layout)}>
+        <div className={cn(styles.box4, styles.box4_layout)} />
+      </div>
+      <div
+        style={{ '--src': `url(${require('assets/7aaf569bd547c973e6f81f873fc1d880.png').default})` }}
+        className={cn(styles.image, styles.image_layout)}
+      />
+      <px-posize x="79px 731fr 630fr" y="443px minmax(0px, 116fr) 341fr" absolute>
+        <h1 className={styles.hero_title4_box}>
+          <pre className={styles.hero_title4}>{'Q2. How many apples are here?\n      '}</pre>
+        </h1>
+      </px-posize>
+      <px-posize x="79px 821fr 540fr" y="755px minmax(0px, 116fr) 29fr" absolute>
+        <h1 className={styles.hero_title5_box}>
+          <pre className={styles.hero_title5}>{'Q3. How do you think of world war?\n      '}</pre>
+        </h1>
+      </px-posize>
+      <div className={cn(styles.box5, styles.box5_layout)} />
+      <div className={cn(styles.box6, styles.box6_layout)} />
+      <div className={cn(styles.box6, styles.box6_layout1)} />
+      <div className={cn(styles.box6, styles.box6_layout2)} />
+      <px-posize x="175px 92fr 1173fr" y="189px minmax(0px, 58fr) 653fr" absolute>
+        <h1 className={styles.hero_title}>{'Cat'}</h1>
+      </px-posize>
+      <px-posize x="550px 174fr 716fr" y="194px minmax(0px, 58fr) 648fr" absolute>
+        <h1 className={styles.hero_title}>{'Catfish'}</h1>
+      </px-posize>
+      <px-posize x="561px 143fr 736fr" y="314px minmax(0px, 58fr) 528fr" absolute>
+        <h1 className={styles.hero_title}>{'Shark'}</h1>
+      </px-posize>
+      <px-posize x="172px 102fr 1166fr" y="312px minmax(0px, 58fr) 530fr" absolute>
+        <h1 className={styles.hero_title}>{'Bird'}</h1>
+      </px-posize>
+      <px-posize x="79px 714fr 647fr" y="93px minmax(0px, 58fr) 749fr" absolute>
+        <h1 className={styles.hero_title}>{'Q1. What kind of animal is this?'}</h1>
+      </px-posize>
+      <div className={cn(styles.box7, styles.box7_layout)} />
+      <px-posize x="203px 35fr 1202fr" y="534px minmax(0px, 58fr) 308fr" absolute>
+        <h1 className={styles.hero_title}>{'1'}</h1>
+      </px-posize>
+      <div
+        style={{ '--src': `url(${require('assets/283b26327915a99c5a9118bb2b2c669f.png').default})` }}
+        className={cn(styles.image1, styles.image1_layout)}
+      />
+      <div
+        style={{ '--src': `url(${require('assets/d3eaed87c64d1394e37fe4939d8a8553.svg').default})` }}
+        className={cn(styles.icon1, styles.icon1_layout)}
+      />
+      <h2 className={cn(styles.medium_title_box, styles.medium_title_box_layout)}>
+        <pre className={styles.medium_title}>{'Mr. Anderson \nis monitoring'}</pre>
+      </h2>
+      <div className={cn(styles.box1, styles.box1_layout2)} />
+    </div>
+  );
+}
+
+UntitledPage.inStorybook = true;

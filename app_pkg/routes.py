@@ -25,4 +25,4 @@ def register():
 
 @app.route('/quizlist', methods=['POST', 'GET'])
 def register():
-    return render_template('quzilist.html')
+    return render_template('quizlist.html')
