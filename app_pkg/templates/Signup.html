@@ -1,32 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-    <!-- body class="login" -->
-    <div class="login">
+    <!-- body class="signup" -->
+    <div class="signup">
         <div class="header">
             <nav>
-                <image src="static/css/logo.png" class="logo"></image>
+                <image src="../static/css/Logo.png" class="logo"></image>
                 <h1>Happy Learning</h1>
             </nav>
         </div>
-        <div class="loginbox">
+        <div class="signupbox">
             <form>
                 <div class="welcome">
-                    <h1>Welcome</h1>
-                    <h3>Login into your account</h3>
+                    <h1>Happy Learning</h1>
+                    <h3>Get Start Now</h3>
                 </div>
-                <p>Username or email</p>
-                <input type="text" name="" placeholder="Enter Username"/>
-                <p>Password:</p>
-                <input type="password" name="" placeholder="Enter password"/>
 
-                <br>
+                <input type="text" name="" placeholder="Full Name"/>
 
-                <label><input type="checkbox">Remember me</label>
+                <input type="text" name="" placeholder="Enter Email"/>
+
+                <input type="password" name="" placeholder="Password"/>
+
+                <input type="password" name="" placeholder="Confirm Password"/>
+
+                <input type="date"/>
                 <br>
-                <input type="submit" name="" value="Login">
+                <a href="#"><input type="submit" name="" value="Create Account and Login"></a>
+
+                <a href="/login">Already have an account?</a>
                 
-                <a href="#">Forgot password?</a>
-                <a href="#">Don't have an account?</a>
             </form>
         </div>
     </div>

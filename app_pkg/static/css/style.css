@@ -6,7 +6,7 @@
 }
 
 body {
-    background-image: url('background.png');
+    background-image: url('../css/Background.png');
     background-size: 100% 100%;
 }
 
@@ -125,7 +125,7 @@ nav ul li {
 .login {
     margin: 0;
     padding: 0;
-    background-image: url("loginbackground.png");
+    background-image: url("../css/LoginBackground.png");
     background-size: 100% 100%;
     background-position: center;
     font-family: "poppins";
@@ -207,3 +207,96 @@ nav ul li {
 .loginbox a:hover {
     color: yellow;
 }
+
+.signup {
+    margin: 0;
+    padding: 0;
+    background-image: url("../css/SignupBackground.png");
+    background-size: 100% 100%;
+    background-position: center;
+    font-family: "poppins";
+}
+
+.signupbox {
+    width: 360px;
+    height: 500px;
+    background: rgba(0, 170, 255, 0.547);
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 20px 30px;
+    border-radius: 10px;
+}
+
+.signupbox h1 {  
+    padding: 0 0 10px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.signupbox p {
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.signupbox input {
+    width: 100px;
+    margin-bottom: 20px;
+}
+
+.signupbox input[type="text"], input[type="password"] {
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.signupbox input[type="date"] {
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+
+.signupbox input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 300px;
+    background: #cbeff7;
+    color: #000;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.signupbox input[type="submit"]:hover {
+    cursor: pointer;
+    background: #1E3A81;
+    color: #fff;
+
+}
+
+.signupbox a {
+    text-decoration: none;
+    text-align: center;
+    font-size: 15px;
+    line-height: 10px;
+    color: red;
+}
+
+.signupbox a:hover {
+    color: yellow;
+}
+
