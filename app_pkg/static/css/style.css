@@ -336,7 +336,7 @@ a {
 	width: 100%;
 }
 
-.header {
+.aboutus {
 	display: inline-block;
 	height: 60px;
 	width: 100%;
@@ -346,19 +346,19 @@ a {
 	min-width: 1220px;
 }
 
-.header .logo {
+.aboutus .logo {
 	margin-left: 10px;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.header .logo img {
+.aboutus .logo img {
 	margin-right: 20px;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.header .logo .title {
+.aboutus .logo .title {
 	font-size: 25px;
 	font-weight: bold;
 	display: inline-block;
@@ -366,7 +366,7 @@ a {
 	padding-top: 10px;
 }
 
-.header .search {
+.aboutus .search {
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 50px;
@@ -377,7 +377,7 @@ a {
 	height: 25px;
 }
 
-.header .search input {
+.aboutus .search input {
 	display: inline-block;
 	vertical-align: middle;
 	background: none;
@@ -388,11 +388,11 @@ a {
 	outline: none;
 }
 
-.header .search input::placeholder {
+.aboutus .search input::placeholder {
 	color: #666666;
 }
 
-.header .search .search-icon {
+.aboutus .search .search-icon {
 	display: inline-block;
 	vertical-align: middle;
 	width: 20px;
@@ -403,36 +403,36 @@ a {
 	cursor: pointer;
 }
 
-.header .functions {
+.aboutus .functions {
 	display: inline-block;
 	margin-left: 50px;
 }
 
-.header .functions .block {
+.aboutus .functions .block {
 	cursor: pointer;
 	display: inline-block;
 	margin-right: 25px;
 }
 
-.header .functions .block span {
+.aboutus .functions .block span {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 3px;
 }
 
-.header .functions .block img {
+.aboutus .functions .block img {
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.header .join-us {
+.aboutus .join-us {
 	position: relative;
 	top: 20px;
 	float: right;
 	right: 50px;
 }
 
-.header .join-us a {
+.aboutus .join-us a {
 	padding: 10px 50px;
 	background-color: #94ccd1;
 	font-size: 20px;
