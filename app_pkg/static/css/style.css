@@ -154,13 +154,13 @@ nav ul li {
     border-radius: 10px;
 }
 
-.loginbox h1 {  
+.loginbox h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-.loginbox h3{
+.loginbox h3 {
     padding: 0 0 10px;
     text-align: center;
 }
@@ -245,13 +245,13 @@ nav ul li {
     border-radius: 10px;
 }
 
-.signupbox h1 {  
+.signupbox h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-.signupbox h3 {  
+.signupbox h3 {
     padding: 0 0 10px;
     text-align: center;
 }
@@ -271,7 +271,7 @@ nav ul li {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
-    background: transparent;    
+    background: transparent;
     outline: none;
     height: 40px;
     color: rgb(110, 110, 110);

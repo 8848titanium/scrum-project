@@ -1,7 +1,11 @@
-from flask import render_template
+from flask import render_template, request
 
 from app_pkg import app
 
+import pymysql
+import traceback
+
+#导入弹出警告框模块
 
 # import config
 
@@ -29,9 +33,10 @@ def login_check():
     user_name = request.form['username']
     password = request.form['password']
     if password == '' or user_name == '':
-        return render_template('login.html')
+        return render_template('signup.html')
     else:
-        return 
+        return
+
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
@@ -41,6 +46,7 @@ def signup():
 @app.route('/quizstudent', methods=['POST', 'GET'])
 def quizstudent():
     return render_template('quizstudent.html')
+
 
 # @app.route('/quizlist', methods=['POST', 'GET'])
 # def quizlist():

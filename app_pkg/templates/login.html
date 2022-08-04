@@ -1,33 +1,60 @@
 {% extends "base.html" %}
 {% block content %}
     <!-- body class="login" -->
+    <head>
+        <script>
+            function validateForm() {
+                let name = document.forms["login"]["username"].value;
+                let password = document.forms["login"]["password"].value;
+
+
+                if (name === "") {
+                    alert("Name must be filled out");
+                    return false;
+                }
+                if (password === "") {
+                    alert("Password must be filled out");
+                    return false;
+                }
+            }</script>
+    </head>
     <div class="login">
-        <div class="header">
-            <nav>
-                <image src="../static/css/logo.png" class="logo"></image>
-                <h1><a href="/">Happy Learning</a></h1>
-            </nav>
-        </div>
-        <div class="loginbox">
-            <form>
+    <div class="header">
+        <nav>
+            <image src="../static/css/logo.png" class="logo"></image>
+            <h1><a href="/">Happy Learning</a></h1>
+        </nav>
+    </div>
+    <div class="loginbox">
+        <div class="formcontainer">
+            <!--<form action="action_page.php" name="myForm" onsubmit="return validateForm()"-->
+            <!--method="post">-->
+            <!--<label for="name">Name: </label>-->
+            <!--<input type="text" name="name">-->
+            <!--<label for="email">Email: </label>-->
+            <!--<input type="text" name="email">-->
+            <form name="login" onsubmit="return validateForm()" method="post">
                 <div class="welcome">
                     <h1>Welcome</h1>
                     <h3>Login into your account</h3>
                 </div>
                 <p>Username or email</p>
-                <input type="text" name="username" placeholder="Enter Username"/>
+                <label>
+                    <input type="text" name="username" placeholder="Enter Username"/>
+                </label>
                 <p>Password:</p>
-                <input type="password" name="password" placeholder="Enter password"/>
+                <label>
+                    <input type="password" name="password" placeholder="Enter password"/>
+                </label>
 
                 <br>
 
                 <label><input type="checkbox">Remember me</label>
                 <br>
-                <input type="submit" name="" value="Login">
-                
-                <a href="#">Forgot password?</a>
-                <a href="/signup">Don't have an account?</a>
+                <input type="submit" value="Submit">
             </form>
+            <a href="#">Forgot password?</a>
+            <a href="/signup">Don't have an account?</a>
         </div>
     </div>
 {% endblock %}
