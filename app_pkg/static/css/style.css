@@ -332,31 +332,38 @@ a {
 	color: black;
 }
 
+
 .content-container {
+	width 100%;
+}
+
+.aboutus_box {
+	top:200px;
+}
+
+.about {
+	display: inline-block;
+	height: 60px;
 	width: 100%;
+	background-color: #ffffff;
+	padding: 20px;
+	vertical-align: middle;
+	min-width: 1220px;
 }
 
-.aboutbg {
-    margin: 0;
-    padding: 0;
-    background-image: url("../css/aboutbg.png");
-    background-size: 100% 100%;
-    background-position: center;
-}
-
-.aboutus .logo {
+.about .logo {
 	margin-left: 10px;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.aboutus .logo img {
+.about .logo img {
 	margin-right: 20px;
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.aboutus .logo .title {
+.about .logo .title {
 	font-size: 25px;
 	font-weight: bold;
 	display: inline-block;
@@ -364,7 +371,7 @@ a {
 	padding-top: 10px;
 }
 
-.aboutus .search {
+.about .search {
 	display: inline-block;
 	vertical-align: middle;
 	margin-left: 50px;
@@ -375,7 +382,7 @@ a {
 	height: 25px;
 }
 
-.aboutus .search input {
+.about .search input {
 	display: inline-block;
 	vertical-align: middle;
 	background: none;
@@ -386,11 +393,11 @@ a {
 	outline: none;
 }
 
-.aboutus .search input::placeholder {
+.about .search input::placeholder {
 	color: #666666;
 }
 
-.aboutus .search .search-icon {
+.about .search .search-icon {
 	display: inline-block;
 	vertical-align: middle;
 	width: 20px;
@@ -401,39 +408,40 @@ a {
 	cursor: pointer;
 }
 
-.aboutus .functions {
+.about .functions {
 	display: inline-block;
 	margin-left: 50px;
 }
 
-.aboutus .functions .block {
+.about .functions .block {
 	cursor: pointer;
 	display: inline-block;
 	margin-right: 25px;
 }
 
-.aboutus .functions .block span {
+.about .functions .block span {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 0 3px;
 }
 
-.aboutus .functions .block img {
+.about .functions .block img {
 	display: inline-block;
 	vertical-align: middle;
 }
 
-.aboutus .join-us {
+.about .join-us {
 	position: relative;
 	top: 20px;
 	float: right;
 	right: 50px;
 }
 
-.aboutus .join-us a {
+.about .join-us a {
 	padding: 10px 50px;
 	background-color: #94ccd1;
 	font-size: 20px;
 	font-weight: bold;
 	border-radius: 10px;
 }
+
