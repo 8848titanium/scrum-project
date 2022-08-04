@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <!-- body class="login" -->
+<head><script src= "script.js"> </script></head>
     <div class="login">
         <div class="header">
             <nav>
@@ -9,7 +10,14 @@
             </nav>
         </div>
         <div class="loginbox">
-            <form>
+            <div class="formcontainer">
+<!--<form action="action_page.php" name="myForm" onsubmit="return validateForm()"-->
+<!--method="post">-->
+<!--<label for="name">Name: </label>-->
+<!--<input type="text" name="name">-->
+<!--<label for="email">Email: </label>-->
+<!--<input type="text" name="email">-->
+            <form onsubmit="return validateForm()" method="post">
                 <div class="welcome">
                     <h1>Welcome</h1>
                     <h3>Login into your account</h3>
@@ -23,8 +31,9 @@
 
                 <label><input type="checkbox">Remember me</label>
                 <br>
-                <input type="submit" name="" value="Login">
-                
+<!--                <input type="submit" name="" value="Login">-->
+                <input type="submit" value="Submit">
+
                 <a href="#">Forgot password?</a>
                 <a href="/signup">Don't have an account?</a>
             </form>
