@@ -15,7 +15,7 @@ def index():
 
 
 @app.route('/about', methods=['POST', 'GET'])
-def quizlist():
+def about():
     return render_template('about.html')
 
 
@@ -33,7 +33,6 @@ def login_check():
     else:
         return 
 
-
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     return render_template('signup.html')
@@ -43,6 +42,6 @@ def signup():
 def quizstudent():
     return render_template('quizstudent.html')
 
-@app.route('/about', methods=['POST', 'GET'])
-def about():
-    return render_template('about.html')
+# @app.route('/quizlist', methods=['POST', 'GET'])
+# def quizlist():
+#     return render_template('quizlist.html')
