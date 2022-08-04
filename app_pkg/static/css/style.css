@@ -336,15 +336,12 @@ a {
 	width: 100%;
 }
 
-.aboutus {
-	display: inline-block;
-	height: 60px;
-	width: 100%;
-	background-color: #ffffff;
-	padding: 20px;
-	vertical-align: middle;
-	min-width: 1220px;
-}
+.aboutbg {
+    margin: 0;
+    padding: 0;
+    background-image: url("../css/aboutbg.png");
+    background-size: 100% 100%;
+    background-position: center;
 
 .aboutus .logo {
 	margin-left: 10px;
