@@ -19,6 +19,16 @@ def login():
     return render_template('login.html')
 
 
+@app.route('/login_check', methods=['POST', 'GET'])
+def login_check():
+    user_name = request.form['username']
+    password = request.form['password']
+    if password == '' or user_name == '':
+        return render_template('login.html')
+    else:
+        return 
+
+
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
     return render_template('signup.html')
