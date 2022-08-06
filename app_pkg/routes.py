@@ -1,7 +1,6 @@
 from flask import render_template, request
 
 from app_pkg import app
-
 import pymysql
 import traceback
 
