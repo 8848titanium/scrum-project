@@ -342,27 +342,6 @@ nav ul li {
     color: yellow;
 }
 
-<<<<<<< Updated upstream
-body {
-	margin: 0px;
-	padding: 0px;
-	font-family: "Arial";
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-
-.content-container {
-	width: 100%;
-}
-
-.aboutus_box {
-	top:200px;
-}
-
 .about {
 	display: inline-block;
 	height: 60px;
@@ -373,101 +352,6 @@ a {
 	min-width: 1220px;
 }
 
-.about .logo {
-	margin-left: 10px;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.about .logo img {
-	margin-right: 20px;
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.about .logo .title {
-	font-size: 25px;
-	font-weight: bold;
-	display: inline-block;
-	vertical-align: middle;
-	padding-top: 10px;
-}
-
-.about .search {
-	display: inline-block;
-	vertical-align: middle;
-	margin-left: 50px;
-	width: 240px;
-	background-color: #b0b0b0;
-	padding: 3px 10px 2px 25px;
-	border-radius: 20px;
-	height: 25px;
-}
-
-.about .search input {
-	display: inline-block;
-	vertical-align: middle;
-	background: none;
-	border: none;
-	height: 20px;
-	font-size: 15px;
-	width: 210px;
-	outline: none;
-}
-
-.about .search input::placeholder {
-	color: #666666;
-}
-
-.about .search .search-icon {
-	display: inline-block;
-	vertical-align: middle;
-	width: 20px;
-	height: 20px;
-	background-image: url("../assets/search.png");
-	background-size: 20px 20px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-}
-
-.about .functions {
-	display: inline-block;
-	margin-left: 50px;
-}
-
-.about .functions .block {
-	cursor: pointer;
-	display: inline-block;
-	margin-right: 25px;
-}
-
-.about .functions .block span {
-	display: inline-block;
-	vertical-align: middle;
-	margin: 0 3px;
-}
-
-.about .functions .block img {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.about .join-us {
-	position: relative;
-	top: 20px;
-	float: right;
-	right: 50px;
-}
-
-.about .join-us a {
-	padding: 10px 50px;
-	background-color: #94ccd1;
-	font-size: 20px;
-	font-weight: bold;
-	border-radius: 10px;
-}
-
-=======
 .aboutus{
     background-image: url('../css/aboutbg.png');
     background-size: 100% 100%;
@@ -493,4 +377,7 @@ a {
     left:80px;
     top:500px;
 }
->>>>>>> Stashed changes
+
+.contactus_box{
+    border-radius: 10px;
+}
