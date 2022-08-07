@@ -286,14 +286,23 @@ nav ul li {
     overflow:hidden;
 }
 
+.sel h4{
+    position:fixed;
+    left:35px;
+    top:357px;
+    margin-bottom: 20px;
+}
+
 .sel select{
+    position:fixed;
+    left:80px;
     background:transparent;
-    width:100px;
+    width:250px;
     padding:1px 2px;
     border:1px solid black;
     font-weight:bold;
     outline:none;
-    height:20px;
+    height:30px;
     -webkit-appearance: none;
     appearance: none;
     -moz-appearance: none;
@@ -311,6 +320,9 @@ nav ul li {
 }
 
 .signupbox input[type="submit"] {
+    position:fixed;
+    top:400px;
+    border-top:10px;
     border: none;
     outline: none;
     height: 40px;
@@ -376,8 +388,6 @@ nav ul li {
     position:fixed;
     left:80px;
     top:500px;
-}
-
-.contactus_box{
     border-radius: 10px;
 }
+
