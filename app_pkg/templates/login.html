@@ -19,42 +19,44 @@
             }</script>
     </head>
     <div class="login">
-    <div class="header">
-        <nav>
-            <image src="../static/css/logo.png" class="logo"></image>
-            <h1><a href="/">Happy Learning</a></h1>
-        </nav>
-    </div>
-    <div class="loginbox">
-        <div class="formcontainer">
-            <!--<form action="action_page.php" name="myForm" onsubmit="return validateForm()"-->
-            <!--method="post">-->
-            <!--<label for="name">Name: </label>-->
-            <!--<input type="text" name="name">-->
-            <!--<label for="email">Email: </label>-->
-            <!--<input type="text" name="email">-->
-            <form name="login" onsubmit="return validateForm()" method="post">
-                <div class="welcome">
-                    <h1>Welcome</h1>
-                    <h3>Login into your account</h3>
-                </div>
+        <div class="header">
+            <nav>
+                <image src="../static/css/logo.png" class="logo"></image>
+                <h1><a href="/">Happy Learning</a></h1>
+                <label for="tips">{{tips}}</label>
+            </nav>
+        </div>
+        <div class="loginbox">
+            <div class="formcontainer">
+                <!--<form action="action_page.php" name="myForm" onsubmit="return validateForm()"-->
+                <!--method="post">-->
+                <!--<label for="name">Name: </label>-->
+                <!--<input type="text" name="name">-->
+                <!--<label for="email">Email: </label>-->
+                <!--<input type="text" name="email">-->
+                <form name="login" onsubmit="return validateForm()" action="/login_check" method="post">
+                    <div class="welcome">
+                        <h1>Welcome</h1>
+                        <h3>Login into your account</h3>
+                    </div>
 
-                <label for="useremail">Email:</label>
-                
-                <input type="text" name="email" placeholder="Enter Email">
+                    <label for="useremail">Email:</label>
 
-                <label for="userpassword">Password:</label>
-                
-                <input type="password" name="password" placeholder="Enter Password" autocomplete="current-password">
+                    <input type="text" name="email" placeholder="Enter Email">
 
-                <br>
+                    <label for="userpassword">Password:</label>
 
-                <label><input type="checkbox">Remember me</label>
-                <br>
-                <input type="submit" value="Submit">
-            </form>
-            <a href="#">Forgot password?</a>
-            <a href="/signup">Don't have an account?</a>
+                    <input type="password" name="password" placeholder="Enter Password" autocomplete="current-password">
+
+                    <br>
+
+                    <label><input type="checkbox">Remember me</label>
+                    <br>
+                    <input type="submit" value="Submit"/>
+                </form>
+                <a href="#">Forgot password?</a>
+                <a href="/signup">Don't have an account?</a>
+            </div>
         </div>
     </div>
 {% endblock %}
