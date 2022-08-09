@@ -233,7 +233,7 @@ nav ul li {
 
 .signupbox {
     width: 360px;
-    height: 550px;
+    height: 570px;
     background: rgba(0, 170, 255, 0.547);
     color: #fff;
     top: 50%;
@@ -289,13 +289,13 @@ nav ul li {
 .sel h4{
     position:fixed;
     left:35px;
-    top:357px;
     margin-bottom: 20px;
 }
 
 .sel select{
     position:fixed;
-    left:80px;
+    left:75px;
+    top:435px;
     background:transparent;
     width:250px;
     padding:1px 2px;
@@ -321,7 +321,7 @@ nav ul li {
 
 .signupbox input[type="submit"] {
     position:fixed;
-    top:400px;
+    top:485px;
     border-top:10px;
     border: none;
     outline: none;
@@ -343,7 +343,7 @@ nav ul li {
 .signupbox a[type="link"] {
     text-decoration: none;
     position: absolute;
-    top: 490px;
+    top: 540px;
     left: 90px;
     font-size: 15px;
     line-height: 10px;
