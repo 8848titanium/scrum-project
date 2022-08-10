@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Lecturer main page</title>
-</head>
-<body>
-    This is the lecturer main page
-    <h4>Welcome, {{user}}</h4>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+    <div class="lecturer-list">
+      <div class="header">
+        <nav>
+            <image src="../static/css/logo.png" class="logo"></image>
+            <h1>Welcome  {{user}}</h1>
+        </nav>
+      </div>
+    
+      <div class="dropdown">
+        <button class="dropbtn">{{user}}</button>
+        <div class="dropdown-content">
+          <a href="/about">About Us</a>
+          <a href="#">Switch Account</a>
+          <a href="/login">Log Out</a>
+        </div>
+      </div>
+{% endblock %}
