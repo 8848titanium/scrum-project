@@ -6,30 +6,30 @@
             <nav>
                 <image src="../static/css/logo.png" class="logo"></image>
                 <h1><a href="/">Happy Learning</a></h1>
+                <h5 style="color:white; text-align:center;">{{tips}}</h5>
             </nav>
         </div>
         <div class="signupbox">
-            <form>
-                <div class="welcome">
-                    <h1>Happy Learning</h1>
-                    <h3>Get Start Now</h3>
-                    <label for="tips">{{tips}}</label>
-                </div>
+            <div class="welcome">
+                <h1>Happy Learning</h1>
+                <h3>Get Start Now</h3>
+            </div>
+            <form action="/signup_check" method="post">
                 <label for="username">Username:</label>
 
-                <input type="text" name="username" placeholder="Userame"/>
-                
+                <input type="text" name="username" placeholder="Username"/>
+
                 <label for="useremail">Email:</label>
-                
+
                 <input type="text" name="email" placeholder="Enter Email"/>
 
                 <label for="password">Password:</label>
 
-                <input type="password" name="password" placeholder="Password"/>
+                <input type="password" name="password1" placeholder="Password"/>
 
                 <label for="con-password">Confirm Password:</label>
 
-                <input type="password" name="" placeholder="Confirm Password"/>
+                <input type="password" name="password2" placeholder="Confirm Password"/>
 
                 <h4>I am </h4>
                 
@@ -40,12 +40,11 @@
                     </select>
                 </div>
                 <br>
-
-                <a href="#"><input type="submit" name="" value="Create Account and Login"></a>
-
-                <a type="link" href="/login">Already have an account?</a>
-
+                <input type="submit" value="Create Account and Login">
             </form>
+
+            <a type="link" href="/login">Already have an account?</a>
+
         </div>
     </div>
 {% endblock %}
