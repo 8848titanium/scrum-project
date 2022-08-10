@@ -91,7 +91,6 @@ def signup_check():
             else:
                 return render_template('lecturer_main.html', user=user_name)
 
-
 @app.route('/quiz_student', methods=['POST', 'GET'])
 def quiz_student():
     return render_template('quiz_student.html')
