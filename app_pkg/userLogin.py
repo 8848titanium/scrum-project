@@ -16,11 +16,9 @@ class userLogin:
             return False
         else:
             for i in student_email:
-                if self.email == str(i):
-                    return True
-            for j in lecturer_email:
-                if self.email == str(i):
-                    return True
+                for j in lecturer_email:
+                    if self.email == str(i) or self.email == str(j):
+                        return True
 
     def check_type(self, email):
         self.email = email
@@ -57,3 +55,14 @@ class userLogin:
         else:
             return -1
 
+    def user_signup(self, name, password, email, user_type):
+        self.name = name
+        self.password = password
+        self.email = email
+        self.user_type = user_type
+        if user_type == "student":
+            string1 = "insert into student values(null,'%s','%s','%s') " % (self.name, self.password, self.email)
+            conndb().conn_non(string1)
+        else:
+            string2 = "insert into lecturer values(null,'%s','%s','%s') " % (self.name, self.password, self.email)
+            conndb().conn_non(string2)

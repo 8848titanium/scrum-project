@@ -52,7 +52,7 @@ def login_check():
                 return render_template('student_main.html', user=this_user_name)
         else:
             userLogin().lecturer_login(email, password)
-            lecturer_result = userLogin().student_login(email, password)
+            lecturer_result = userLogin().lecturer_login(email, password)
             if lecturer_result == -1:
                 return render_template('login.html', tips='Wrong password, please check.')
             else:
@@ -65,7 +65,31 @@ def login_check():
 
 @app.route('/signup', methods=['POST', 'GET'])
 def signup():
-    return render_template('signup.html')
+    return render_template('signup.html', name="")
+
+
+@app.route('/signup_check', methods=['POST', 'GET'])
+def signup_check():
+    user_name = request.form['username']
+    user_email = request.form['email']
+    password1 = request.form['password1']
+    password2 = request.form['password2']
+    account_type = request.form['type']
+    if password1 != password2:
+        return render_template('signup.html', name=user_name, tips='Two passwords not equal, please input again.')
+    elif password1 == '' or user_name == '' or password2 == '':
+        return render_template('signup.html', tips='Please input.')
+    else:
+        flag = userLogin().check_exist(user_email)  # check user email is existing or not
+        if flag:
+            return render_template('signup.html',
+                                   tips='This email has been registered already, please change to another.')
+        else:
+            userLogin().user_signup(user_name, password1, user_email, account_type)
+            if account_type == "student":
+                return render_template('student_main.html', user=user_name)
+            else:
+                return render_template('lecturer_main.html', user=user_name)
 
 
 @app.route('/quiz_student', methods=['POST', 'GET'])
