@@ -36,30 +36,20 @@ def login_check():
     global current_user
     current_user = User(email=request.form['email'], password=request.form['password'])
 
-    exist_flag = current_user.check_exist()
-    if exist_flag:
-        # account_type = True --> this is a student account
-        # account_type = False --> this is a lecturer account
-        account_type = current_user.check_type()
-        if account_type:
-            student_result = current_user.student_login()
-            if student_result == -1:
-                return render_template('login.html', tips='Wrong password, please check.')
-            else:
-                current_user.user_id = student_result[0]
-                current_user.user_name = student_result[1]
+    # check for existing user
+    if current_user.check_exist():
+        result = current_user.login()
+        if result:
+            current_user.user_id = result[0]
+            current_user.user_name = result[1]
+            if current_user.user_type == "student":
                 return render_template('student_main.html', user=current_user.user_name)
-        else:
-            current_user.lecturer_login()
-            lecturer_result = current_user.lecturer_login()
-            if lecturer_result == -1:
-                return render_template('login.html', tips='Wrong password, please check.')
             else:
-                current_user.user_id = lecturer_result[0]
-                current_user.user_name = lecturer_result[1]
                 return render_template('lecturer_main.html', user=current_user.user_name)
+        else:
+            return render_template('login.html', tips='Wrong password, please try again.')
     else:
-        return render_template('login.html', tips='User not exist, please check the input or register.')
+        return render_template('login.html', tips='User non-exist, please check your input or sign-up.')
 
 
 @app.route('/signup', methods=['POST', 'GET'])

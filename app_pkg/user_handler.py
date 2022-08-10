@@ -37,23 +37,13 @@ class User:
             if self.email == str(j[0]):
                 return False
 
-    # student login
-    def student_login(self):
-        string = "select * from student where student_email = '%s'" % self.email
-        res = conn_one(string)
-        if res[2] == self.password:
-            return res
+    def login(self):
+        if self.user_type == "student":
+            string = "select * from student where student_email = '%s'" % self.email
         else:
-            return -1
-
-    # lecturer login
-    def lecturer_login(self):
-        string = "select * from lecturer where lecturer_email = '%s'" % self.email
+            string = "select * from lecturer where lecturer_email = '%s'" % self.email
         res = conn_one(string)
-        if res[2] == self.password:
-            return res
-        else:
-            return -1
+        return res if res[2] == self.password else None
 
     def signup(self):
         if self.user_type == "student":
