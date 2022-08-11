@@ -656,6 +656,7 @@ nav ul li {
 .lecturer-list .dropdown:hover .dropbtn {background-color: #3badff;}
 /*student quiz start*/
 /* importing google fonts */
+/* importing google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 *{
     margin: 0;
@@ -664,8 +665,8 @@ nav ul li {
     font-family: 'Poppins', sans-serif;
 }
 
-.student_quiz{
-    background-image: url('../css/student_quiz_bg.gif');
+body{
+    background-image: url('student_quiz_bg.gif');
     background-size: cover;
 
 
@@ -1045,4 +1046,3 @@ footer button.show{
     color: #fff;
     background: #007bff;
 }
-/*student quiz end*/
