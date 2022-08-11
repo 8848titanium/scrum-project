@@ -15,15 +15,11 @@ class User:
         student_email = conn_mul(string1)
         string2 = "select lecturer_email from lecturer;"
         lecturer_email = conn_mul(string2)
-        if student_email is None and lecturer_email is None:
-            return False
+        if student_email or lecturer_email:
+            self.user_type = "student" if self.check_type() else "lecturer"
+            return True
         else:
-            for i in student_email:
-                if self.email == str(i[0]):
-                    return True
-            for i in lecturer_email:
-                if self.email == str(i[0]):
-                    return True
+            return False
 
     def check_type(self):
         string1 = "select student_email from student;"
@@ -38,7 +34,7 @@ class User:
                 return False
 
     def login(self):
-        if self.user_type == "student":
+        if self.check_type():
             string = "select * from student where student_email = '%s'" % self.email
         else:
             string = "select * from lecturer where lecturer_email = '%s'" % self.email
@@ -46,7 +42,7 @@ class User:
         return res if res[2] == self.password else None
 
     def signup(self):
-        if self.user_type == "student":
+        if self.check_type():
             string1 = "insert into student values(null,'%s','%s','%s') " % (self.user_name, self.password, self.email)
             conn_non(string1)
         else:
