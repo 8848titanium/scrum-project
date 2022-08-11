@@ -233,11 +233,11 @@ nav ul li {
     font-family: "poppins";
 }
 
-.signup .header h5{
-    position:fixed;
-    top:15px;
-    left:805px;
-    color:red; 
+.signup .header h5 {
+    position: fixed;
+    top: 15px;
+    left: 805px;
+    color: red;
 }
 
 .signupbox {
@@ -287,31 +287,31 @@ nav ul li {
     font-size: 16px;
 }
 
-.sel{
-    float:right;
-    margin-right:20px;
-    width:120px;
-    height:22px;
-    overflow:hidden;
+.sel {
+    float: right;
+    margin-right: 20px;
+    width: 120px;
+    height: 22px;
+    overflow: hidden;
 }
 
-.sel h4{
-    position:fixed;
-    left:35px;
+.sel h4 {
+    position: fixed;
+    left: 35px;
     margin-bottom: 20px;
 }
 
-.sel select{
-    position:fixed;
-    left:75px;
-    top:435px;
-    background:transparent;
-    width:250px;
-    padding:1px 2px;
-    border:1px solid black;
-    font-weight:bold;
-    outline:none;
-    height:30px;
+.sel select {
+    position: fixed;
+    left: 75px;
+    top: 435px;
+    background: transparent;
+    width: 250px;
+    padding: 1px 2px;
+    border: 1px solid black;
+    font-weight: bold;
+    outline: none;
+    height: 30px;
     -webkit-appearance: none;
     appearance: none;
     -moz-appearance: none;
@@ -329,9 +329,9 @@ nav ul li {
 }
 
 .signupbox input[type="submit"] {
-    position:fixed;
-    top:485px;
-    border-top:10px;
+    position: fixed;
+    top: 485px;
+    border-top: 10px;
     border: none;
     outline: none;
     height: 40px;
@@ -364,48 +364,48 @@ nav ul li {
 }
 
 .about {
-	display: inline-block;
-	height: 60px;
-	width: 100%;
-	background-color: #ffffff;
-	padding: 20px;
-	vertical-align: middle;
-	min-width: 1220px;
+    display: inline-block;
+    height: 60px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 20px;
+    vertical-align: middle;
+    min-width: 1220px;
 }
 
-.aboutus{
+.aboutus {
     background-image: url('../css/aboutbg.png');
     background-size: 100% 100%;
 }
 
-.aboutus a{
-    color:black;
+.aboutus a {
+    color: black;
 }
 
 .aboutus a:hover {
-    color:#FF0000;
+    color: #FF0000;
 
 }
 
-.aboutus_box{
-    position:fixed;
-    left:80px;
-    top:180px;
+.aboutus_box {
+    position: fixed;
+    left: 80px;
+    top: 180px;
 }
 
-.contactus_box{
-    position:fixed;
-    left:80px;
-    top:500px;
+.contactus_box {
+    position: fixed;
+    left: 80px;
+    top: 500px;
     border-radius: 10px;
 }
 
-.student-list{
+.student-list {
     background-image: url('../css/studentbg.jpg');
     background-size: 100% 100%;
 }
 
-.student-list .logo{
+.student-list .logo {
     width: 40px;
     height: 53.42px;
     position: absolute;
@@ -445,30 +445,30 @@ nav ul li {
     text-decoration: none;
     font-size: 18px;
 }
-  
+
 .student-list .headerlinks a:hover {
     background-color: #ddd;
     color: black;
 }
-  
+
 .student-list .headerlinks a.active {
     background-color: #2196F3;
     color: white;
 }
 
 .student-list .headerlinks .search-container {
-    float:right;
+    float: right;
     position: fixed;
     top: 40px;
     left: 350px;
     font-size: 17px;
-    border-radius:30px;
+    border-radius: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-  
+
 
 .student-list .headerlinks .search-container button {
-    float:right;
+    float: right;
     padding: 6px;
     background: #5d9cc9;
     font-size: 28px;
@@ -476,11 +476,11 @@ nav ul li {
     border-radius: 20px;
     cursor: pointer;
 }
-  
+
 .headerlinks .search-container button:hover {
     background: #3badff;
 }
-  
+
 .headerlinks input[type=text] {
     padding: 6px;
     margin-top: 4px;
@@ -491,8 +491,8 @@ nav ul li {
 
 .student-list .dropbtn {
     background-color: #0384fc;
-    position:absolute;
-    right:50px;
+    position: absolute;
+    right: 50px;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -511,83 +511,85 @@ nav ul li {
 .student-list .dropdown-content {
     display: none;
     position: absolute;
-    right:50px;
-    top:50px;
+    right: 50px;
+    top: 50px;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-  
+
 .student-list .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-  
+
 .student-list .dropdown-content a:hover {
     background-color: #ddd;
 }
-  
-.student-list .dropdown:hover .dropdown-content {display: block;}
-  
-.student-list .dropdown:hover .dropbtn {background-color: #3badff;}
-  
+
+.student-list .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.student-list .dropdown:hover .dropbtn {
+    background-color: #3badff;
+}
+
 .quizname1 {
-  position: absolute;
-  top:100px;
-  left: 100px;
+    position: absolute;
+    top: 100px;
+    left: 100px;
 }
 
-.quizname2
- {
-  position: absolute;
-  top: 100px;
-  left: 350px;
+.quizname2 {
+    position: absolute;
+    top: 100px;
+    left: 350px;
 }
 
-.quizname3
- {
-  position: absolute;
-  top: 100px;
-  left: 600px;
+.quizname3 {
+    position: absolute;
+    top: 100px;
+    left: 600px;
 }
 
-.quiz{
-    padding-left:16px;
-    position:fixed;
-    top:120px;
-    font-size:20px;
+.quiz {
+    padding-left: 16px;
+    position: fixed;
+    top: 120px;
+    font-size: 20px;
 }
 
-.quiz button{
-  display: block;
-  width: 200px;
-  height: 200px;
-  border: none;
-  background-color: #5d9cc9;
-  color: white;
-  padding: 14px 28px;
-  font-size: 18px;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 30px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+.quiz button {
+    display: block;
+    width: 200px;
+    height: 200px;
+    border: none;
+    background-color: #5d9cc9;
+    color: white;
+    padding: 14px 28px;
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.quiz button:hover{
-  background-color: #3badff;
-  color: white;
-  font-size: 20px;
+.quiz button:hover {
+    background-color: #3badff;
+    color: white;
+    font-size: 20px;
 }
 
-.lecturer-list{
+.lecturer-list {
     background-image: url('../css/studentbg.jpg');
     background-size: 100% 100%;
 }
 
-.lecturer-list .logo{
+.lecturer-list .logo {
     width: 40px;
     height: 53.42px;
     position: absolute;
@@ -614,8 +616,8 @@ nav ul li {
 
 .lecturer-list .dropbtn {
     background-color: #0384fc;
-    position:absolute;
-    right:50px;
+    position: absolute;
+    right: 50px;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -634,24 +636,32 @@ nav ul li {
 .lecturer-list .dropdown-content {
     display: none;
     position: absolute;
-    right:50px;
-    top:50px;
+    right: 50px;
+    top: 50px;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-  
+
 .lecturer-list .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-  
+
 .lecturer-list .dropdown-content a:hover {
     background-color: #ddd;
 }
+
+
+.lecturer-list .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.lecturer-list .dropdown:hover .dropbtn {
+    background-color: #3badff;
   
 .lecturer-list .dropdown:hover .dropdown-content {display: block;}
   
