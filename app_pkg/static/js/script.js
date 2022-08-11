@@ -11,7 +11,39 @@ let questions = [
       "option4"
     ]
   },
-
+    {
+    numb: 2,
+    question: "question",
+    answer: "option2",
+    options: [
+      "option1",
+      "option2",
+      "option3",
+      "option4"
+    ]
+  },
+      {
+    numb: 3,
+    question: "question",
+    answer: "option3",
+    options: [
+      "option1",
+      "option2",
+      "option3",
+      "option4"
+    ]
+  },
+      {
+    numb: 4,
+    question: "question",
+    answer: "option4",
+    options: [
+      "option1",
+      "option2",
+      "option3",
+      "option4"
+    ]
+  },
   // you can uncomment the below codes and make duplicate as more as you want to add question
   // but remember you need to give the numb value serialize like 1,2,3,5,6,7,8,9.....
 
