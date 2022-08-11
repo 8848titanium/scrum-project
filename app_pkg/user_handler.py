@@ -11,12 +11,9 @@ class User:
 
     # check the given email is existing or not
     def check_exist(self):
-        string1 = "select student_email from student;"
-        student_email = conn_mul(string1)
-        string2 = "select lecturer_email from lecturer;"
-        lecturer_email = conn_mul(string2)
-        if student_email or lecturer_email:
-            self.user_type = "student" if self.check_type() else "lecturer"
+        user_type = self.check_type()
+        if user_type is not None:
+            self.user_type = "student" if user_type else "lecturer"
             return True
         else:
             return False
@@ -32,6 +29,7 @@ class User:
         for j in lecturer_email:
             if self.email == str(j[0]):
                 return False
+        return None
 
     def login(self):
         if self.check_type():
