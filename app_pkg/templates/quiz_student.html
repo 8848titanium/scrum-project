@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    <!-- body class="login" -->
-    <div class="login">
         <div class="header">
             <nav>
                 <image src="../static/css/logo.png" class="logo"></image>
                 <h1><a href="/">Happy Learning</a></h1>
+                <label for="tips">{{tips}}</label>
             </nav>
         </div>
         <!-- <div class="loginbox">
@@ -18,9 +17,52 @@
                 <input type="text" user_name="" placeholder="Enter Username"/>
                 <p>Password:</p>
                 <input type="password" user_name="" placeholder="Enter password"/>
+    <!-- start Quiz button -->
+    <div class="start_btn"><button>Start Quiz</button></div>
 
-                <br>
+    <!-- Info Box -->
+    <div class="info_box">
+        <div class="info-title"><span>Some Rules of this Quiz</span></div>
+        <div class="info-list">
+            <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
+            <div class="info">2. Once you select your answer, it can't be undone.</div>
+            <div class="info">3. You can't select any option once time goes off.</div>
+            <div class="info">4. You can't exit from the Quiz while you're playing.</div>
+            <div class="info">5. You'll get points on the basis of your correct answers.</div>
+        </div>
+        <div class="buttons">
+            <button class="quit">Exit Quiz</button>
+            <button class="restart">Continue</button>
+        </div>
+    </div>
 
+    <!-- Quiz Box -->
+    <div class="quiz_box">
+        <header>
+            <div class="title">Awesome Quiz Application</div>
+            <div class="timer">
+                <div class="time_left_txt">Time Left</div>
+                <div class="timer_sec">15</div>
+            </div>
+            <div class="time_line"></div>
+        </header>
+        <section>
+            <div class="que_text">
+                <!--inserted question from JavaScript -->
+            </div>
+            <div class="option_list">
+                <!--inserted options from JavaScript -->
+            </div>
+        </section>
+
+        <!-- footer of Quiz Box -->
+        <footer>
+            <div class="total_que">
+                <!--inserted Question Count Number from JavaScript -->
+            </div>
+            <button class="next_btn">Next Que</button>
+        </footer>
+    </div>
                 <label><input type="checkbox">Remember me</label>
                 <br>
                 <input type="submit" user_name="" value="Login">
@@ -29,5 +71,23 @@
                 <a href="/signup">Don't have an account?</a>
             </form>
         </div> -->
+    <!-- Result Box -->
+    <div class="result_box">
+        <div class="icon">
+            <i class="fas fa-crown"></i>
+        </div>
+        <div class="complete_text">You've completed the Quiz!</div>
+        <div class="score_text">
+            <!--inserted Score Result from JavaScript -->
+        </div>
+        <div class="buttons">
+            <button class="restart">Replay Quiz</button>
+            <button class="quit">Quit Quiz</button>
+        </div>
     </div>
+
+
+    <script src=""></script>
+    <script src="../static/js/script.js"></script>
+
 {% endblock %}
