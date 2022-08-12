@@ -1,9 +1,9 @@
 from flask import render_template, request
 
 from app_pkg import app
-import pymysql
-import traceback
-from app_pkg.userLogin import userLogin
+# import pymysql
+# import traceback
+from app_pkg.user_handler import User
 
 # 导入弹出警告框模块
 
@@ -12,8 +12,8 @@ from app_pkg.userLogin import userLogin
 # app = Flask(__name__)
 # app.config.from_object(config)
 
-# Define two global variables to store the user's name and user's id after user login this system.
-global this_user_name, this_user_id
+# Define a global variable to store user info after successfully login to the system.
+global current_user
 
 
 @app.route('/')
@@ -33,34 +33,23 @@ def login():
 
 @app.route('/login_check', methods=['POST', 'GET'])
 def login_check():
-    global this_user_name, this_user_id
-    email = request.form['email']
-    password = request.form['password']
+    global current_user
+    current_user = User(email=request.form['email'], password=request.form['password'])
 
-    exist_flag = userLogin().check_exist(email)
-    if exist_flag:
-        # account_type = True --> this is a student account
-        # account_type = False --> this is a lecturer account
-        account_type = userLogin().check_type(email)
-        if account_type:
-            student_result = userLogin().student_login(email, password)
-            if student_result == -1:
-                return render_template('login.html', tips='Wrong password, please check.')
+    # check for existing user
+    if current_user.check_exist():
+        result = current_user.login()
+        if result:
+            current_user.user_id = result[0]
+            current_user.user_name = result[1]
+            if current_user.user_type == "student":
+                return render_template('student_main.html', user=current_user.user_name)
             else:
-                this_user_id = student_result[0]
-                this_user_name = student_result[1]
-                return render_template('student_main.html', user=this_user_name)
+                return render_template('lecturer_main.html', user=current_user.user_name)
         else:
-            userLogin().lecturer_login(email, password)
-            lecturer_result = userLogin().lecturer_login(email, password)
-            if lecturer_result == -1:
-                return render_template('login.html', tips='Wrong password, please check.')
-            else:
-                this_user_id = lecturer_result[0]
-                this_user_name = lecturer_result[1]
-                return render_template('lecturer_main.html', user=this_user_name)
+            return render_template('login.html', tips='Wrong password, please try again.')
     else:
-        return render_template('login.html', tips='User not exist, please check the input or register.')
+        return render_template('login.html', tips='User non-exist, please check your input or sign-up.')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -70,26 +59,27 @@ def signup():
 
 @app.route('/signup_check', methods=['POST', 'GET'])
 def signup_check():
-    user_name = request.form['username']
-    user_email = request.form['email']
+    input_name = request.form['username']
+    input_email = request.form['email']
     password1 = request.form['password1']
     password2 = request.form['password2']
     account_type = request.form['type']
-    if password1 != password2:
-        return render_template('signup.html', name=user_name, tips='Two passwords not equal, please input again.')
-    elif password1 == '' or user_name == '' or password2 == '':
-        return render_template('signup.html', tips='Please input.')
-    else:
-        flag = userLogin().check_exist(user_email)  # check user email is existing or not
-        if flag:
-            return render_template('signup.html',
-                                   tips='This email has been registered already, please change to another.')
-        else:
-            userLogin().user_signup(user_name, password1, user_email, account_type)
-            if account_type == "student":
-                return render_template('student_main.html', user=user_name)
+    if input_name and input_email and password1 and password2:
+        if password1 == password2:
+            new_user = User(input_email, input_name, password1, account_type)
+            if new_user.check_exist():  # check user email is existing or not
+                return render_template('signup.html', tips='This email has been registered already!')
             else:
-                return render_template('lecturer_main.html', user=user_name)
+                new_user.signup()
+                if new_user.user_type == "student":
+                    return render_template('student_main.html', user=new_user.user_name)
+                else:
+                    return render_template('lecturer_main.html', user=new_user.user_name)
+        else:
+            return render_template('signup.html', name=input_name, tips='Password mismatch, please try again.')
+    else:
+        return render_template('signup.html', tips='Please fill all the fields.')
+
 
 @app.route('/quiz_student', methods=['POST', 'GET'])
 def quiz_student():

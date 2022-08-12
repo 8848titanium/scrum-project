@@ -1,31 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="student-list">
-  <div class="header">
-    <nav>
-        <image src="../static/css/logo.png" class="logo"></image>
-        <h1>Welcome  {{user}}</h1>
-        <ul class="headerlinks">
-          <input type="text" placeholder="Game PIN" name="">
-		      <button type="submit">JOIN</button>
-        </ul>
-    </nav>
-  </div>
+    <div class="student-list">
+        <div class="header">
+            <nav>
+                <image src="../static/images/logo.png" class="logo"></image>
+                <h1>Welcome {{ user }}</h1>
+                <ul class="headerlinks">
+                    <input type="text" placeholder="Game PIN" name="">
+                    <button type="submit">JOIN</button>
+                </ul>
+            </nav>
+        </div>
 
-  <div class="dropdown">
-    <button class="dropbtn">{{user}}</button>
-    <div class="dropdown-content">
-      <a href="#">Switch Account</a>
-      <a href="/login">Log Out</a>
+        <div class="dropdown">
+            <button class="dropbtn">{{ user }}</button>
+            <div class="dropdown-content">
+                <a href="#">Switch Account</a>
+                <a href="/login">Log Out</a>
+            </div>
+        </div>
+
+        <div class="quiz">
+            <h2>Recent Quiz</h2>
+            <button class="quizname1">Quiz Name Teacher's name</button>
+            <button class="quizname2">Quiz Name Teacher's name</button>
+            <button class="quizname3">Quiz Name Teacher's name</button>
+        </div>
     </div>
-  </div>
-  
-  <div class="quiz">
-    <h2>Recent Quiz</h2>
-    <button class="quizname1">Quiz Name   Teacher's name</button>
-    <button class="quizname2">Quiz Name   Teacher's name</button>
-    <button class="quizname3">Quiz Name   Teacher's name</button>
-  </div>
-</div>
 {% endblock %}

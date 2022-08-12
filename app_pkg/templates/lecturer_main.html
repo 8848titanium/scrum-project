@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="lecturer-list">
-      <div class="header">
-        <nav>
-            <image src="../static/css/logo.png" class="logo"></image>
-            <h1>Welcome  {{user}}</h1>
-        </nav>
-      </div>
-    
-      <div class="dropdown">
-        <button class="dropbtn">{{user}}</button>
-        <div class="dropdown-content">
-          <a href="#">Switch Account</a>
-          <a href="/login">Log Out</a>
+        <div class="header">
+            <nav>
+                <image src="../static/images/logo.png" class="logo"></image>
+                <h1>Welcome {{ user }}</h1>
+            </nav>
         </div>
-      </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">{{ user }}</button>
+            <div class="dropdown-content">
+                <a href="#">Switch Account</a>
+                <a href="/login">Log Out</a>
+            </div>
+        </div>
 {% endblock %}
