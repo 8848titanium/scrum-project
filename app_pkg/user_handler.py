@@ -2,7 +2,7 @@ from app_pkg.conn_db import *
 
 
 class User:
-    def __init__(self, email=None, user_name=None, password=None, user_type=None, user_id=None):
+    def __init__(self, email="", user_name="", password="", user_type="", user_id=""):
         self.email = email
         self.user_name = user_name
         self.password = password
