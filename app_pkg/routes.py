@@ -90,6 +90,10 @@ def quiz_student():
 def student_main():
     return render_template('student_main.html')
 
+@app.route('/quiz_lecturer')
+def lecturer_main():
+    return render_template('quiz_lecturer.html')
+
 # @app.route('/quiz_list', methods=['POST', 'GET'])
 # def quiz_list():
 #     return render_template('quiz_list.html')
