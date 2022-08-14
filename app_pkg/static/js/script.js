@@ -17,7 +17,7 @@ let questions = [
         answer: "option2",
         options: [
             "option1",
-            "option2",
+            "option2",2
             "option3",
             "option4"
         ]
