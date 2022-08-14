@@ -1,34 +1,51 @@
-from app_pkg.conn_db import *
 import random
+import string
+
+from app_pkg.conn_db import *
 
 PIN_LENGTH = 8
-MINIMUM = 0
-MAXIMUM = 9
+
 
 class Quiz:
-    def __init__(self, lecturer_id=None, quiz_id=None, quiz_PIN=None):
+    def __init__(self, lecturer_id=None, quiz_id=None):
         self.lecturer_id = lecturer_id
+        self.question_set = []
+        if not quiz_id:
+            self.quiz_id = conn_one("SELECT COUNT(*) FROM quiz;")[0] + 1
+            self.quiz_PIN = ''.join(random.choice(string.digits) for i in range(PIN_LENGTH))
+            write_cmd = "INSERT INTO quiz VALUES('%s', '%s', '%s')" % (self.quiz_id, self.lecturer_id, self.quiz_PIN)
+            conn_non(write_cmd)
+        else:
+            self.quiz_id = quiz_id
         # self.quiz_attendant = quiz_attendant
-        self.quiz_id = quiz_id
-        self.quiz_PIN = quiz_PIN
-        self.questions = []
 
-    def create(self):
-        self.lecturer_id = "TestUser_id"  # need to change after class finished
-        self.quiz_PIN = ""
-        for i in range(PIN_LENGTH):
-            number = random.randint(MINIMUM, MAXIMUM)
-            self.quiz_PIN += str(number)
-        # self.quiz_id = int(max(happylearning.quiz.quiz_id)) + 1  # 这里俺不知道怎么弄嘞，只能demo一个最大id+1的placeholder
-
-    # def add_question(self):做不动了，解构俺也不太确定，晚上再继续
-    #     if is
-
+    def __repr__(self):
+        return str({self.lecturer_id: {self.quiz_id: [self.quiz_PIN, self.question_set]}})
 
     def __str__(self):
-        return f"quiz id - {self.quiz_id}, quiz PIN - {self.quiz_PIN}, quiz creator - {self.lecturer_id}"
+        return f"lecturer id - {self.lecturer_id}, quiz id - {self.quiz_id}, PIN - {self.quiz_PIN}, question set - {self.question_set}"
 
-"""Test"""
-new_quiz = Quiz()
-Quiz.create(new_quiz)
-print(new_quiz)
+    def add_question(self, question, category, choices, answer):
+        question_id = conn_one("SELECT COUNT(*) FROM question;")[0] + 1
+        a, b, c, d = choices
+        write_cmd = "INSERT INTO question VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (
+            question_id, self.quiz_id, question, category, a, b, c, d, answer)
+        conn_non(write_cmd)
+        self.question_set.append(question_id)
+
+    def load_questions(self):
+        query_result = conn_mul("SELECT * FROM question WHERE quiz_id = '%s'" % self.quiz_id)
+        return [{"question_id": row[0], "question": row[2], "category": row[3], "choices": row[4:8], "answer": row[-1]}
+                for row in query_result]
+
+
+"""Demo"""
+quiz = Quiz(1)  # add a new quiz by declaring the lecturer_id
+print(quiz)
+quiz.add_question("hello?", 0, ['dasd', 'gefv', 'bfdsb', 'h6tuyn'], 'B')
+quiz.add_question("hello??", 1, ['dasd', 'gefv', 'bfdsb', 'h6tuyn'], 'BC')
+quiz.add_question("Please fill__", 0, ['dasd', 'gefv', 'bfdsb', 'h6tuyn'], 'Filled')
+print(quiz)
+
+old_quiz = Quiz(quiz_id=4)  # load exist quiz by declaring quiz_id with keyword argument
+print(old_quiz.load_questions())
