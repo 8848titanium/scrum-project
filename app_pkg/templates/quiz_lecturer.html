@@ -7,76 +7,81 @@
 </head>
 <style>
     /*quiz_lecturer start*/
-.top{
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: auto;
-    background-color: aliceblue;
-}
+    .top {
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: auto;
+        background-color: aliceblue;
+    }
 
 
-.button_1{
-    top: 3%;
-    right: 10%;
-    position: absolute;
-}
+    .button_1 {
+        top: 3%;
+        right: 10%;
+        position: absolute;
+    }
 
-.button_2{
-    top: 90%;
-    right: 5%;
-    position: absolute;
-}
+    .button_2 {
+        top: 90%;
+        right: 5%;
+        position: absolute;
+    }
 
-.Question {
-    background-color: #ffffff;
-    width: 1100px;
-    color: #044e99;
-    padding: 40px;
-    text-align: center;
-}
+    .Question {
+        background-color: #ffffff;
+        width: 1100px;
+        color: #044e99;
+        padding: 40px;
+        text-align: center;
+    }
 
-.Question input {
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    background: none;
-    padding: 12px;
-    font-size: 40px;
-    border-radius: 22px;
-    outline: none;
-    color: #000000;
-}
-/*quiz_lecturer end*/
+    .Question input {
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        background: none;
+        padding: 12px;
+        font-size: 40px;
+        border-radius: 22px;
+        outline: none;
+        color: #000000;
+    }
+
+    /*quiz_lecturer end*/
 </style>
 <body>
-    <div class="top">
-        <h4>Creating Exam</h4>
-        <a href=""><button class="button_1">back to home</button></a>
+<div class="top">
+    <h4>Creating Exam</h4>
+    <a href="">
+        <button class="button_1">back to home</button>
+    </a>
 
 
-    </div>
-    <div id="menu" style="background-color:#46a6cf;height: 750px;;width:150px;float:left;">
-        <b>Question 1</b>
-        <br>
-        <b>Question 2</b>
-        <br>
-        <b>add Question</b>
-    </div>
-    <div id="content" style="background-color:#ffffff;height:750px;width:1200px;float:left;">
+</div>
+<div id="menu" style="background-color:#46a6cf;height: 750px;;width:150px;float:left;">
+    <b>Question 1</b>
+    <br>
+    <b>Question 2</b>
+    <br>
+    <b>add Question</b>
+</div>
+<div id="content" style="background-color:#ffffff;height:750px;width:1200px;float:left;">
 
-            <a href=""><button class="button_2">Done</button></a>
-            <form action="action.js" class="Question">
-                <h1>Question 1</h1>
-                <input type="text" placeholder="Question" />
-                <br />
-                <input type="options" placeholder="add options" />
-                <br />
-                <input type="options" placeholder="add options" />
-                <br />
-                <input type="options" placeholder="add options" />
-            </form>
-        </div>
+    <a href="">
+        <button class="button_2">Done</button>
+    </a>
+    <form action="action.js" class="Question">
+        <h1>Question 1</h1>
+        <input type="text" placeholder="Question"/>
+        <br/>
+        <input type="options" placeholder="add options"/>
+        <br/>
+        <input type="options" placeholder="add options"/>
+        <br/>
+        <input type="options" placeholder="add options"/>
+    </form>
+</div>
 
 </body>
 </html>

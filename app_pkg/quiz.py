@@ -1,6 +1,7 @@
-from app_pkg.conn_db import *
 import random
 import string
+
+from app_pkg.conn_db import *
 
 PIN_LENGTH = 8
 
@@ -27,13 +28,15 @@ class Quiz:
     def add_question(self, question, category, choices, answer):
         question_id = conn_one("SELECT COUNT(*) FROM question;")[0] + 1
         a, b, c, d = choices
-        write_cmd = "INSERT INTO question VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (question_id, self.quiz_id, question, category, a, b, c, d, answer)
+        write_cmd = "INSERT INTO question VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % (
+            question_id, self.quiz_id, question, category, a, b, c, d, answer)
         conn_non(write_cmd)
         self.question_set.append(question_id)
 
     def load_questions(self):
         query_result = conn_mul("SELECT * FROM question WHERE quiz_id = '%s'" % self.quiz_id)
-        return [{"question_id": row[0], "question": row[2], "category": row[3], "choices": row[4:8], "answer": row[-1]} for row in query_result]
+        return [{"question_id": row[0], "question": row[2], "category": row[3], "choices": row[4:8], "answer": row[-1]}
+                for row in query_result]
 
 
 """Demo"""
@@ -46,4 +49,3 @@ print(quiz)
 
 old_quiz = Quiz(quiz_id=4)  # load exist quiz by declaring quiz_id with keyword argument
 print(old_quiz.load_questions())
-
