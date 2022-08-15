@@ -672,9 +672,6 @@ nav ul li {
     background-color: #3badff;
 }
 
-/*student quiz start*/
-/* importing google fonts */
-/* importing google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 * {
     margin: 0;
@@ -719,7 +716,7 @@ body {
     transform: translate(-50%, -50%) scale(1);
 }
 
-.start_btn button {
+.start_btn button{
     font-size: 25px;
     font-weight: 500;
     color: #007bff;
@@ -1065,6 +1062,4 @@ footer button.show {
     color: #fff;
     background: #007bff;
 }
-
-/*student quiz end*/
 
