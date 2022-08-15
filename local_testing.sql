@@ -80,9 +80,9 @@ INSERT INTO lecturer(`lecturer_id`, `lecturer_name`, `lecturer_password`, `lectu
 VALUES ("1", "Michael", "456", "777@outlook.com");
 
 INSERT INTO quiz(`quiz_id`, `lecturer_id`, `quiz_PIN`)
-VALUES (1, 1, 12345678);
+VALUES (1, 1, 123456);
 INSERT INTO quiz(`quiz_id`, `lecturer_id`, `quiz_PIN`)
-VALUES (2, 1, 87654321);
+VALUES (2, 1, 654321);
 INSERT INTO question(`question_id`, `quiz_id`, `question`, `type`, `A`, `B`, `C`, `D`, `answer`)
 VALUES (1, 1, "MonoMCQ?", 0, "dasdas", "dsadas", "dasdsa", "dasda", "B");
 INSERT INTO question(`question_id`, `quiz_id`, `question`, `type`, `A`, `B`, `C`, `D`, `answer`)
