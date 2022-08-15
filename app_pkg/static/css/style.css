@@ -374,7 +374,7 @@ nav ul li {
 }
 
 .aboutus {
-    background-image: url('../images/aboutbg.png');
+    background-image: url('../images/student_quiz_bg.gif');
     background-size: 100% 100%;
 }
 
@@ -397,11 +397,12 @@ nav ul li {
     position: fixed;
     left: 80px;
     top: 500px;
+    top: 500px;
     border-radius: 10px;
 }
 
 .student-list {
-    background-image: url('../images/studentbg.jpg');
+    background-image: url('../images/student_quiz_bg.gif');
     background-size: 100% 100%;
 }
 
@@ -585,7 +586,7 @@ nav ul li {
 }
 
 .lecturer-list {
-    background-image: url('../images/studentbg.jpg');
+    background-image: url('../images/student_quiz_bg.gif');
     background-size: 100% 100%;
 }
 
