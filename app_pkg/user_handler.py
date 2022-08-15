@@ -3,7 +3,7 @@ import string
 
 from app_pkg.conn_db import *
 
-PIN_LENGTH = 8
+PIN_LENGTH = 6
 
 
 class User:
