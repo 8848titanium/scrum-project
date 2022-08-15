@@ -3,7 +3,7 @@ from flask import render_template, request
 from app_pkg import app
 # import pymysql
 # import traceback
-from app_pkg.user_handler import User
+from app_pkg.user_handler import *
 
 # 导入弹出警告框模块
 
@@ -83,12 +83,17 @@ def signup_check():
 
 @app.route('/quiz_student', methods=['POST', 'GET'])
 def quiz_student():
-    return render_template('quiz_student.html')
+    input_pin = request.form["quiz_PIN"]
+    if launch_quiz(input_pin):
+        return render_template('quiz_student.html')
+    else:
+        return render_template('index.html')
 
 
 @app.route('/student_main')
 def student_main():
     return render_template('student_main.html')
+
 
 @app.route('/quiz_lecturer')
 def lecturer_main():

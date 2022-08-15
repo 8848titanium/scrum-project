@@ -28,8 +28,10 @@
 
         </div>
         <div class="Join-quiz">
-            <input type="text" placeholder="Game PIN" maxlength="6">
-            <button><a href="/quiz_student">Join now</a></button>
+            <form name="join-quiz_PIN" action="/quiz_student" method="post">
+                <input type="text" name="quiz_PIN" placeholder="QUIZ PIN" maxlength="8">
+                <button type="submit">Join now</button>
+            </form>
         </div>
     </div>
 {% endblock %}
