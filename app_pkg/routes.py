@@ -14,6 +14,7 @@ from app_pkg.user_handler import *
 
 # Define a global variable to store user info after successfully login to the system.
 global current_user
+global current_pin
 
 
 @app.route('/')
@@ -83,8 +84,9 @@ def signup_check():
 
 @app.route('/quiz_student', methods=['POST', 'GET'])
 def quiz_student():
-    input_pin = request.form["quiz_PIN"]
-    if launch_quiz(input_pin):
+    global current_pin
+    current_pin = request.form["quiz_PIN"]
+    if launch_quiz(current_pin):
         return render_template('quiz_student.html')
     else:
         return render_template('index.html')
@@ -109,9 +111,23 @@ def create_quiz():
 # def quiz_list():
 #     return render_template('quiz_list.html')
 
+
+@app.route('/lecturer_main')
+def lecturer_main():
+    return render_template('lecturer_main.html')
+
+
+@app.route('/load_quiz', methods=['POST', 'GET'])
+def load_quiz():
+    global current_pin
+    questions = launch_quiz(current_pin)
+    a, b, c, d = questions[0].get('choices')
+    return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (questions[0].get('question'), a, b, c, d)
+
 # @app.route('/lecturer_main')
 # def lecturer_main():
 #     return render_template('lecturer_main.html')
+
 
 @app.route('/lec_add_question', methods=['POST', 'GET'])
 def lec_add_question():
