@@ -99,10 +99,22 @@ def student_main():
 def quiz_lecturer():
     return render_template('quiz_lecturer.html')
 
+
+@app.route('/create_quiz')
+def create_quiz():
+    return render_template('create_quiz.html')
+
+
 # @app.route('/quiz_list', methods=['POST', 'GET'])
 # def quiz_list():
 #     return render_template('quiz_list.html')
 
-@app.route('/lecturer_main')
-def lecturer_main():
-    return render_template('lecturer_main.html')
+# @app.route('/lecturer_main')
+# def lecturer_main():
+#     return render_template('lecturer_main.html')
+
+@app.route('/lec_add_question', methods=['POST', 'GET'])
+def lec_add_question():
+    a_quiz = Quiz(current_user.user_id)
+    a_quiz.add_question(request.form['question'], 'Category Undefined', request.form['choices'], 'Answer Undefined')
+    return render_template('create_quiz.html')

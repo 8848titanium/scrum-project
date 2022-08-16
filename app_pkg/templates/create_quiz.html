@@ -9,38 +9,33 @@
  <button><a href="/quiz_lecturer">Create quiz</a></button><br><br>
 
 <div id="Question list">
-        <button type="question">Question 1</button><br><br>
+
+        <button type="lec question">Question 1</button><br><br>
 </div>
 
  <button type="add button" onclick="addQuestion()">Add question</button>
-<!--<form action="js.js" class="Question">-->
-<!--    <h1>Question {{que_num}}</h1>-->
-<!--    <input type="text" placeholder="Question"/>-->
-<!--    <br/>-->
-<!--    <input type="options" placeholder="add options"/>-->
-<!--    <br/>-->
-<!--    <input type="options" placeholder="add options"/>-->
-<!--    <br/>-->
-<!--    <input type="options" placeholder="add options"/>-->
-<!--</form>-->
-<!--<h3 id="demo" onclick="myFunction()">Click me to change my color.</h3>-->
- <button onclick="displayFeedback()">Submit</button><br><br>
 
 <label>Question:</label><br><br>
 
-<input type="text" name="my_question" placeholder="Enter a question here"><br><br>
+<form action="/lec_add_question" method="post">
+    <input type="text" name="question" placeholder="Enter a question here"><br><br>
 
-<div id="Answer list">
-    <input type="answer1" name="my_answer" placeholder="Answer1"><br><br>
-</div>
+    <div id="Choices list">
+        <input type="text" name="choices" placeholder="Choice1"><br><br>
+    </div>
 
- <button onclick="addAnswer()">+</button><br><br>
+<!--    add a choice, cannot use button-->
+    <label onclick="addChoice()"> Click to add choice </label><br><br>
+
+<!--    submit a question-->
+    <button type="submit" onclick="displayFeedback()" type="submit">Submit</button><br><br>
+</form>
+
 </body>
 </html>
 
 <script>
 function addQuestion() {
-<!--  document.createElement("button") ;-->
     let button = document.createElement("button");
     button.innerHTML = "Question2";
     button.type = "question";
@@ -48,13 +43,14 @@ function addQuestion() {
     document.getElementById("Question list").appendChild(button);
 }
 
-function addAnswer() {
-    let answerBox = document.createElement("input");
-    answerBox.type = "answer1";
-    answerBox.name = "my_answer";
-    answerBox.placeholder="Answer2"
-    document.getElementById("Answer list").appendChild(answerBox);
+function addChoice() {
+    let choiceBox = document.createElement("input");
+    choiceBox.type = "text";
+    choiceBox.name = "choices";
+    choiceBox.placeholder="Choice2"
+    document.getElementById("Choices list").appendChild(choiceBox);
 }
+
 function displayFeedback() {
   let prompt = 'Upload successfully!'
   alert(prompt);
