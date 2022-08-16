@@ -124,18 +124,19 @@ function showQuetions(index){
 
     //creating a new span and div tag for question and option and passing the value using array index
     let que_tag = '<span>'+ questions[index].numb + ". " + questions[index].question +'</span>';
-    let option_tag = '<div class="option"><span>'+ questions[index].options[0] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[1] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[2] +'</span></div>'
-    + '<div class="option"><span>'+ questions[index].options[3] +'</span></div>';
+    let option_tag = '<button class="option"><span>'+ questions[index].options[0] +'</span></button>'
+    + '<button class="option"><span>'+ questions[index].options[1] +'</span></button>'
+    + '<button class="option"><span>'+ questions[index].options[2] +'</span></button>'
+    + '<button class="option"><span>'+ questions[index].options[3] +'</span></button>';
     que_text.innerHTML = que_tag; //adding new span tag inside que_tag
-    option_list.innerHTML = option_tag; //adding new div tag inside option_tag
+    option_list.innerHTML = '<form action="/login" method="post">' + option_tag + '</form>'; //adding new div tag inside option_tag
 
     const option = option_list.querySelectorAll(".option");
 
     // set onclick attribute to all available options
     for(i=0; i < option.length; i++){
         option[i].setAttribute("onclick", "optionSelected(this)");
+        option[i].setAttribute("type", "submit");
     }
 }
 // creating the new div tags which for icons
