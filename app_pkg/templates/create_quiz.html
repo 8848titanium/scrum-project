@@ -13,13 +13,17 @@
         <button type="lec question">Question 1</button><br><br>
 </div>
 
- <button type="add button" onclick="addQuestion()">Add question</button>
-
-<label>Question:</label><br><br>
+ <button type="add button" onclick="addQuestion()">Add question</button><br><br>
 
 <form action="/lec_add_question" method="post">
+    <label>Question:</label><br><br>
     <input type="text" name="question" placeholder="Enter a question here"><br><br>
+    <label>Question type:</label><br><br>
+    <input type="text" name="type" placeholder="Enter a question type here"><br><br>
+    <label>Question answer:</label><br><br>
+    <input type="text" name="answer" placeholder="Enter a answer here"><br><br>
 
+    <label>Choices:</label><br><br>
     <div id="Choices list">
         <input type="text" name="choices" placeholder="Choice1"><br><br>
     </div>

@@ -118,3 +118,8 @@ def lec_add_question():
     a_quiz = Quiz(current_user.user_id)
     a_quiz.add_question(request.form['question'], 'Category Undefined', request.form['choices'], 'Answer Undefined')
     return render_template('create_quiz.html')
+
+
+@app.route('/my_quiz', methods=['POST', 'GET'])
+def my_quiz():
+    return render_template('my_quiz.html')
