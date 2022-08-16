@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create quiz</title>
+</head>
+
+<body>
+ <button><a href="/quiz_lecturer">Create quiz</a></button><br><br>
+
+
+<label>Question:</label>
+
+<input type="text" name="my_question" placeholder="Enter a question here"><br><br>
+
+<div id="Question list">
+        <button type="question">Question 1</button><br><br>
+</div>
+
+ <button type="add button" onclick="addQuestion()">Add question</button>
+<!--<form action="js.js" class="Question">-->
+<!--    <h1>Question {{que_num}}</h1>-->
+<!--    <input type="text" placeholder="Question"/>-->
+<!--    <br/>-->
+<!--    <input type="options" placeholder="add options"/>-->
+<!--    <br/>-->
+<!--    <input type="options" placeholder="add options"/>-->
+<!--    <br/>-->
+<!--    <input type="options" placeholder="add options"/>-->
+<!--</form>-->
+<!--<h3 id="demo" onclick="myFunction()">Click me to change my color.</h3>-->
+ <button onclick="displayFeedback()">Submit</button>
+</body>
+</html>
+
+<script>
+function addQuestion() {
+<!--  document.createElement("button") ;-->
+    let button = document.createElement("button");
+    button.innerHTML = "Question2";
+    button.type = "question";
+    button.name = "Question2";
+    document.getElementById("Question list").appendChild(button);
+}
+
+function displayFeedback() {
+  let prompt = 'Upload successfully!'
+  alert(prompt);
+}
+</script>
