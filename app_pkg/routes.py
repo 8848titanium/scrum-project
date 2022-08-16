@@ -96,9 +96,13 @@ def student_main():
 
 
 @app.route('/quiz_lecturer')
-def lecturer_main():
+def quiz_lecturer():
     return render_template('quiz_lecturer.html')
 
 # @app.route('/quiz_list', methods=['POST', 'GET'])
 # def quiz_list():
 #     return render_template('quiz_list.html')
+
+@app.route('/lecturer_main')
+def lecturer_main():
+    return render_template('lecturer_main.html')

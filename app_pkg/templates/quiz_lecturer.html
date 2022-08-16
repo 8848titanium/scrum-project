@@ -7,12 +7,102 @@
 </head>
 <style>
     /*quiz_lecturer start*/
-    .top {
-        top: 0px;
-        left: 0px;
+    .header {
         width: 100%;
-        height: auto;
-        background-color: aliceblue;
+        height: 100%;
+        padding: 0 10%;
+    }
+
+    .header a{
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .header a:hover {
+        color: #0ff;
+    }
+
+    .logo {
+        width: 40px;
+        height: 53.42px;
+        position: absolute;
+        top: 29px;
+        left: 53px;
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 0;
+    }
+
+    nav h1 {
+        font-size: 30px;
+        color: #FFF;
+        font-weight: bolder;
+        position: absolute;
+        left: 106px;
+        top: 40px;
+    }
+
+    .dropbtn {
+        background-color: #0384fc;
+        position: absolute;
+        right: 50px;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        border-radius: 20px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+    .dropdown {
+        position: fixed;
+        top: 40px;
+        right: 30px;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 50px;
+        top: 50px;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3badff;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropbtn {
+        background-color: #3badff;
     }
 
 
@@ -30,10 +120,9 @@
 
     .Question {
         background-color: #ffffff;
-        width: 1100px;
+        text-align: center;
         color: #044e99;
         padding: 40px;
-        text-align: center;
     }
 
     .Question input {
@@ -51,37 +140,43 @@
     /*quiz_lecturer end*/
 </style>
 <body>
-<div class="top">
-    <h4>Creating Exam</h4>
-    <a href="/login">
-        <button class="button_1">back to home</button>
-    </a>
+    <div class="header">
+        <nav>
+            <image src="../static/images/logo.png" class="logo"></image>
+            <h1><a href="/lecturer_main">Creating Quiz</a></h1>
+        </nav>
+    </div>
 
+    <div class="dropdown">
+        <button class="dropbtn">{{ user }}</button>
+        <div class="dropdown-content">
+            <a href="#">Switch Account</a>
+            <a href="/login">Log Out</a>
+        </div>
+    </div>
 
-</div>
-<div id="menu" style="background-color:#46a6cf;height: 750px;;width:150px;float:left;">
-    <button>Question 1</button>
-    <br>
-    <button>Question 2</button>
-    <br>
-    <button>add Question</button>
-</div>
-<div id="content" style="background-color:#ffffff;height:750px;width:1200px;float:left;">
+    <div style="background-color:#46a6cf;height: 750px;;width:150px;float:left;">
+        <button>Question 1</button>
+        <br>
+        <button>Question 2</button>
+        <br>
+        <button>add Question</button>
+    </div>
 
-    <a href="">
-        <button class="button_2">Done</button>
-    </a>
-    <form action="action.js" class="Question">
-        <h1>Question 1</h1>
-        <input type="text" placeholder="Question"/>
-        <br/>
-        <input type="options" placeholder="add options"/>
-        <br/>
-        <input type="options" placeholder="add options"/>
-        <br/>
-        <input type="options" placeholder="add options"/>
-    </form>
-</div>
-
+    <div style="background-color:#ffffff;height:750px;width:1200px;float:left;">
+        <form action="action.js" class="Question">
+            <h1>Question {{que_num}}</h1>
+            <input type="text" placeholder="Question"/>
+            <br/>
+            <input type="options" placeholder="add options"/>
+            <br/>
+            <input type="options" placeholder="add options"/>
+            <br/>
+            <input type="options" placeholder="add options"/>
+        </form>
+    </div>
+        <a href="/lecturer_main">
+            <button class="button_2">Done</button>
+        </a>
 </body>
 </html>
