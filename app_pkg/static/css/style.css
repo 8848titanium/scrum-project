@@ -673,6 +673,12 @@ nav ul li {
     background-color: #3badff;
 }
 
+.lecturer-list .create-button button{
+    position:absolute;
+    top:20px;
+    right:250px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 * {
     margin: 0;
