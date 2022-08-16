@@ -8,11 +8,6 @@
 <body>
  <button><a href="/quiz_lecturer">Create quiz</a></button><br><br>
 
-
-<label>Question:</label>
-
-<input type="text" name="my_question" placeholder="Enter a question here"><br><br>
-
 <div id="Question list">
         <button type="question">Question 1</button><br><br>
 </div>
@@ -29,7 +24,17 @@
 <!--    <input type="options" placeholder="add options"/>-->
 <!--</form>-->
 <!--<h3 id="demo" onclick="myFunction()">Click me to change my color.</h3>-->
- <button onclick="displayFeedback()">Submit</button>
+ <button onclick="displayFeedback()">Submit</button><br><br>
+
+<label>Question:</label><br><br>
+
+<input type="text" name="my_question" placeholder="Enter a question here"><br><br>
+
+<div id="Answer list">
+    <input type="answer1" name="my_answer" placeholder="Answer1"><br><br>
+</div>
+
+ <button onclick="addAnswer()">+</button><br><br>
 </body>
 </html>
 
@@ -43,6 +48,13 @@ function addQuestion() {
     document.getElementById("Question list").appendChild(button);
 }
 
+function addAnswer() {
+    let answerBox = document.createElement("input");
+    answerBox.type = "answer1";
+    answerBox.name = "my_answer";
+    answerBox.placeholder="Answer2"
+    document.getElementById("Answer list").appendChild(answerBox);
+}
 function displayFeedback() {
   let prompt = 'Upload successfully!'
   alert(prompt);
