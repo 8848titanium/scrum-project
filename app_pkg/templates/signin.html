@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="login">
+        <div class="header">
+            <nav>
+                <image src="../static/images/logo.png" class="logo"></image>
+                <h1><a href="/">Happy Learning</a></h1>
+                <label for="tips">{{ tips }}</label>
+            </nav>
+        </div>
+        <div class="login-box">
+            <div class="welcome">
+                <h1>Welcome</h1>
+                <h3>Login into your account</h3>
+            </div>
+            <form name="login-form" action="/login_check" method="post" autocomplete="on">
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email(size=32) }}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=32) }}
+                </p>
+                <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p>{{ form.submit() }}</p>
+            </form>
+            <a href="#">Forgot password?</a>
+            <a href="/signup">Don't have an account?</a>
+        </div>
+    </div>
+{% endblock %}

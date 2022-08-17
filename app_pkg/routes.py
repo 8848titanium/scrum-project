@@ -4,6 +4,7 @@ from app_pkg import app
 # import pymysql
 # import traceback
 from app_pkg.user_handler import *
+from app_pkg.forms import LoginForm
 
 # 导入弹出警告框模块
 
@@ -18,8 +19,9 @@ global current_pin
 
 
 @app.route('/')
+@app.route('/index')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', title='Home')
 
 
 @app.route('/about', methods=['POST', 'GET'])
@@ -29,7 +31,8 @@ def about():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    return render_template('login.html')
+    form = LoginForm()
+    return render_template('signin.html', title="Sign In", form=form)
 
 
 @app.route('/login_check', methods=['POST', 'GET'])
@@ -48,9 +51,9 @@ def login_check():
             else:
                 return render_template('lecturer_main.html', user=current_user.user_name)
         else:
-            return render_template('login.html', tips='Wrong password, please try again.')
+            return render_template('signin.html', tips='Wrong password, please try again.')
     else:
-        return render_template('login.html', tips='User non-exist, please check your input or sign-up.')
+        return render_template('signin.html', tips='User non-exist, please check your input or sign-up.')
 
 
 @app.route('/signup', methods=['POST', 'GET'])

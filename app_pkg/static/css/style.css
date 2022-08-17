@@ -142,7 +142,7 @@ nav ul li {
     font-family: "poppins";
 }
 
-.loginbox {
+.login-box {
     width: 360px;
     height: 450px;
     background: rgba(0, 170, 255, 0.547);
@@ -156,34 +156,33 @@ nav ul li {
     border-radius: 10px;
 }
 
-.loginbox h1 {
+.login-box h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-.loginbox h3 {
+.login-box h3 {
     padding: 0 0 10px;
     text-align: center;
 }
 
-.loginbox p {
+.login-box p {
     margin: 0;
     padding: 0;
     font-weight: bold;
 }
 
-.loginbox input {
+.login-box input {
     width: 100px;
     margin-bottom: 20px;
 }
 
-.loginbox input[type="checkbox"] {
-    width: 10px;
-    zoom: 150%;
+.login-box input[type="checkbox"] {
+    width: 5%;
 }
 
-.loginbox input[type="text"], input[type="password"] {
+.login-box input[type="text"], input[type="password"] {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -194,7 +193,7 @@ nav ul li {
     font-size: 16px;
 }
 
-.loginbox input[type="submit"] {
+.login-box input[type="submit"] {
     border: none;
     outline: none;
     height: 40px;
@@ -205,14 +204,14 @@ nav ul li {
     border-radius: 10px;
 }
 
-.loginbox input[type="submit"]:hover {
+.login-box input[type="submit"]:hover {
     cursor: pointer;
     background: #1E3A81;
     color: #fff;
 
 }
 
-.loginbox a {
+.login-box a {
     text-decoration: none;
     text-align: center;
     font-size: 15px;
@@ -220,7 +219,7 @@ nav ul li {
     color: red;
 }
 
-.loginbox a:hover {
+.login-box a:hover {
     color: yellow;
 }
 
