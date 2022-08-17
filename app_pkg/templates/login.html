@@ -13,10 +13,13 @@
                 <h1>Welcome</h1>
                 <h3>Login into your account</h3>
             </div>
-            <form name="login-form" action="/login_check" method="post" autocomplete="on">
+            <form name="login-form" action="/login" method="post" autocomplete="on">
                 <p>
                     {{ form.email.label }}<br>
-                    {{ form.email(size=32) }}
+                    {{ form.email(size=32) }}<br>
+            {% for error in form.email.errors %}
+            <span>[{{ error }}]</span>
+            {% endfor %}
                 </p>
                 <p>
                     {{ form.password.label }}<br>

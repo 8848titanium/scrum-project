@@ -1,4 +1,4 @@
-from flask import render_template, request
+from flask import render_template, request, flash, redirect, url_for
 
 from app_pkg import app
 # import pymysql
@@ -29,10 +29,14 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
-    return render_template('signin.html', title="Sign In", form=form)
+    if form.validate_on_submit():
+        flash('Login requested for email {}, remember_me={}'.format(
+            form.email.data, form.remember_me.data))
+        return redirect(url_for('index'))
+    return render_template('login.html', title='Sign In', form=form)
 
 
 @app.route('/login_check', methods=['POST', 'GET'])
@@ -51,9 +55,9 @@ def login_check():
             else:
                 return render_template('lecturer_main.html', user=current_user.user_name)
         else:
-            return render_template('signin.html', tips='Wrong password, please try again.')
+            return render_template('login.html', tips='Wrong password, please try again.')
     else:
-        return render_template('signin.html', tips='User non-exist, please check your input or sign-up.')
+        return render_template('login.html', tips='User non-exist, please check your input or sign-up.')
 
 
 @app.route('/signup', methods=['POST', 'GET'])
