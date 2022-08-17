@@ -117,6 +117,7 @@ def create_quiz():
 def lecturer_main():
     return render_template('lecturer_main.html')
 
+
 @app.route('/load_quiz', methods=['POST', 'GET'])
 def load_quiz():
     global current_pin
@@ -124,16 +125,34 @@ def load_quiz():
     a, b, c, d = questions[0].get('choices')
     return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (questions[0].get('question'), a, b, c, d)
 
-# @app.route('/lecturer_main')
-# def lecturer_main():
-#     return render_template('lecturer_main.html')
+
+@app.route('/new_quiz', methods=['POST', 'GET'])
+def new_quiz():
+    return render_template("quiz_lecturer.html", user=current_user.user_name)
 
 
 @app.route('/lec_add_question', methods=['POST', 'GET'])
 def lec_add_question():
     a_quiz = Quiz(current_user.user_id)
-    a_quiz.add_question(request.form['question'], request.form['type'], request.form['choices'], request.form['answer'])
-    return render_template('create_quiz.html')
+    a = request.form["op1"]
+    b = request.form["op2"]
+    c = request.form["op3"]
+    d = request.form["op4"]
+    choices = [a, b, c, d]
+
+    answer = ''
+
+    if request.form.get('checkbox1') == "on":
+        answer = 'A'
+    if request.form.get('checkbox2') == "on":
+        answer = 'B'
+    if request.form.get('checkbox3') == "on":
+        answer = 'C'
+    if request.form.get('checkbox4') == "on":
+        answer = 'D'
+
+    a_quiz.add_question(request.form['question'], 0, choices, answer)
+    return render_template('lecturer_main.html', user=current_user.user_name)
 
 
 @app.route('/my_quiz', methods=['POST', 'GET'])
@@ -149,10 +168,3 @@ def my_quiz():
     return render_template('my_quiz.html', user=current_user, user_name=current_user.user_name, all_quiz=all_quiz_string)
 
 
-@app.route('/create_num', methods=['POST', 'GET'])
-def create_num():
-    quiz_name = request.form['quiz_name']
-    num = request.form['num']
-    pin = request.form['quiz_PIN']
-    return render_template('quiz_lecturer.html', quiz_name=quiz_name, num=num, pin=pin)
-    
