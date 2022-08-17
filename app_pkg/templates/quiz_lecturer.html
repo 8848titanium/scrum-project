@@ -1,84 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Creating Exam</title>
-        <link rel="stylesheet" href="../static/css/style.css">
-    </head>
-    <style>
-        /*quiz_lecturer start*/
-
-        .button_1 {
-            top: 3%;
-            right: 10%;
-            position: absolute;
-        }
-
-        .button_2 {
-            top: 90%;
-            right: 5%;
-            position: absolute;
-        }
-
-        .Question {
-            background-color: #ffffff;
-            text-align: center;
-            color: #044e99;
-            padding: 40px;
-        }
-
-        .Question input {
-            display: block;
-            margin: 20px auto;
-            text-align: center;
-            background: none;
-            padding: 12px;
-            font-size: 40px;
-            border-radius: 22px;
-            outline: none;
-            color: #000000;
-        }
-
-        /*quiz_lecturer end*/
-    </style>
-    <body>
-        <div class="lecturer-list">
-            <div class="header">
-                <nav>
-                    <image src="../static/images/logo.png" class="logo"></image>
-                    <h1><a href="/lecturer_main">Creating Quiz</a></h1>
-                </nav>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">{{ user }}</button>
+{% extends "base.html" %}
+{% block content %}
+    <div class="lecturer-list">
+        <div class="header">
+            <nav>
+                <image src="../static/images/logo.png" class="logo"></image>
+                <h1><a href="/lecturer_main">Creating Quiz</a></h1>
+            </nav>
+        </div>
+    
+        <div class="dropdown">
+            <button class="dropbtn">{{ user }}</button>
                 <div class="dropdown-content">
                     <a href="#">Switch Account</a>
                     <a href="/login">Log Out</a>
                 </div>
-            </div>
-        </div>
-        <div style="background-color:#46a6cf;height: 750px;width:200px;">
-            <h2 class="btn">Question 1</h2>
-            <br>
-            <h2 class="btn">Question 2</h2>
-            <br>
-            <h2 class="btn">Add More</h2>
         </div>
         
-        <div style="background-color:#ffffff;height:750px;width:1200px;">
-            <form action="action.js" class="Question">
-                <h1>Question {{que_num}}</h1>
-                <input type="text" placeholder="Question"/>
-                <br/>
-                <input type="options" placeholder="add options"/>
-                <br/>
-                <input type="options" placeholder="add options"/>
-                <br/>
-                <input type="options" placeholder="add options"/>
-            </form>
+        <div class="quiz-creation" id="test">
+            <input type="text" placeholder="Question {{que_num}}"/>
+            <br/>
+            <input type="checkbox" class="label__input"/>
+            <input type="options" placeholder="add options"/>
+            <br/>
+            <input type="checkbox" class="label__input"/>
+            <input type="options" placeholder="add options"/>
+            <br/>
+            <input type="checkbox" class="label__input"/>
+            <input type="options" placeholder="add options"/>
+            <br/>
+            <input type="checkbox" class="label__input"/>
+            <input type="options" placeholder="add options"/>
+            <input type="submit" value="Submit"/>
         </div>
-            
-    </body>
-</html>
+        
+    </div>     
 
+<script>
+$(document).ready(function(){
+$('#test').find('input[type=checkbox]').bind('click', function(){
+$('#test').find('input[type=checkbox]').not(this).attr("checked", false);
+});
+});
+</script>
+{% endblock %}

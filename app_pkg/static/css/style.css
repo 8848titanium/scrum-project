@@ -209,7 +209,6 @@ nav ul li {
     cursor: pointer;
     background: #1E3A81;
     color: #fff;
-
 }
 
 .loginbox a {
@@ -1070,3 +1069,59 @@ footer button.show {
     background: #007bff;
 }
 
+.quiz-creation {
+    width: 1200px;
+    height: 800px;
+    background: rgba(0, 170, 255, 0.4);
+    top: 55%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 50px 30px;
+    border-radius: 10px;
+}
+
+.quiz-creation h1 {
+    padding: 0 0 10px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.quiz-creation input {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    background: none;
+    padding: 12px;
+    font-size: 40px;
+    border-radius: 22px;
+    outline: none;
+    color: #000000;
+}
+
+.quiz-creation input[type="submit"] {
+    border: none;
+    outline: none;
+    height: 7%;
+    width: 14%;
+    background: #cbeff7;
+    color: #000;
+    font-size: 18px;
+    border-radius: 10px;
+    position:absolute;
+    right:4%;
+    bottom:5px;
+}
+
+.quiz-creation input[type="submit"]:hover {
+    cursor: pointer;
+    background: #1E3A81;
+    color: #fff;
+}
+
+.quiz-creation .label__input{
+    position:absolute;
+    left:25%;
+    zoom:250%;
+}
