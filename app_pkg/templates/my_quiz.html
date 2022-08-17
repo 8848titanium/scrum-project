@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My quiz</title>
-</head>
-<body>
+{% extends "base.html" %}i
+{% block content %}
+<div class="quiz-list">
+    <div class="header">
+        <nav>
+            <image src="../static/images/logo.png" class="logo"></image>
+            <h1><a href="/lecturer_main">Quiz List</a></h1>
+        </nav>
+    </div>
 
-</body>
-</html>
+    <div class="dropdown">
+        <button class="dropbtn">{{ user }}</button>
+            <div class="dropdown-content">
+                <a href="#">Switch Account</a>
+                <a href="/login">Log Out</a>
+            </div>
+    </div>
+
+    <div class="quiz-creation" id="test">
+        <h1>{{question}}</h1>
+        <br/>
+        <h2>{{A}}</h2>
+        <br/>
+        <h2>{{B}}</h2>
+        <br/>
+        <h2>{{C}}</h2>
+        <br/>
+        <h2>{{D}}</h2>
+        <input type="submit" value="Next"/>
+    </div>
+
+</div>
