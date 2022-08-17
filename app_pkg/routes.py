@@ -117,6 +117,7 @@ def lecturer_main():
     return render_template('lecturer_main.html')
 
 
+<<<<<<< Updated upstream
 @app.route('/load_quiz', methods=['POST', 'GET'])
 def load_quiz():
     global current_pin
