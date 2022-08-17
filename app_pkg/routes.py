@@ -141,20 +141,8 @@ def my_quiz():
 
 @app.route('/create_num', methods=['POST', 'GET'])
 def create_num():
-    global current_user
-    current_user = User(email=request.form['email'], password=request.form['password'])
-
-    # check for existing user
-    if current_user.check_exist():
-        result = current_user.login()
-        if result:
-            current_user.user_id = result[0]
-            current_user.user_name = result[1]
-            if current_user.user_type == "student":
-                return render_template('student_main.html', user=current_user.user_name)
-            else:
-                return render_template('lecturer_main.html', user=current_user.user_name)
-        else:
-            return render_template('login.html', tips='Wrong password, please try again.')
-    else:
-        return render_template('login.html', tips='User non-exist, please check your input or sign-up.')
+    quiz_name = request.form['quiz_name']
+    num = request.form['num']
+    pin = request.form['quiz_PIN']
+    return render_template('quiz_lecturer.html', quiz_name=quiz_name, num=num, pin=pin)
+    

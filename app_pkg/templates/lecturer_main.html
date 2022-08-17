@@ -8,6 +8,14 @@
             </nav>
         </div>
 
+        <div class="quiz">
+            <h2>Your Quiz</h2>
+            <button class="btn" style="position: absolute;left: 100px;top: 100px;">Quiz 1</button>
+            <button class="btn" style="position: absolute;left: 400px;top: 100px;">Quiz 2</button>
+            <button class="btn" style="position: absolute;left: 700px;top: 100px;">Quiz 3</button>
+
+        </div>
+
         <div class="dropdown">
             <button class="dropbtn">{{ user }}</button>
             <div class="dropdown-content">
@@ -23,9 +31,10 @@
                         <div id="header">
                             <span>How many question you want add?</span>
 
-                            <form name="create_num" onsubmit="return validateForm()" action="/quiz_lecturer" method="post">
-                                <input type="text" name="num" id="num" placeholder="number">
-                                <input type="text" name="quiz_name" id="quiz_name" placeholder="quiz name">
+                            <form action="/create_num" method="post">
+                                <input type="text" name="num" placeholder="Number">
+                                <input type="text" name="quiz_name" placeholder="Quiz Name">
+                                <input type="text" name="quiz_PIN" placeholder="Quiz PIN">
                                 <input type="submit" value="Submit"/>
                             </form>
 
@@ -50,13 +59,7 @@
             <button> <a href="/quiz_lecturer">create quiz</a>></button>
         </div> -->
 
-        <div class="quiz">
-            <h2>Your Quiz</h2>
-            <button class="btn" style="position: absolute;left: 100px;top: 100px;">Quiz 1</button>
-            <button class="btn" style="position: absolute;left: 400px;top: 100px;">Quiz 2</button>
-            <button class="btn" style="position: absolute;left: 700px;top: 100px;">Quiz 3</button>
-
-        </div>
+        
 
     </div>
 {% endblock %}

@@ -4,7 +4,7 @@
         <div class="header">
             <nav>
                 <image src="../static/images/logo.png" class="logo"></image>
-                <h1><a href="/lecturer_main">Creating Quiz</a></h1>
+                <h1><a href="/lecturer_main">{{quiz_name}}</a></h1>
             </nav>
         </div>
     
@@ -17,29 +17,28 @@
         </div>
         
         <div class="quiz-creation" id="test">
+            
+
+            <form action="#" method="post">
             <input type="text" placeholder="Question {{que_num}}"/>
             <br/>
             <input type="checkbox" class="label__input"/>
-            <input type="options" placeholder="add options"/>
+            <input type="text" placeholder="Add options"/>
+
             <br/>
             <input type="checkbox" class="label__input"/>
-            <input type="options" placeholder="add options"/>
+            <input type="text" placeholder="Add options"/>
             <br/>
             <input type="checkbox" class="label__input"/>
-            <input type="options" placeholder="add options"/>
+            <input type="text" placeholder="Add options"/>
             <br/>
             <input type="checkbox" class="label__input"/>
-            <input type="options" placeholder="add options"/>
+            <input type="text" placeholder="Add options"/>
             <input type="submit" value="Submit"/>
+            </form>
+
         </div>
         
     </div>     
 
-<script>
-$(document).ready(function(){
-$('#test').find('input[type=checkbox]').bind('click', function(){
-$('#test').find('input[type=checkbox]').not(this).attr("checked", false);
-});
-});
-</script>
 {% endblock %}
