@@ -15,6 +15,7 @@ from app_pkg.user_handler import *
 # Define a global variable to store user info after successfully login to the system.
 global current_user
 global current_pin
+global current_quiz
 
 
 @app.route('/')
@@ -131,13 +132,22 @@ def load_quiz():
 @app.route('/lec_add_question', methods=['POST', 'GET'])
 def lec_add_question():
     a_quiz = Quiz(current_user.user_id)
-    a_quiz.add_question(request.form['question'], 'Category Undefined', request.form['choices'], 'Answer Undefined')
+    a_quiz.add_question(request.form['question'], request.form['type'], request.form['choices'], request.form['answer'])
     return render_template('create_quiz.html')
 
 
 @app.route('/my_quiz', methods=['POST', 'GET'])
 def my_quiz():
-    return render_template('my_quiz.html')
+    global current_quiz
+    # current_quiz = Quiz(current_user.user_id)
+    all_quiz_id = conn_mul("SELECT * FROM quiz WHERE lecturer_id = '%s'" % current_user.user_id)
+    all_quiz_string = ""
+    for row in all_quiz_id:
+        all_quiz_string += str(load_questions(row[0]))
+        all_quiz_string += "\n"
+    # current_quiz = load_questions(1) #quiz id
+    return render_template('my_quiz.html', user=current_user, user_name=current_user.user_name, all_quiz=all_quiz_string)
+
 
 @app.route('/create_num', methods=['POST', 'GET'])
 def create_num():
