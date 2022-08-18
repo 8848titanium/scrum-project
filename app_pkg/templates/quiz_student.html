@@ -1,70 +1,49 @@
-{% extends "base.html" %}
-{% block content %}
-    <!-- start Quiz button -->
-    <div class="start_btn"><button>Start Quiz</button></div>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Quiz Application</title>
+</head>
+<style>
+body{
+    background-image: url('../images/student_quiz.gif');
+    background-size: 100% 100%;
 
-    <!-- Info Box -->
-    <div class="info_box">
-        <div class="info-title"><span>Some Rules of this Quiz</span></div>
-        <div class="info-list">
-            <div class="info">1. You will have only <span>15 seconds</span> per each question.</div>
-            <div class="info">2. Once you select your answer, it can't be undone.</div>
-            <div class="info">3. You can't select any option once time goes off.</div>
-            <div class="info">4. You can't exit from the Quiz while you're playing.</div>
-            <div class="info">5. You'll get points on the basis of your correct answers.</div>
-        </div>
-        <div class="buttons">
-            <button class="quit">Exit Quiz</button>
-            <form action="/load_quiz" method="post">
-            <button type="submit" class="restart">Continue</button>
-            </form>
-        </div>
-    </div>
+    height: 100vh;
+    padding:0;
+    margin:0;
+}
+</style>
 
-    <!-- Quiz Box -->
-    <div class="quiz_box">
-        <header>
-            <div class="title">Awesome Quiz Application</div>
-            <div class="timer">
-                <div class="time_left_txt">Time Left</div>
-                <div class="timer_sec">15</div>
-            </div>
-            <div class="time_line"></div>
-        </header>
-        <section>
-            <div class="que_text">
-                <!--inserted question from JavaScript -->
-            </div>
-            <div class="option_list">
-                <!--inserted options from JavaScript -->
-            </div>
-        </section>
+<body>
 
-        <!-- footer of Quiz Box -->
-        <footer>
-            <div class="total_que">
-                <!--inserted Question Count Number from JavaScript -->
-            </div>
-            <button class="next_btn">Next Que</button>
-        </footer>
-    </div>
+<div class="studentquiz_bg">
+		Q1.How long is a sprint time goes on?<br>
+	<div class="studentquiz">
+		<input type="radio" name="question1" id="correct1">1 <br>
+		<input type="radio" name="question1">2 <br>
+		<input type="radio" name="question1">3 <br>
+		<input type="radio" name="question1">0 <br>
+	</div>
 
-    <!-- Result Box -->
-    <div class="result_box">
-        <div class="icon">
-            <i class="fas fa-crown"></i>
-        </div>
-        <div class="complete_text">You've completed the Quiz!</div>
-        <div class="score_text">
-            <!--inserted Score Result from JavaScript -->
-        </div>
-        <div class="buttons">
-            <button class="restart">Replay Quiz</button>
-            <button class="quit">Quit Quiz</button>
-        </div>
-    </div>
 
-    <script src="../static/js/js.js"></script>
-    <script src="../static/js/script.js"></script>
+	<button class="quiz_previous_btn">Previous</button>
+	<button class="quiz_next_btn">Next</button>
+	<input type="submit" class="studentquiz_button" name="submit" value="Submit Quiz" onClick="result()">
+</div>
+<script type="text/javascript">
+function result()
+{
+	var score=0;
+	if(document.getElementById('correct1').checked)
+		{	score++;
+		}
 
-{% endblock %}
+ alert("Your score is:"+score);
+ // to print on browser
+ // document.write("Your score is:"+score);
+}
+</script>
+
+
+</body>
+</html>
