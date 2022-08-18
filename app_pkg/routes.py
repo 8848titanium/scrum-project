@@ -186,13 +186,16 @@ def view_my_quiz():
     global current_quiz_choiceB
     global current_quiz_choiceC
     global current_quiz_choiceD
-    current_quiz_id = request.form.get('get_quiz_id')
+    # current_quiz_id = request.form.get('get_quiz_id')
+    current_quiz_id = request.form['get_quiz_id']
     current_quiz_question = conn_mul(f"SELECT question FROM question where quiz_id={current_quiz_id}")
     current_quiz_choiceA = conn_mul(f"SELECT A FROM question where quiz_id={current_quiz_id}")
     current_quiz_choiceB = conn_mul(f"SELECT B FROM question where quiz_id={current_quiz_id}")
     current_quiz_choiceC = conn_mul(f"SELECT C FROM question where quiz_id={current_quiz_id}")
     current_quiz_choiceD = conn_mul(f"SELECT D FROM question where quiz_id={current_quiz_id}")
-    return render_template('view_my_quiz.html', quiz_id=current_quiz_id[0][0], question=current_quiz_question[0][0], A=current_quiz_choiceA[0][0], B=current_quiz_choiceB[0][0], C=current_quiz_choiceC[0][0], D=current_quiz_choiceD[0][0])
+    return render_template('view_my_quiz.html', quiz_id=current_quiz_id[0][0], question=current_quiz_question[0][0],
+                           A=current_quiz_choiceA[0][0], B=current_quiz_choiceB[0][0], C=current_quiz_choiceC[0][0],
+                           D=current_quiz_choiceD[0][0])
 # 如果不用[0][0]只用[0]的话会传回一个tuple,这里暂时只做出了只能看quiz中的第一个问题
 
 
@@ -207,6 +210,7 @@ def get_quiz_id():
     return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list))
 # edit_my_quiz() tuple - 处理成string并存为变量 - 就可以被读了！处理成-opt1 ,question,opt2这样子
 
+
 @app.route('/edit_my_quiz', methods=['POST', 'GET'])
 def edit_my_quiz():
     global current_quiz_id
@@ -215,7 +219,9 @@ def edit_my_quiz():
     global current_quiz_choiceB
     global current_quiz_choiceC
     global current_quiz_choiceD
-    return render_template('edit_my_quiz.html', quiz_id=current_quiz_id[0][0], question=current_quiz_question[0][0], A=current_quiz_choiceA[0][0], B=current_quiz_choiceB[0][0], C=current_quiz_choiceC[0][0], D=current_quiz_choiceD[0][0])
+    return render_template('edit_my_quiz.html', quiz_id=current_quiz_id[0][0], question=current_quiz_question[0][0],
+                           A=current_quiz_choiceA[0][0], B=current_quiz_choiceB[0][0], C=current_quiz_choiceC[0][0],
+                           D=current_quiz_choiceD[0][0])
 
 
 @app.route('/edit_quiz_question', methods=['POST', 'GET'])
@@ -238,6 +244,9 @@ def edit_quiz_question():
         answer = 'D'
 
     # write_cmd = f"UPDATE question SET question = '{question}' WHERE question_id=1;UPDATE question SET A = '{a}' WHERE question_id=1;UPDATE question SET B = '{b}' WHERE question_id=1;UPDATE question SET C = '{c}' WHERE question_id=1;UPDATE question SET D = '{d}' WHERE question_id=1;"
+    # write_cmd = f"UPDATE question SET question = '{question}' WHERE question_id=1;"
+    # write_cmd = "UPDATE question SET question = ' Hi ' WHERE question_id=1;"
     write_cmd = f"UPDATE question SET question = '{question}' WHERE question_id=1;"
     conn_non(write_cmd)
-    return render_template('/view_my_quiz.html')
+    # return view_my_quiz()
+    return my_quiz()
