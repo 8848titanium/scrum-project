@@ -84,7 +84,7 @@ class Quiz:
 def load_questions(quiz_id):
     query_result = conn_mul("SELECT * FROM question WHERE quiz_id = '%s'" % quiz_id)
     return [{"question_id": row[0], "question": row[2], "category": row[3], "choices": row[4:8], "answer": row[-1]}
-            for row in query_result]
+            for row in query_result]  # list comprehension
 
 
 def launch_quiz(pin):

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create quiz</title>
+</head>
+
+<body>
+ <button><a href="/quiz_lecturer">Create quiz</a></button><br><br>
+
+<form action="/lec_add_question" method="post">
+    <label>Question:</label><br><br>
+    <input type="text" name="question" placeholder="Enter a question here"><br><br>
+    <label>Question type:</label><br><br>
+    <input type="text" name="type" placeholder="Enter a question type here"><br><br>
+    <label>Question answer:</label><br><br>
+    <input type="text" name="answer" placeholder="Enter a answer here"><br><br>
+
+    <label>Choices:</label><br><br>
+    <div id="Choices list">
+        <input type="text" name="choices" placeholder="Choice1"><br><br>
+        <input type="text" name="choices" placeholder="Choice1"><br><br>
+    </div>
+
+<!--    add a choice, cannot use button-->
+<!--    <label onclick="addChoice()"> Click to add choice </label><br><br>-->
+
+<!--    submit a question-->
+    <button type="submit" onclick="displayFeedback()" type="submit">Submit</button><br><br>
+</form>
+
+</body>
+</html>
+
+<script>
+function addQuestion() {
+    let button = document.createElement("button");
+    button.innerHTML = "Question2";
+    button.type = "question";
+    button.name = "Question2";
+    document.getElementById("Question list").appendChild(button);
+}
+
+function addChoice() {
+    let choiceBox = document.createElement("input");
+    choiceBox.type = "text";
+    choiceBox.name = "choices";
+    choiceBox.placeholder="Choice2"
+    document.getElementById("Choices list").appendChild(choiceBox);
+}
+
+function displayFeedback() {
+  let prompt = 'Upload successfully!'
+  alert(prompt);
+}
+</script>

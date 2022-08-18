@@ -152,7 +152,7 @@ def lec_add_question():
         answer = 'D'
 
     a_quiz.add_question(request.form['question'], 0, choices, answer)
-    return render_template('lecturer_main.html', user=current_user.user_name)
+    return my_quiz()
 
 
 @app.route('/my_quiz', methods=['POST', 'GET'])
@@ -160,11 +160,31 @@ def my_quiz():
     global current_quiz
     # current_quiz = Quiz(current_user.user_id)
     all_quiz_id = conn_mul("SELECT * FROM quiz WHERE lecturer_id = '%s'" % current_user.user_id)
-    all_quiz_string = ""
+    all_quiz_string = "Those are all the quiz created:\n"
     for row in all_quiz_id:
+        all_quiz_string += "Quiz id:\n"
+        all_quiz_string += str(row[0])
+        all_quiz_string += "Quiz detail:\n"
         all_quiz_string += str(load_questions(row[0]))
         all_quiz_string += "\n"
     # current_quiz = load_questions(1) #quiz id
     return render_template('my_quiz.html', user=current_user, user_name=current_user.user_name, all_quiz=all_quiz_string)
 
 
+@app.route('/edit_my_quiz', methods=['POST', 'GET'])
+def edit_my_quiz():
+    global current_quiz_id
+    current_quiz_id = request.form.get('get_quiz_id')
+    current_quiz_question = conn_mul(f"SELECT question FROM question where quiz_id={current_quiz_id}")
+    current_quiz_choiceA = conn_mul(f"SELECT A FROM question where quiz_id={current_quiz_id}")
+    current_quiz_choiceB = conn_mul(f"SELECT B FROM question where quiz_id={current_quiz_id}")
+    current_quiz_choiceC = conn_mul(f"SELECT C FROM question where quiz_id={current_quiz_id}")
+    current_quiz_choiceD = conn_mul(f"SELECT D FROM question where quiz_id={current_quiz_id}")
+    return render_template('edit_my_quiz.html', quiz_id=current_quiz_id[0][0], question=current_quiz_question[0][0], A=current_quiz_choiceA[0][0], B=current_quiz_choiceB[0][0], C=current_quiz_choiceC[0][0], D=current_quiz_choiceD[0][0])
+# 如果不用[0][0]只用[0]的话会传回一个tuple,这里暂时只做出了只能看quiz中的第一个问题
+
+
+@app.route('/get_quiz_id', methods=['POST', 'GET'])
+def get_quiz_id():
+    return render_template('get_quiz_id.html')
+# edit_my_quiz() tuple - 处理成string并存为变量 - 就可以被读了！处理成-opt1 ,question,opt2这样子

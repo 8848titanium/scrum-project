@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Get quiz id </title>
+</head>
+<body>
+<!--<p>{{quiz_id}}</p>-->
+<!--<p>{{question}}</p>-->
+<!--<p>{{A}}</p>-->
+<!--<p>{{B}}</p>-->
+<!--<p>{{C}}</p>-->
+<!--<p>{{D}}</p>-->
+<h1>Enter quiz id:</h1>
+
+    <form action="/edit_my_quiz" method="post">
+        <input type="text" name="get_quiz_id" placeholder="Enter a question id"><br><br>
+        <button type="submit" onclick="displayFeedback()" type="submit">Submit</button><br><br>
+    </form>
+
+
+</body>
+</html>
+
+<script>
+function displayFeedback() {
+  let prompt = 'Quiz id entered successfully!'
+  alert(prompt);
+}
+</script>
