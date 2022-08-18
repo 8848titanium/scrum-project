@@ -1160,3 +1160,79 @@ footer button.show {
     top: 5px;
     text-align: center;
 }
+
+.studentquiz_bg {
+    background-image: url('../images/student_quiz.gif');
+    background-size: 100% 100%;
+	position: absolute;
+	height: 350px;
+	width: 600px;
+    top: 50%;
+    left: 50%;
+	font-size: 40px;
+	border-radius: 20px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.studentquiz {
+	font-size: 30px;
+	position:fixed;
+	left: 5px;
+}
+
+.quiz_previous_btn {
+	font-size: 20px;
+	color: #1E3A81;
+    background-image: url('../images/student_quiz.gif');
+    padding: 10px 30px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+	border: none;
+	position: fixed;
+	bottom: 10px;
+	left: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.quiz_next_btn {
+	font-size: 20px;
+	color: #1E3A81;
+    background-image: url('../images/student_quiz.gif');
+    padding: 10px 30px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+	border: none;
+	position: fixed;
+	bottom: 10px;
+	left: 200px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.studentquiz_button {
+	font-size: 20px;
+	color: #1E3A81;
+    background: #fff;
+    background-image: url('../images/student_quiz.gif');
+    padding: 10px 30px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+	border: none;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.quizmusic {
+	position:fixed;
+	bottom: 300px;
+	left: 800px;
+}
