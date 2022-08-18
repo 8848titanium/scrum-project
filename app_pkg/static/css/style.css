@@ -770,7 +770,7 @@ nav ul li {
 }
 
 .studentquiz_bg {
-    background-image: url('../images/student_quiz.gif');
+    background-color: #98d8e3;
     background-size: 100% 100%;
 	position: absolute;
 	height: 350px;
@@ -793,7 +793,7 @@ nav ul li {
 .quiz_previous_btn {
 	font-size: 20px;
 	color: #1E3A81;
-    background-image: url('../images/student_quiz.gif');
+    background-color: #98d8e3;
     padding: 10px 30px;
     cursor: pointer;
     outline: none;
@@ -809,7 +809,7 @@ nav ul li {
 .quiz_next_btn {
 	font-size: 20px;
 	color: #1E3A81;
-    background-image: url('../images/student_quiz.gif');
+    background-color: #98d8e3;
     padding: 10px 30px;
     cursor: pointer;
     outline: none;
@@ -826,7 +826,7 @@ nav ul li {
 	font-size: 20px;
 	color: #1E3A81;
     background: #fff;
-    background-image: url('../images/student_quiz.gif');
+    background-color: #98d8e3;
     padding: 10px 30px;
     cursor: pointer;
     outline: none;
