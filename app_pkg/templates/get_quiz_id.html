@@ -5,26 +5,19 @@
     <title>Get quiz id </title>
 </head>
 <body>
-<!--<p>{{quiz_id}}</p>-->
-<!--<p>{{question}}</p>-->
-<!--<p>{{A}}</p>-->
-<!--<p>{{B}}</p>-->
-<!--<p>{{C}}</p>-->
-<!--<p>{{D}}</p>-->
+
+<h1>All quiz id:</h1>
+<p>{{all_quiz}}</p>
+<h1>Most recently created quiz:</h1>
+<p>{{recent_quiz}}</p>
 <h1>Enter quiz id:</h1>
 
-    <form action="/edit_my_quiz" method="post">
+    <form action="/view_my_quiz" method="post">
+        <!--        enter quiz id to view the related quiz-->
         <input type="text" name="get_quiz_id" placeholder="Enter a question id"><br><br>
-        <button type="submit" onclick="displayFeedback()" type="submit">Submit</button><br><br>
+        <button type="submit" type="submit">Submit</button><br><br>
     </form>
 
 
 </body>
 </html>
-
-<script>
-function displayFeedback() {
-  let prompt = 'Quiz id entered successfully!'
-  alert(prompt);
-}
-</script>
