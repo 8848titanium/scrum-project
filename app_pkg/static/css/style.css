@@ -241,7 +241,8 @@ nav ul li {
 
 .signupbox {
     width: 360px;
-    height: 570px;
+    min-height: 570px;
+    height: auto;
     background: rgba(0, 170, 255, 0.547);
     color: #fff;
     top: 50%;
@@ -265,13 +266,11 @@ nav ul li {
 }
 
 .signupbox p {
-    margin: 0;
-    padding: 0;
+
     font-weight: bold;
 }
 
 .signupbox input {
-    width: 100px;
     margin-bottom: 20px;
 }
 
@@ -286,36 +285,6 @@ nav ul li {
     font-size: 16px;
 }
 
-.sel {
-    float: right;
-    margin-right: 20px;
-    width: 120px;
-    height: 22px;
-    overflow: hidden;
-}
-
-.sel h4 {
-    position: fixed;
-    left: 35px;
-    margin-bottom: 20px;
-}
-
-.sel select {
-    position: fixed;
-    left: 75px;
-    top: 435px;
-    background: transparent;
-    width: 250px;
-    padding: 1px 2px;
-    border: 1px solid black;
-    font-weight: bold;
-    outline: none;
-    height: 30px;
-    -webkit-appearance: none;
-    appearance: none;
-    -moz-appearance: none;
-}
-
 .signupbox input[type="date"] {
     width: 300px;
     border: none;
@@ -328,8 +297,7 @@ nav ul li {
 }
 
 .signupbox input[type="submit"] {
-    position: fixed;
-    top: 485px;
+    margin-top: 8%;
     border-top: 10px;
     border: none;
     outline: none;
@@ -351,7 +319,6 @@ nav ul li {
 .signupbox a[type="link"] {
     text-decoration: none;
     position: absolute;
-    top: 540px;
     left: 90px;
     font-size: 15px;
     line-height: 10px;
@@ -1069,3 +1036,37 @@ footer button.show {
     background: #007bff;
 }
 
+/* toggle in label designing */
+.toggle {
+    position : relative;
+    display : inline-block;
+    width : 36px;
+    height : 22px;
+    border-radius: 30px;
+    border: 3px solid #ffffff;
+    vertical-align: top;
+}
+
+/* After slide changes */
+.toggle:after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 88%;
+    border-radius: 50%;
+    background-color: white;
+    top: 1px;
+    left: 1px;
+    transition:  all 0.25s;
+    vertical-align: top;
+}
+
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+    left : 48%;
+}
+
+/* Checkbox vanished */
+.checkbox {
+            display : none;
+}

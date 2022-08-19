@@ -1,19 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="header">
-        <nav>
             <image src="../static/images/logo.png" class="logo"></image>
+        <nav>
             <h1>Happy Learning</h1>
             <ul class="nav-links">
-                <a href="/about">
+                <a href="{{ url_for('about') }}">
                     <li class="btn">About us</li>
                 </a>
-                <a href="/signup">
+                <a href="{{ url_for('register') }}">
                     <li class="btn">Sign up</li>
                 </a>
-                <a href="/login">
+                {% if current_user.is_anonymous %}
+                <a href="{{ url_for('login') }}">
                     <li class="btn">Login</li>
                 </a>
+                {% else %}
+                <a href="{{ url_for('logout') }}">
+                    <li class="btn">Logout</li>
+                </a>
+                {% endif %}
             </ul>
         </nav>
         <div class="content">

@@ -13,23 +13,24 @@
                 <h1>Welcome</h1>
                 <h3>Login into your account</h3>
             </div>
-            <form name="login-form" action="/login" method="post" autocomplete="on">
+            <form name="login-form" action="" method="post" autocomplete="on">
+            {{ form.hidden_tag() }}
                 <p>
                     {{ form.email.label }}<br>
-                    {{ form.email(size=32) }}<br>
+                    {{ form.email(size=120) }}<br>
             {% for error in form.email.errors %}
             <span>[{{ error }}]</span>
             {% endfor %}
                 </p>
                 <p>
                     {{ form.password.label }}<br>
-                    {{ form.password(size=32) }}
+                    {{ form.password(size=255) }}
                 </p>
                 <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
                 <p>{{ form.submit() }}</p>
             </form>
+            <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
             <a href="#">Forgot password?</a>
-            <a href="/signup">Don't have an account?</a>
         </div>
     </div>
 {% endblock %}
