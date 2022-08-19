@@ -21,3 +21,19 @@
 
 </body>
 </html>
+
+<script>
+    for(var i=0;i<{{quiz_count}};i++){
+        var br = document.createElement("br");
+        addLink(i+1)
+        document.body.appendChild(br)
+    }
+
+    function addLink(i){
+        var a = document.createElement("a");
+        a.innerHTML = "Question" + i;
+        a.title = "Question link";
+        a.href = "/edit_my_quiz"
+        document.body.appendChild(a)
+    }
+</script>

@@ -177,7 +177,9 @@ def my_quiz():
     # current_quiz = load_questions(1) #quiz id
     return render_template('my_quiz.html', user=current_user, user_name=current_user.user_name, all_quiz=all_quiz_string)
 
-
+@app.route('/js_test', methods=['POST', 'GET'])
+def js_test():
+    return render_template('js_test.html', question_count=5)
 @app.route('/view_my_quiz', methods=['POST', 'GET'])
 def view_my_quiz():
     global current_quiz_id
@@ -207,7 +209,7 @@ def get_quiz_id():
     for row in all_quiz_id:
         quiz_id_list.append(row[0])
         # 这里可以execute javascript就是往网页上添加按钮
-    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list))
+    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list), quiz_count=most_recent_quiz[0][0] )
 # edit_my_quiz() tuple - 处理成string并存为变量 - 就可以被读了！处理成-opt1 ,question,opt2这样子
 
 
