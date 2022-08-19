@@ -1,7 +1,9 @@
-from app_pkg import db
+from app_pkg import db, login
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     username = db.Column(db.String(64), index=True)
     email = db.Column(db.String(120), index=True, unique=True)
@@ -10,6 +12,17 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User: {self.username}, Email: {self.email}, User Type: {self.type}>"
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+
+@login.user_loader
+def load_user(uid):
+    return User.query.get(int(uid))
 
 
 class Quiz(db.Model):
@@ -23,6 +36,7 @@ class Quiz(db.Model):
 
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
     question = db.Column(db.String(255), index=True)
     type = db.Column(db.String(20), index=True)
     choice_a = db.Column(db.String(255), index=True)
@@ -30,7 +44,6 @@ class Question(db.Model):
     choice_c = db.Column(db.String(255), index=True)
     choice_d = db.Column(db.String(255), index=True)
     answer = db.Column(db.String(255), index=True)
-    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
 
     def __repr__(self):
         return f"<Question {self.id}: {self.type} type, {self.question}, {[self.choice_a, self.choice_b, self.choice_c, self.choice_d]}, answer: {self.answer}>"

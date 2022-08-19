@@ -16,3 +16,4 @@ cryptography==37.0.4
 WTForms==3.0.1
 flask-migrate==3.1.0
 flask-mysqldb==1.0.1
+email-validator==1.2.1
