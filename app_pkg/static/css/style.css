@@ -405,31 +405,6 @@ nav ul li {
     background-size: 100% 100%;
 }
 
-.student-list .logo {
-    width: 40px;
-    height: 53.42px;
-    position: absolute;
-    top: 29px;
-    left: 53px;
-}
-
-.student-list .nav {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-}
-
-.student-list .nav h1 {
-    font-size: 30px;
-    color: #FFF;
-    font-weight: bolder;
-    position: absolute;
-    left: 106px;
-    top: 40px;
-}
-
 .student-list .nav ul {
     position: fixed;
     top: 50px;
@@ -489,7 +464,7 @@ nav ul li {
     border-radius: 15px;
 } */
 
-.student-list .dropbtn {
+.dropbtn {
     background-color: #0384fc;
     position: absolute;
     right: 50px;
@@ -501,14 +476,14 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.student-list .dropdown {
+.dropdown {
     position: fixed;
     top: 40px;
     right: 30px;
     display: inline-block;
 }
 
-.student-list .dropdown-content {
+.dropdown-content {
     display: none;
     position: absolute;
     right: 50px;
@@ -519,22 +494,22 @@ nav ul li {
     z-index: 1;
 }
 
-.student-list .dropdown-content a {
+.dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.student-list .dropdown-content a:hover {
+.dropdown-content a:hover {
     background-color: #ddd;
 }
 
-.student-list .dropdown:hover .dropdown-content {
+.dropdown:hover .dropdown-content {
     display: block;
 }
 
-.student-list .dropdown:hover .dropbtn {
+.dropdown:hover .dropbtn {
     background-color: #3badff;
 }
 
@@ -563,6 +538,59 @@ nav ul li {
     font-size: 20px;
 }
 
+.cards-layout {
+    display: flex;
+
+    /* Put a card in the next row when previous cards take all width */
+    flex-wrap: wrap;
+
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+.cards{
+    /* There will be 4 cards per row */
+    flex-basis: 18%;
+
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.card {
+    margin: 30px 60px;
+    width: 300px;
+    height: 300px;
+    border-radius: 40px;
+    box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+    cursor: pointer;
+    transition: 0.4s;
+    background-color:#0ff;
+  }
+  
+.card .card_title {
+    text-align: center;
+    padding-top: 130px;
+    border-radius: 0px 0px 40px 40px;
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 80px;
+    color: white;
+}
+  
+.card:hover {
+    transform: scale(0.9, 0.9);
+    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+        -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+  
+@media all and (max-width: 500px) {
+    .card-list {
+        /* On small screens, we are no longer using row direction but column */
+        flex-direction: row;
+    }
+}
+
 .quiz button {
     display: block;
     width: 200px;
@@ -589,94 +617,12 @@ nav ul li {
     background-size: 100% 100%;
 }
 
-.lecturer-list .logo {
-    width: 40px;
-    height: 53.42px;
-    position: absolute;
-    top: 29px;
-    left: 53px;
-}
-
-.lecturer-list .nav {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-}
-
-.lecturer-list .nav h1 {
-    font-size: 30px;
-    color: #FFF;
-    font-weight: bolder;
-    position: absolute;
-    left: 106px;
-    top: 40px;
-}
-
-.lecturer-list .dropbtn {
-    background-color: #0384fc;
-    position: absolute;
-    right: 50px;
-    color: white;
-    padding: 16px;
-    font-size: 16px;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.lecturer-list .dropdown {
-    position: fixed;
-    top: 40px;
-    right: 30px;
-    display: inline-block;
-}
-
-.lecturer-list .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 50px;
-    top: 50px;
-    background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-}
-
-.lecturer-list .dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.lecturer-list .dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-
-.lecturer-list .dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.lecturer-list .dropdown:hover .dropbtn {
-    background-color: #3badff;
-}
-
-.lecturer-list .dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.lecturer-list .dropdown:hover .dropbtn {
-    background-color: #3badff;
-}
-
 .lecturer-list .create-button button{
     position:absolute;
     top:20px;
     right:250px;
 }
+
 .quiz-creation {
     width: 1200px;
     height: 800px;
