@@ -113,7 +113,9 @@ def load_quiz():
     global current_pin
     questions = launch_quiz(current_pin)
     a, b, c, d = questions[0].get('choices')
-    return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (questions[0].get('question'), a, b, c, d)
+    return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (
+    questions[0].get('question'), a, b, c, d)
+
 
 # @app.route('/lecturer_main')
 # def lecturer_main():

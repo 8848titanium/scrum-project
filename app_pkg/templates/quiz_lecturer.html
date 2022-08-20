@@ -13,7 +13,7 @@
         padding: 0 10%;
     }
 
-    .header a{
+    .header a {
         text-decoration: none;
         color: #fff;
     }
@@ -140,43 +140,43 @@
     /*quiz_lecturer end*/
 </style>
 <body>
-    <div class="header">
-        <nav>
-            <image src="../static/images/logo.png" class="logo"></image>
-            <h1><a href="/lecturer_main">Creating Quiz</a></h1>
-        </nav>
-    </div>
+<div class="header">
+    <nav>
+        <image src="../static/images/logo.png" class="logo"></image>
+        <h1><a href="/lecturer_main">Creating Quiz</a></h1>
+    </nav>
+</div>
 
-    <div class="dropdown">
-        <button class="dropbtn">{{ user }}</button>
-        <div class="dropdown-content">
-            <a href="#">Switch Account</a>
-            <a href="/login">Log Out</a>
-        </div>
+<div class="dropdown">
+    <button class="dropbtn">{{ user }}</button>
+    <div class="dropdown-content">
+        <a href="#">Switch Account</a>
+        <a href="/login">Log Out</a>
     </div>
+</div>
 
-    <div style="background-color:#46a6cf;height: 750px;;width:150px;float:left;">
-        <button>Question 1</button>
-        <br>
-        <button>Question 2</button>
-        <br>
-        <button>add Question</button>
-    </div>
+<div style="background-color:#46a6cf;height: 750px;;width:150px;float:left;">
+    <button>Question 1</button>
+    <br>
+    <button>Question 2</button>
+    <br>
+    <button>add Question</button>
+</div>
 
-    <div style="background-color:#ffffff;height:750px;width:1200px;float:left;">
-        <form action="action.js" class="Question">
-            <h1>Question {{que_num}}</h1>
-            <input type="text" placeholder="Question"/>
-            <br/>
-            <input type="options" placeholder="add options"/>
-            <br/>
-            <input type="options" placeholder="add options"/>
-            <br/>
-            <input type="options" placeholder="add options"/>
-        </form>
-    </div>
-        <a href="/lecturer_main">
-            <button class="button_2">Done</button>
-        </a>
+<div style="background-color:#ffffff;height:750px;width:1200px;float:left;">
+    <form action="action.js" class="Question">
+        <h1>Question {{ que_num }}</h1>
+        <input type="text" placeholder="Question"/>
+        <br/>
+        <input type="options" placeholder="add options"/>
+        <br/>
+        <input type="options" placeholder="add options"/>
+        <br/>
+        <input type="options" placeholder="add options"/>
+    </form>
+</div>
+<a href="/lecturer_main">
+    <button class="button_2">Done</button>
+</a>
 </body>
 </html>

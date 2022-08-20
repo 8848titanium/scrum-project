@@ -10,50 +10,50 @@
             </nav>
         </div>
         <div class="signupbox">
-                <div class="welcome">
-                    <h1>Happy Learning</h1>
-                    <h3>Get Start Now</h3>
-                </div>
-                <form name="signup-form" action="" method="post">
-                    {{ form.hidden_tag() }}
-                    <p>
-                        {{ form.username.label }}<br>
-                        {{ form.username() }}<br>
-                        {% for error in form.username.errors %}
-                            <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
-                    <p>
-                        {{ form.email.label }}<br>
-                        {{ form.email() }}<br>
-                        {% for error in form.email.errors %}
-                            <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
-                    <p>
-                        {{ form.password.label }}<br>
-                        {{ form.password() }}<br>
-                        {% for error in form.password.errors %}
-                            <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
-                    <p>
-                        {{ form.password2.label }}<br>
-                        {{ form.password2() }}<br>
-                        {% for error in form.password2.errors %}
-                            <span style="color: red;">[{{ error }}]</span>
-                        {% endfor %}
-                    </p>
-                    <p>
-                        <span class="role">Student&nbsp;</span>
-                        {{ form.type(id="switch", class="checkbox")}}
-                        <label for="switch" class="toggle"></label>
-                        <span class="role">&nbsp;Lecturer</span>
-                    </p>
-                    <p>
-                        {{ form.submit() }}
-                    </p>
-                </form>
+            <div class="welcome">
+                <h1>Happy Learning</h1>
+                <h3>Get Start Now</h3>
+            </div>
+            <form name="signup-form" action="" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username() }}<br>
+                    {% for error in form.username.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email() }}<br>
+                    {% for error in form.email.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password() }}<br>
+                    {% for error in form.password.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password2.label }}<br>
+                    {{ form.password2() }}<br>
+                    {% for error in form.password2.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    <span class="role">Student&nbsp;</span>
+                    {{ form.type(id="switch", class="checkbox") }}
+                    <label for="switch" class="toggle"></label>
+                    <span class="role">&nbsp;Lecturer</span>
+                </p>
+                <p>
+                    {{ form.submit() }}
+                </p>
+            </form>
             <a type="link" href="/login">Already have an account?</a>
         </div>
     </div>

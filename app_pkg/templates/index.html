@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="header">
-            <image src="../static/images/logo.png" class="logo"></image>
+        <image src="../static/images/logo.png" class="logo"></image>
         <nav>
             <h1>Happy Learning</h1>
             <ul class="nav-links">
@@ -12,13 +12,13 @@
                     <li class="btn">Sign up</li>
                 </a>
                 {% if current_user.is_anonymous %}
-                <a href="{{ url_for('login') }}">
-                    <li class="btn">Login</li>
-                </a>
+                    <a href="{{ url_for('login') }}">
+                        <li class="btn">Login</li>
+                    </a>
                 {% else %}
-                <a href="{{ url_for('logout') }}">
-                    <li class="btn">Logout</li>
-                </a>
+                    <a href="{{ url_for('logout') }}">
+                        <li class="btn">Logout</li>
+                    </a>
                 {% endif %}
             </ul>
         </nav>
@@ -34,13 +34,13 @@
 
         </div>
         <div class="Join-quiz">
-             <form name="pin-form" action="" method="post">
-                 {{ form.pin(placeholder='Your PIN') }}
-                 {{ form.hidden_tag() }}
-                 {% for error in form.pin.errors %}
-                     <span style="color: red;">[{{ error }}]</span>
-                 {% endfor %}
-                 {{ form.submit() }}
+            <form name="pin-form" action="" method="post">
+                {{ form.pin(placeholder='Your PIN') }}
+                {{ form.hidden_tag() }}
+                {% for error in form.pin.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+                {{ form.submit() }}
             </form>
         </div>
     </div>

@@ -14,13 +14,13 @@
                 <h3>Login into your account</h3>
             </div>
             <form name="login-form" action="" method="post" autocomplete="on">
-            {{ form.hidden_tag() }}
+                {{ form.hidden_tag() }}
                 <p>
                     {{ form.email.label }}<br>
                     {{ form.email() }}<br>
-                {% for error in form.email.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
+                    {% for error in form.email.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
                 </p>
                 <p>
                     {{ form.password.label }}<br>

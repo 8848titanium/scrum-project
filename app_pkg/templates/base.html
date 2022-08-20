@@ -10,13 +10,13 @@
 <h1>Hi, {{ current_user.email }}!</h1>
 <div></div>
 {% with messages = get_flashed_messages() %}
-        {% if messages %}
+    {% if messages %}
         <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+                <li>{{ message }}</li>
             {% endfor %}
         </ul>
-        {% endif %}
+    {% endif %}
 {% endwith %}
 {% block content %}
 {% endblock %}

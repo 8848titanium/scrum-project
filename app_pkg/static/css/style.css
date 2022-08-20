@@ -632,10 +632,10 @@ input::-webkit-inner-spin-button {
     background-color: #3badff;
 }
 
-.lecturer-list .create-button button{
-    position:absolute;
-    top:20px;
-    right:250px;
+.lecturer-list .create-button button {
+    position: absolute;
+    top: 20px;
+    right: 250px;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
@@ -656,7 +656,7 @@ body {
     margin: 0;
 }
 
-::selection{
+::selection {
     color: #fff;
     background: #007bff;
 }
@@ -664,25 +664,25 @@ body {
 .start_btn,
 .info_box,
 .quiz_box,
-.result_box{
+.result_box {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .info_box.activeInfo,
 .quiz_box.activeQuiz,
-.result_box.activeResult{
+.result_box.activeResult {
     opacity: 1;
     z-index: 5;
     pointer-events: auto;
     transform: translate(-50%, -50%) scale(1);
 }
 
-.start_btn button{
+.start_btn button {
     font-size: 25px;
     font-weight: 500;
     color: #007bff;
@@ -1031,10 +1031,10 @@ footer button.show {
 
 /* toggle in label designing */
 .toggle {
-    position : relative;
-    display : inline-block;
-    width : 36px;
-    height : 22px;
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 22px;
     border-radius: 30px;
     border: 3px solid #ffffff;
     vertical-align: top;
@@ -1050,16 +1050,16 @@ footer button.show {
     background-color: white;
     top: 1px;
     left: 1px;
-    transition:  all 0.25s;
+    transition: all 0.25s;
     vertical-align: top;
 }
 
 /* Checkbox checked effect */
 .checkbox:checked + .toggle::after {
-    left : 48%;
+    left: 48%;
 }
 
 /* Checkbox vanished */
 .checkbox {
-            display : none;
+    display: none;
 }
