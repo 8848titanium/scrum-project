@@ -12,9 +12,9 @@ from app_pkg.models import *
 # import traceback
 
 ROLES = ['lecturer', 'student']
+CHOICES = ['A', 'B', 'C', 'D']
 
 # Define a global variable to store user info after successfully login to the system.
-global current_user
 global current_pin
 global current_quiz
 global current_quiz_question
@@ -24,8 +24,6 @@ global current_question_choiceB
 global current_question_choiceC
 global current_question_choiceD
 global ids
-
-CHOICES = ['A', 'B', 'C', 'D']
 
 
 @app.route('/', methods=['POST', 'GET'])
