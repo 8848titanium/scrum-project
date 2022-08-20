@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Rubik", 'Roboto'
+    font-family: "Rubik", 'Roboto', 'sans-serif'
 }
 
 body {
@@ -100,7 +100,7 @@ nav ul li {
 
 .Join-quiz {
     position: fixed;
-    width: 330px;
+    width: 10%;
     left: 100px;
     bottom: 54px;
     background-color: #FFF;
@@ -108,30 +108,34 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.Join-quiz button {
+.Join-quiz input[type="text"] {
+    width: 100%;
+    height: 50%;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+.Join-quiz input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.Join-quiz input[type="submit"] {
     font-size: 30px;
     font-weight: bolder;
-    color: #FFF;
-    top: 0;
-    right: 0;
+    background: #1E3A81;
+    color: #fff;
     height: 100%;
-    position: absolute;
-    background-color: #98d8e3;
+    width: 100%;
+    margin-top: 2%;
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 15px;
 }
-
-.Join-quiz input {
-    width: 100%;
-    height: 54px;
-    outline: none;
-    border: none;
-    border-radius: 15px;
-    font-size: 32px;
-}
-
 
 .login {
     margin: 0;
@@ -139,10 +143,10 @@ nav ul li {
     background-image: url("../images/loginbackground.png");
     background-size: 100% 100%;
     background-position: center;
-    font-family: "poppins";
+    font-family: "poppins", sans-serif;
 }
 
-.loginbox {
+.login-box {
     width: 360px;
     height: 450px;
     background: rgba(0, 170, 255, 0.547);
@@ -156,34 +160,33 @@ nav ul li {
     border-radius: 10px;
 }
 
-.loginbox h1 {
+.login-box h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-.loginbox h3 {
+.login-box h3 {
     padding: 0 0 10px;
     text-align: center;
 }
 
-.loginbox p {
+.login-box p {
     margin: 0;
     padding: 0;
     font-weight: bold;
 }
 
-.loginbox input {
+.login-box input {
     width: 100px;
     margin-bottom: 20px;
 }
 
-.loginbox input[type="checkbox"] {
-    width: 10px;
-    zoom: 150%;
+.login-box input[type="checkbox"] {
+    width: 5%;
 }
 
-.loginbox input[type="text"], input[type="password"] {
+.login-box input[type="text"], input[type="password"] {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -194,7 +197,7 @@ nav ul li {
     font-size: 16px;
 }
 
-.loginbox input[type="submit"] {
+.login-box input[type="submit"] {
     border: none;
     outline: none;
     height: 40px;
@@ -205,13 +208,13 @@ nav ul li {
     border-radius: 10px;
 }
 
-.loginbox input[type="submit"]:hover {
+.login-box input[type="submit"]:hover {
     cursor: pointer;
     background: #1E3A81;
     color: #fff;
 }
 
-.loginbox a {
+.login-box a {
     text-decoration: none;
     text-align: center;
     font-size: 15px;
@@ -219,7 +222,7 @@ nav ul li {
     color: red;
 }
 
-.loginbox a:hover {
+.login-box a:hover {
     color: yellow;
 }
 
@@ -229,7 +232,7 @@ nav ul li {
     background-image: url("../images/signupbackground.png");
     background-size: 100% 100%;
     background-position: center;
-    font-family: "poppins";
+    font-family: "poppins", sans-serif;
 }
 
 .signup .header h5 {
@@ -241,7 +244,8 @@ nav ul li {
 
 .signupbox {
     width: 360px;
-    height: 570px;
+    min-height: 570px;
+    height: auto;
     background: rgba(0, 170, 255, 0.547);
     color: #fff;
     top: 50%;
@@ -265,13 +269,11 @@ nav ul li {
 }
 
 .signupbox p {
-    margin: 0;
-    padding: 0;
+
     font-weight: bold;
 }
 
 .signupbox input {
-    width: 100px;
     margin-bottom: 20px;
 }
 
@@ -286,50 +288,8 @@ nav ul li {
     font-size: 16px;
 }
 
-.sel {
-    float: right;
-    margin-right: 20px;
-    width: 120px;
-    height: 22px;
-    overflow: hidden;
-}
-
-.sel h4 {
-    position: fixed;
-    left: 35px;
-    margin-bottom: 20px;
-}
-
-.sel select {
-    position: fixed;
-    left: 75px;
-    top: 435px;
-    background: transparent;
-    width: 250px;
-    padding: 1px 2px;
-    border: 1px solid black;
-    font-weight: bold;
-    outline: none;
-    height: 30px;
-    -webkit-appearance: none;
-    appearance: none;
-    -moz-appearance: none;
-}
-
-.signupbox input[type="date"] {
-    width: 300px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: rgb(110, 110, 110);
-    font-size: 16px;
-}
-
 .signupbox input[type="submit"] {
-    position: fixed;
-    top: 485px;
+    margin-top: 8%;
     border-top: 10px;
     border: none;
     outline: none;
@@ -351,7 +311,6 @@ nav ul li {
 .signupbox a[type="link"] {
     text-decoration: none;
     position: absolute;
-    top: 540px;
     left: 90px;
     font-size: 15px;
     line-height: 10px;
@@ -566,7 +525,7 @@ nav ul li {
     transition: 0.4s;
     background-color:#0ff;
   }
-  
+
 .card .card_title {
     text-align: center;
     padding-top: 130px;
@@ -577,13 +536,13 @@ nav ul li {
     margin-top: 80px;
     color: white;
 }
-  
+
 .card:hover {
     transform: scale(0.9, 0.9);
-    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25),
         -5px -5px 30px 15px rgba(0,0,0,0.22);
 }
-  
+
 @media all and (max-width: 500px) {
     .card-list {
         /* On small screens, we are no longer using row direction but column */
@@ -789,4 +748,39 @@ nav ul li {
 	position:fixed;
 	bottom: 300px;
 	left: 800px;
+}
+
+/* toggle in label designing */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 22px;
+    border-radius: 30px;
+    border: 3px solid #ffffff;
+    vertical-align: top;
+}
+
+/* After slide changes */
+.toggle:after {
+    content: '';
+    position: absolute;
+    width: 50%;
+    height: 88%;
+    border-radius: 50%;
+    background-color: white;
+    top: 1px;
+    left: 1px;
+    transition: all 0.25s;
+    vertical-align: top;
+}
+
+/* Checkbox checked effect */
+.checkbox:checked + .toggle::after {
+    left: 48%;
+}
+
+/* Checkbox vanished */
+.checkbox {
+    display: none;
 }

@@ -14,37 +14,47 @@
                 <h1>Happy Learning</h1>
                 <h3>Get Start Now</h3>
             </div>
-            <form action="/signup_check" method="post">
-                <label for="username">Username:</label>
-
-                <input type="text" name="username" placeholder="Username"/>
-
-                <label for="useremail">Email:</label>
-
-                <input type="text" name="email" placeholder="Enter Email"/>
-
-                <label for="password">Password:</label>
-
-                <input type="password" name="password1" placeholder="Password"/>
-
-                <label for="con-password">Confirm Password:</label>
-
-                <input type="password" name="password2" placeholder="Confirm Password"/>
-
-                <h4>I am </h4>
-
-                <div class="sel">
-                    <select name="type" id="select">
-                        <option value="student">Student</option>
-                        <option value="lecturer">Lecturer</option>
-                    </select>
-                </div>
-                <br>
-                <input type="submit" value="Create Account and Login">
+            <form name="signup-form" action="" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username() }}<br>
+                    {% for error in form.username.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.email.label }}<br>
+                    {{ form.email() }}<br>
+                    {% for error in form.email.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password() }}<br>
+                    {% for error in form.password.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password2.label }}<br>
+                    {{ form.password2() }}<br>
+                    {% for error in form.password2.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    <span class="role">Student&nbsp;</span>
+                    {{ form.type(id="switch", class="checkbox") }}
+                    <label for="switch" class="toggle"></label>
+                    <span class="role">&nbsp;Lecturer</span>
+                </p>
+                <p>
+                    {{ form.submit() }}
+                </p>
             </form>
-
             <a type="link" href="/login">Already have an account?</a>
-
         </div>
     </div>
 {% endblock %}

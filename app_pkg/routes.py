@@ -1,16 +1,17 @@
-from flask import render_template, request
+from flask import render_template, request, flash, redirect, url_for
+from flask_login import current_user, login_user, logout_user, login_required
+from werkzeug.urls import url_parse
 
 from app_pkg import app
+from app_pkg import db
+from app_pkg.forms import LoginForm, RegistrationForm, JoinQuizForm
+from app_pkg.user_handler import *
+from app_pkg.models import *
+
 # import pymysql
 # import traceback
-from app_pkg.user_handler import *
 
-# 导入弹出警告框模块
-
-# import config
-
-# app = Flask(__name__)
-# app.config.from_object(config)
+ROLES = ['lecturer', 'student']
 
 # Define a global variable to store user info after successfully login to the system.
 global current_user
@@ -27,9 +28,13 @@ global ids
 CHOICES = ['A', 'B', 'C', 'D']
 
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
+@app.route('/index', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html')
+    form = JoinQuizForm()
+    if form.validate_on_submit():
+        return quiz_pin(form)
+    return render_template('index.html', title='Home', form=form)
 
 
 @app.route('/about', methods=['POST', 'GET'])
@@ -37,82 +42,71 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+    # block manually access to /login if one user already logged in
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = LoginForm()
+    if form.validate_on_submit():
+        # return a user object if any exists, or None if it doesn't
+        user = User.query.filter_by(email=form.email.data).first()
+        login_user(user, remember=form.remember_me.data)
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
+    return render_template('login.html', title='Sign In', form=form)
 
 
-@app.route('/login_check', methods=['POST', 'GET'])
-def login_check():
-    global current_user
-    current_user = User(email=request.form['email'], password=request.form['password'])
-
-    # check for existing user
-    if current_user.check_exist():
-        result = current_user.login()
-        if result:
-            current_user.user_id = result[0]
-            current_user.user_name = result[1]
-            if current_user.user_type == "student":
-                return render_template('student_main.html', user=current_user.user_name)
-            else:
-                return render_template('lecturer_main.html', user=current_user.user_name)
-        else:
-            return render_template('login.html', tips='Wrong password, please try again.')
-    else:
-        return render_template('login.html', tips='User non-exist, please check your input or sign-up.')
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 
-@app.route('/signup', methods=['POST', 'GET'])
-def signup():
-    return render_template('signup.html', name="")
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    # block manually access to /login if one user already logged in
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, email=form.email.data)  # ignore pycharm unexpected argument warning
+        user.type = ROLES[0] if form.type.data else ROLES[1]  # 0 for lecturer, 1 for student
+        user.set_password(form.password.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('signup.html', title='Signup', form=form)
 
 
-@app.route('/signup_check', methods=['POST', 'GET'])
-def signup_check():
-    input_name = request.form['username']
-    input_email = request.form['email']
-    password1 = request.form['password1']
-    password2 = request.form['password2']
-    account_type = request.form['type']
-    if input_name and input_email and password1 and password2:
-        if password1 == password2:
-            new_user = User(input_email, input_name, password1, account_type)
-            if new_user.check_exist():  # check user email is existing or not
-                return render_template('signup.html', tips='This email has been registered already!')
-            else:
-                new_user.signup()
-                if new_user.user_type == "student":
-                    return render_template('student_main.html', user=new_user.user_name)
-                else:
-                    return render_template('lecturer_main.html', user=new_user.user_name)
-        else:
-            return render_template('signup.html', name=input_name, tips='Password mismatch, please try again.')
-    else:
-        return render_template('signup.html', tips='Please fill all the fields.')
-
-
-@app.route('/quiz_student', methods=['POST', 'GET'])
-def quiz_student():
-    global current_pin
-    current_pin = request.form["quiz_PIN"]
-    if launch_quiz(current_pin):
-        return render_template('quiz_student.html')
-    else:
-        return render_template('index.html')
+@app.route('/quiz_pin', methods=['POST', 'GET'])
+@login_required
+def quiz_pin(form):
+    quiz = Quiz.query.filter_by(pin=form.pin.data).first()
+    if quiz is None:
+        return redirect(url_for('index'))
+    return render_template('quiz_student.html')
 
 
 @app.route('/student_main')
+@login_required
 def student_main():
     return render_template('student_main.html')
 
 
 @app.route('/quiz_lecturer')
+@login_required
 def quiz_lecturer():
     return render_template('quiz_lecturer.html')
 
 
 @app.route('/create_quiz')
+@login_required
 def create_quiz():
     return render_template('create_quiz.html')
 
@@ -123,6 +117,7 @@ def create_quiz():
 
 
 @app.route('/lecturer_main')
+@login_required
 def lecturer_main():
     return render_template('lecturer_main.html')
 
@@ -132,7 +127,8 @@ def load_quiz():
     global current_pin
     questions = launch_quiz(current_pin)
     a, b, c, d = questions[0].get('choices')
-    return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (questions[0].get('question'), a, b, c, d)
+    return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (
+    questions[0].get('question'), a, b, c, d)
 
 
 @app.route('/new_quiz', methods=['POST', 'GET'])
