@@ -4,18 +4,26 @@ from werkzeug.urls import url_parse
 
 from app_pkg import app
 from app_pkg import db
-from app_pkg.forms import LoginForm, RegistrationForm
-from app_pkg.models import User
+from app_pkg.forms import LoginForm, RegistrationForm, JoinQuizForm
+from app_pkg.user_handler import *
+from app_pkg.models import *
+
 # import pymysql
 # import traceback
 
 ROLES = ['lecturer', 'student']
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['POST', 'GET'])
+@app.route('/index', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html', title='Home')
+    form = JoinQuizForm()
+    if form.validate_on_submit():
+        quiz = Quiz.query.filter_by(pin=form.pin.data).first()
+        if quiz is None:
+            return redirect(url_for('index'))
+        return render_template('quiz_student.html')
+    return render_template('index.html', title='Home', form=form)
 
 
 @app.route('/about', methods=['POST', 'GET'])
@@ -33,15 +41,11 @@ def login():
     if form.validate_on_submit():
         # return a user object if any exists, or None if it doesn't
         user = User.query.filter_by(email=form.email.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('index')
         return redirect(next_page)
-        # return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
 
 
@@ -60,47 +64,13 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
-        user.type = ROLES[0] if form.type.data else ROLES[1]
+        user.type = ROLES[0] if form.type.data else ROLES[1]  # 0 for lecturer, 1 for student
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Signup', form=form)
-
-
-@app.route('/signup_check', methods=['POST', 'GET'])
-def signup_check():
-    input_name = request.form['username']
-    input_email = request.form['email']
-    password1 = request.form['password1']
-    password2 = request.form['password2']
-    account_type = request.form['type']
-    if input_name and input_email and password1 and password2:
-        if password1 == password2:
-            new_user = User(input_email, input_name, password1, account_type)
-            if new_user.check_exist():  # check user email is existing or not
-                return render_template('signup.html', tips='This email has been registered already!')
-            else:
-                new_user.signup()
-                if new_user.user_type == "student":
-                    return render_template('student_main.html', user=new_user.user_name)
-                else:
-                    return render_template('lecturer_main.html', user=new_user.user_name)
-        else:
-            return render_template('signup.html', name=input_name, tips='Password mismatch, please try again.')
-    else:
-        return render_template('signup.html', tips='Please fill all the fields.')
-
-
-@app.route('/quiz_student', methods=['POST', 'GET'])
-def quiz_student():
-    global current_pin
-    current_pin = request.form["quiz_PIN"]
-    if launch_quiz(current_pin):
-        return render_template('quiz_student.html')
-    else:
-        return render_template('index.html')
 
 
 @app.route('/student_main')

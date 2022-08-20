@@ -100,7 +100,7 @@ nav ul li {
 
 .Join-quiz {
     position: fixed;
-    width: 330px;
+    width: 10%;
     left: 100px;
     bottom: 54px;
     background-color: #FFF;
@@ -108,30 +108,34 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.Join-quiz button {
+.Join-quiz input[type="text"] {
+    width: 100%;
+    height: 50%;
+    outline: none;
+    border: none;
+    border-radius: 15px;
+    font-size: 32px;
+    font-weight: bolder;
+}
+
+.Join-quiz input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.Join-quiz input[type="submit"] {
     font-size: 30px;
     font-weight: bolder;
-    color: #FFF;
-    top: 0;
-    right: 0;
+    background: #1E3A81;
+    color: #fff;
     height: 100%;
-    position: absolute;
-    background-color: #98d8e3;
+    width: 100%;
+    margin-top: 2%;
     border: none;
     outline: none;
     cursor: pointer;
     border-radius: 15px;
 }
-
-.Join-quiz input {
-    width: 100%;
-    height: 54px;
-    outline: none;
-    border: none;
-    border-radius: 15px;
-    font-size: 32px;
-}
-
 
 .login {
     margin: 0;
@@ -139,7 +143,7 @@ nav ul li {
     background-image: url("../images/loginbackground.png");
     background-size: 100% 100%;
     background-position: center;
-    font-family: "poppins";
+    font-family: "poppins", sans-serif;
 }
 
 .login-box {
@@ -229,7 +233,7 @@ nav ul li {
     background-image: url("../images/signupbackground.png");
     background-size: 100% 100%;
     background-position: center;
-    font-family: "poppins";
+    font-family: "poppins", sans-serif;
 }
 
 .signup .header h5 {
@@ -275,17 +279,6 @@ nav ul li {
 }
 
 .signupbox input[type="text"], input[type="password"] {
-    width: 300px;
-    border: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
-    outline: none;
-    height: 40px;
-    color: rgb(110, 110, 110);
-    font-size: 16px;
-}
-
-.signupbox input[type="date"] {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
