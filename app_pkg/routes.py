@@ -19,10 +19,7 @@ ROLES = ['lecturer', 'student']
 def index():
     form = JoinQuizForm()
     if form.validate_on_submit():
-        quiz = Quiz.query.filter_by(pin=form.pin.data).first()
-        if quiz is None:
-            return redirect(url_for('index'))
-        return render_template('quiz_student.html')
+        return quiz_pin(form)
     return render_template('index.html', title='Home', form=form)
 
 
@@ -63,7 +60,7 @@ def register():
 
     form = RegistrationForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = User(username=form.username.data, email=form.email.data)  # ignore pycharm unexpected argument warning
         user.type = ROLES[0] if form.type.data else ROLES[1]  # 0 for lecturer, 1 for student
         user.set_password(form.password.data)
         db.session.add(user)
@@ -71,6 +68,15 @@ def register():
         flash('Congratulations, you are now a registered user!')
         return redirect(url_for('login'))
     return render_template('signup.html', title='Signup', form=form)
+
+
+@app.route('/quiz_pin', methods=['POST', 'GET'])
+@login_required
+def quiz_pin(form):
+    quiz = Quiz.query.filter_by(pin=form.pin.data).first()
+    if quiz is None:
+        return redirect(url_for('index'))
+    return render_template('quiz_student.html')
 
 
 @app.route('/student_main')
