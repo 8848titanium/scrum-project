@@ -7,8 +7,6 @@
 </head>
 
 <body>
-<h1>Hi, {{ current_user.email }}!</h1>
-<div></div>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>

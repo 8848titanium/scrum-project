@@ -4,7 +4,7 @@ from werkzeug.urls import url_parse
 
 from app_pkg import app
 from app_pkg import db
-from app_pkg.forms import LoginForm, RegistrationForm, JoinQuizForm
+from app_pkg.forms import *
 from app_pkg.user_handler import *
 from app_pkg.models import *
 
@@ -136,26 +136,25 @@ def new_quiz():
 
 @app.route('/lec_add_question', methods=['POST', 'GET'])
 def lec_add_question():
-    a_quiz = Quiz(current_user.id)
-    a = request.form["op1"]
-    b = request.form["op2"]
-    c = request.form["op3"]
-    d = request.form["op4"]
-    choices = [a, b, c, d]
+    if not current_user.is_authenticated:
+        return redirect(url_for('index'))
 
-    answer = ''
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        quiz = Quiz(user_id=current_user.id)
+        answer = ''
 
-    if request.form.get('checkbox1') == "on":
-        answer = 'A'
-    if request.form.get('checkbox2') == "on":
-        answer = 'B'
-    if request.form.get('checkbox3') == "on":
-        answer = 'C'
-    if request.form.get('checkbox4') == "on":
-        answer = 'D'
+        if request.form.get('checkbox1') == "on":
+            answer = 'A'
+        if request.form.get('checkbox2') == "on":
+            answer = 'B'
+        if request.form.get('checkbox3') == "on":
+            answer = 'C'
+        if request.form.get('checkbox4') == "on":
+            answer = 'D'
 
-    a_quiz.add_question(request.form['question'], 0, choices, answer)
-    return my_quiz()
+        quiz.add_question(request.form['question'], 0, answer)
+        return my_quiz()
 
 
 @app.route('/my_quiz', methods=['POST', 'GET'])

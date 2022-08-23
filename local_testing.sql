@@ -1,5 +1,6 @@
 # create database if doesn't have one.
 # db modeling for mysql can't operate without an existed database
+# you may need to edit the config.py to use your local database
 CREATE DATABASE IF NOT EXISTS `happylearning` DEFAULT CHARACTER SET UTF8MB4;
 
 # !!!!!! !!!!!! Execute below command in commandline:

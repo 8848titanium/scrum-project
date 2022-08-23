@@ -7,7 +7,6 @@
                 <h1>Welcome {{ current_user.username }}</h1>
             </nav>
         </div>
-    
         <div class="quiz">
             <h2>Your Quiz</h2>
             <div class="cards-layout">
@@ -17,11 +16,9 @@
                             <p>quiz 1</p>
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
-
         <div class="dropdown">
             <button class="drop-btn">{{ current_user.username }}</button>
             <div class="dropdown-content">
@@ -32,9 +29,5 @@
                 <a href="/get_quiz_id">Edit My Quiz</a>
             </div>
         </div>
-
-
-        
-
     </div>
 {% endblock %}

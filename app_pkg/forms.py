@@ -48,3 +48,16 @@ class JoinQuizForm(FlaskForm):
         quiz = Quiz.query.filter_by(pin=pin.data).first()
         if quiz is None:
             raise ValidationError('Please try a different pin.')
+
+
+class AddQuestionForm(FlaskForm):
+    question = StringField('Question:', validators=[DataRequired()])
+    choice_a = StringField('Choice A:', validators=[DataRequired()])
+    check_box_a = BooleanField()
+    choice_b = StringField('Choice B:', validators=[DataRequired()])
+    check_box_b = BooleanField()
+    choice_c = StringField('Choice C:', validators=[DataRequired()])
+    check_box_c = BooleanField()
+    choice_d = StringField('Choice D:', validators=[DataRequired()])
+    check_box_d = BooleanField()
+    submit = SubmitField('Add Question to This Quiz')
