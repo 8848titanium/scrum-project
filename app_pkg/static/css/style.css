@@ -423,7 +423,7 @@ input::-webkit-inner-spin-button {
     border-radius: 15px;
 } */
 
-.dropbtn {
+.drop-btn {
     background-color: #0384fc;
     position: absolute;
     right: 50px;
@@ -468,7 +468,7 @@ input::-webkit-inner-spin-button {
     display: block;
 }
 
-.dropdown:hover .dropbtn {
+.dropdown:hover .drop-btn {
     background-color: #3badff;
 }
 

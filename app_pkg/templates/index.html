@@ -16,9 +16,15 @@
                         <li class="btn">Login</li>
                     </a>
                 {% else %}
-                    <a href="{{ url_for('student_main') }}">
-                        <li class="btn">{{current_user.username}}</li>
-                    </a>
+                    {%  if current_user.type == "student" %}
+                        <a href="{{ url_for('student_main') }}">
+                            <li class="btn">{{current_user.username}}</li>
+                        </a>
+                    {% else %}
+                        <a href="{{ url_for('lecturer_main') }}">
+                            <li class="btn">{{current_user.username}}</li>
+                        </a>
+                    {%  endif %}
                     <a href="{{ url_for('logout') }}">
                         <li class="btn">Logout<li>
                     </a>
