@@ -8,16 +8,19 @@
                 <a href="{{ url_for('about') }}">
                     <li class="btn">About us</li>
                 </a>
-                <a href="{{ url_for('register') }}">
-                    <li class="btn">Sign up</li>
-                </a>
                 {% if current_user.is_anonymous %}
+                    <a href="{{ url_for('register') }}">
+                        <li class="btn">Sign up</li>
+                    </a>
                     <a href="{{ url_for('login') }}">
                         <li class="btn">Login</li>
                     </a>
                 {% else %}
+                    <a href="{{ url_for('student_main') }}">
+                        <li class="btn">{{current_user.username}}</li>
+                    </a>
                     <a href="{{ url_for('logout') }}">
-                        <li class="btn">Logout</li>
+                        <li class="btn">Logout<li>
                     </a>
                 {% endif %}
             </ul>
