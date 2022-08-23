@@ -4,7 +4,7 @@
         <div class="header">
             <nav>
                 <image src="../static/images/logo.png" class="logo"></image>
-                <h1>Welcome {{ user }}</h1>
+                <h1>Welcome {{ current_user.username }}</h1>
             </nav>
         </div>
     
@@ -23,7 +23,7 @@
         </div>
 
         <div class="dropdown">
-            <button class="drop-btn">{{ user }}</button>
+            <button class="drop-btn">{{ current_user.username }}</button>
             <div class="dropdown-content">
                 <a href="#">Switch Account</a>
                 <a href="/login">Log Out</a>

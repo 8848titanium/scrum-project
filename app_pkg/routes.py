@@ -126,17 +126,17 @@ def load_quiz():
     questions = launch_quiz(current_pin)
     a, b, c, d = questions[0].get('choices')
     return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (
-    questions[0].get('question'), a, b, c, d)
+        questions[0].get('question'), a, b, c, d)
 
 
 @app.route('/new_quiz', methods=['POST', 'GET'])
 def new_quiz():
-    return render_template("quiz_lecturer.html", user=current_user.user_name)
+    return render_template("quiz_lecturer.html", user=current_user.username)
 
 
 @app.route('/lec_add_question', methods=['POST', 'GET'])
 def lec_add_question():
-    a_quiz = Quiz(current_user.user_id)
+    a_quiz = Quiz(current_user.id)
     a = request.form["op1"]
     b = request.form["op2"]
     c = request.form["op3"]
@@ -161,8 +161,7 @@ def lec_add_question():
 @app.route('/my_quiz', methods=['POST', 'GET'])
 def my_quiz():
     global current_quiz
-    # current_quiz = Quiz(current_user.user_id)
-    all_quiz_id = conn_mul("SELECT * FROM quiz WHERE lecturer_id = '%s'" % current_user.user_id)
+    all_quiz_id = conn_mul("SELECT * FROM quiz WHERE user_id = '%s'" % current_user.id)
     all_quiz_string = "Those are all the quiz created:\n"
     for row in all_quiz_id:
         all_quiz_string += "Quiz id:\n"
@@ -171,7 +170,7 @@ def my_quiz():
         all_quiz_string += str(load_questions(row[0]))
         all_quiz_string += "\n"
     # current_quiz = load_questions(1) #quiz id
-    return render_template('my_quiz.html', user=current_user, user_name=current_user.user_name, all_quiz=all_quiz_string)
+    return render_template('my_quiz.html', user=current_user, user_name=current_user.username, all_quiz=all_quiz_string)
 
 
 @app.route('/js_test', methods=['POST', 'GET'])
@@ -191,12 +190,14 @@ def view_my_quiz():
     global ids
     try:
         current_quiz_id = request.form['get_quiz_id']
-        all_question_id = [row[0]for row in conn_mul(f"SELECT question_id FROM question where quiz_id={current_quiz_id}")]
+        all_question_id = [row[0] for row in
+                           conn_mul(f"SELECT question_id FROM question where quiz_id={current_quiz_id}")]
         ids = iter(all_question_id)
         current_quiz_question_id = next(ids)
     except:
         current_quiz_question_id = next(ids)
-    current_quiz_question = conn_mul(f"SELECT question FROM question where question_id={current_quiz_question_id}")[0][0]
+    current_quiz_question = conn_mul(f"SELECT question FROM question where question_id={current_quiz_question_id}")[0][
+        0]
     current_quiz_choiceA = conn_mul(f"SELECT A FROM question where question_id={current_quiz_question_id}")[0][0]
     current_quiz_choiceB = conn_mul(f"SELECT B FROM question where question_id={current_quiz_question_id}")[0][0]
     current_quiz_choiceC = conn_mul(f"SELECT C FROM question where question_id={current_quiz_question_id}")[0][0]
@@ -204,18 +205,23 @@ def view_my_quiz():
     return render_template('view_my_quiz.html', quiz_id=current_quiz_id, question=current_quiz_question,
                            A=current_quiz_choiceA, B=current_quiz_choiceB, C=current_quiz_choiceC,
                            D=current_quiz_choiceD, question_id=current_quiz_question_id)
+
+
 # 如果不用[0][0]只用[0]的话会传回一个tuple
 
 
 @app.route('/get_quiz_id', methods=['POST', 'GET'])
 def get_quiz_id():
-    most_recent_quiz = conn_mul("SELECT MAX(quiz_id) FROM quiz WHERE lecturer_id = '%s'" % current_user.user_id)
-    all_quiz_id = conn_mul("SELECT quiz_id FROM quiz WHERE lecturer_id = '%s'" % current_user.user_id)
+    most_recent_quiz = conn_mul("SELECT MAX(id) FROM quiz WHERE user_id = '%s'" % current_user.id)
+    all_quiz_id = conn_mul("SELECT id FROM quiz WHERE user_id = '%s'" % current_user.id)
     quiz_id_list = []
     for row in all_quiz_id:
         quiz_id_list.append(row[0])
         # 这里可以execute javascript就是往网页上添加按钮
-    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list), quiz_count=most_recent_quiz[0][0] )
+    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list),
+                           quiz_count=most_recent_quiz[0][0])
+
+
 # edit_my_quiz() tuple - 处理成string并存为变量 - 就可以被读了！处理成-opt1 ,question,opt2这样子
 
 
