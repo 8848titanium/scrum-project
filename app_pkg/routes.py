@@ -94,7 +94,7 @@ def quiz_pin(form):
 @app.route('/lecturer_main', methods=['GET', 'POST'])
 @login_required
 def lecturer_main():
-    return render_template('lecturer_main.html', quizzes=Quiz.query)
+    return render_template('lecturer_main.html', quizzes=Quiz.query.filter_by(user_id=current_user.id))
 
 
 @app.route('/student_main', methods=['GET', 'POST'])

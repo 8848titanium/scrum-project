@@ -10,17 +10,17 @@
         <div class="quiz">
             <h2>Your Quizzes</h2>
             <div class="cards-layout">
-                <div class="cards">
-                    {% if quizzes %}
-                        {%  for quiz in quizzes %}
+                {% if quizzes %}
+                    {% for quiz in quizzes %}
+                        <div class="cards">
                             <div class="card">
                                 <div class="card_title title-white">
                                     <p>{{ quiz.name }}</p>
                                 </div>
                             </div>
-                        {% endfor %}
-                    {%  endif %}
-                </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
             </div>
         </div>
         <div class="dropdown">
@@ -28,7 +28,6 @@
             <div class="dropdown-content">
                 <a href="#">Switch Account</a>
                 <a href="/login">Log Out</a>
-                <a href="/my_quiz">My quiz</a>
                 <a href="/new_quiz">Create quiz</a>
                 <a href="/get_quiz_id">Edit My Quiz</a>
             </div>
