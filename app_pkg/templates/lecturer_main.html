@@ -8,14 +8,18 @@
             </nav>
         </div>
         <div class="quiz">
-            <h2>Your Quiz</h2>
+            <h2>Your Quizzes</h2>
             <div class="cards-layout">
                 <div class="cards">
-                    <div class="card 1" >
-                        <div class="card_title title-white">
-                            <p>quiz 1</p>
-                        </div>
-                    </div>
+                    {% if quizzes %}
+                        {%  for quiz in quizzes %}
+                            <div class="card">
+                                <div class="card_title title-white">
+                                    <p>{{ quiz.name }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {%  endif %}
                 </div>
             </div>
         </div>

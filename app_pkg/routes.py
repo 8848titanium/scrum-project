@@ -5,7 +5,7 @@ from werkzeug.urls import url_parse
 from app_pkg import app
 from app_pkg import db
 from app_pkg.forms import *
-from app_pkg.user_handler import *
+# from app_pkg.user_handler import *
 from app_pkg.models import *
 
 # import pymysql
@@ -26,8 +26,8 @@ global current_question_choiceD
 global ids
 
 
-@app.route('/', methods=['POST', 'GET'])
-@app.route('/index', methods=['POST', 'GET'])
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     form = JoinQuizForm()
     if form.validate_on_submit():
@@ -35,7 +35,7 @@ def index():
     return render_template('index.html', title='Home', form=form)
 
 
-@app.route('/about', methods=['POST', 'GET'])
+@app.route('/about', methods=['GET', 'POST'])
 def about():
     return render_template('about.html')
 
@@ -82,7 +82,7 @@ def register():
     return render_template('signup.html', title='Signup', form=form)
 
 
-@app.route('/quiz_pin', methods=['POST', 'GET'])
+@app.route('/quiz_pin', methods=['GET', 'POST'])
 @login_required
 def quiz_pin(form):
     quiz = Quiz.query.filter_by(pin=form.pin.data).first()
@@ -91,36 +91,31 @@ def quiz_pin(form):
     return render_template('quiz_student.html')
 
 
-@app.route('/student_main')
+@app.route('/lecturer_main', methods=['GET', 'POST'])
+@login_required
+def lecturer_main():
+    return render_template('lecturer_main.html', quizzes=Quiz.query)
+
+
+@app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
     return render_template('student_main.html')
 
 
-@app.route('/quiz_lecturer')
+@app.route('/quiz_lecturer', methods=['GET', 'POST'])
 @login_required
 def quiz_lecturer():
     return render_template('quiz_lecturer.html')
 
 
-@app.route('/create_quiz')
+@app.route('/create_quiz', methods=['GET', 'POST'])
 @login_required
 def create_quiz():
     return render_template('create_quiz.html')
 
 
-# @app.route('/quiz_list', methods=['POST', 'GET'])
-# def quiz_list():
-#     return render_template('quiz_list.html')
-
-
-@app.route('/lecturer_main')
-@login_required
-def lecturer_main():
-    return render_template('lecturer_main.html')
-
-
-@app.route('/load_quiz', methods=['POST', 'GET'])
+@app.route('/load_quiz', methods=['GET', 'POST'])
 def load_quiz():
     global current_pin
     questions = launch_quiz(current_pin)
@@ -129,12 +124,12 @@ def load_quiz():
         questions[0].get('question'), a, b, c, d)
 
 
-@app.route('/new_quiz', methods=['POST', 'GET'])
+@app.route('/new_quiz', methods=['GET', 'POST'])
 def new_quiz():
     return render_template("quiz_lecturer.html", user=current_user.username)
 
 
-@app.route('/lec_add_question', methods=['POST', 'GET'])
+@app.route('/lec_add_question', methods=['GET', 'POST'])
 def lec_add_question():
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
@@ -157,7 +152,7 @@ def lec_add_question():
         return my_quiz()
 
 
-@app.route('/my_quiz', methods=['POST', 'GET'])
+@app.route('/my_quiz', methods=['GET', 'POST'])
 def my_quiz():
     global current_quiz
     all_quiz_id = conn_mul("SELECT * FROM quiz WHERE user_id = '%s'" % current_user.id)
@@ -172,12 +167,12 @@ def my_quiz():
     return render_template('my_quiz.html', user=current_user, user_name=current_user.username, all_quiz=all_quiz_string)
 
 
-@app.route('/js_test', methods=['POST', 'GET'])
+@app.route('/js_test', methods=['GET', 'POST'])
 def js_test():
     return render_template('js_test.html', question_count=5)
 
 
-@app.route('/view_my_quiz', methods=['POST', 'GET'])
+@app.route('/view_my_quiz', methods=['GET', 'POST'])
 def view_my_quiz():
     global current_quiz_id
     global current_quiz_question
@@ -209,7 +204,7 @@ def view_my_quiz():
 # 如果不用[0][0]只用[0]的话会传回一个tuple
 
 
-@app.route('/get_quiz_id', methods=['POST', 'GET'])
+@app.route('/get_quiz_id', methods=['GET', 'POST'])
 def get_quiz_id():
     most_recent_quiz = conn_mul("SELECT MAX(id) FROM quiz WHERE user_id = '%s'" % current_user.id)
     all_quiz_id = conn_mul("SELECT id FROM quiz WHERE user_id = '%s'" % current_user.id)
@@ -224,7 +219,7 @@ def get_quiz_id():
 # edit_my_quiz() tuple - 处理成string并存为变量 - 就可以被读了！处理成-opt1 ,question,opt2这样子
 
 
-@app.route('/edit_my_quiz', methods=['POST', 'GET'])
+@app.route('/edit_my_quiz', methods=['GET', 'POST'])
 def edit_my_quiz():
     global current_quiz_id
     global current_quiz_question
@@ -237,7 +232,7 @@ def edit_my_quiz():
                            D=current_quiz_choiceD)
 
 
-@app.route('/edit_quiz_question', methods=['POST', 'GET'])
+@app.route('/edit_quiz_question', methods=['GET', 'POST'])
 def edit_quiz_question():
     question = request.form["question"]  # 这里出问题的可能原因是form没填？？
     a = request.form["op1"]

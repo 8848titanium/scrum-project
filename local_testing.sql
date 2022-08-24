@@ -25,12 +25,12 @@ VALUES (3, "Hansen", "888@outlook.com",
         'lecturer');
 
 # Quizzes
-INSERT INTO quiz(`id`, `user_id`, `pin`)
-VALUES (1, 1, 123456);
-INSERT INTO quiz(`id`, `user_id`, `pin`)
-VALUES (2, 1, 654321);
-INSERT INTO quiz(`id`, `user_id`, `pin`)
-VALUES (3, 3, 162534);
+INSERT INTO quiz(`id`, `name`, `user_id`, `pin`)
+VALUES (1, 'this is first quiz', 1, 123456);
+INSERT INTO quiz(`id`, `name`, `user_id`, `pin`)
+VALUES (2, 'second quiz lah', 1, 654321);
+INSERT INTO quiz(`id`, `name`, `user_id`, `pin`)
+VALUES (3, 'maybe the third?', 3, 162534);
 
 # Questions
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)

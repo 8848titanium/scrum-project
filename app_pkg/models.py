@@ -27,11 +27,12 @@ def load_user(uid):
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
+    name = db.Column(db.String(255), index=True)
     pin = db.Column(db.String(64), index=True, unique=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f"<Quiz {self.quiz_id}: {self.pin} by Lecturer {self.user_id}>"
+        return f"<Quiz {self.id}: {self.pin} by Lecturer {self.user_id}>"
 
 
 class Question(db.Model):
