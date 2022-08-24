@@ -26,7 +26,7 @@
         <div class="dropdown">
             <button class="drop-btn">{{ current_user.username }}</button>
             <div class="dropdown-content">
-                <a href="{{ url_for('new_quiz') }}">Create quiz</a>
+                <a href="{{ url_for('create_quiz') }}">Create quiz</a>
                 <a href="{{ url_for('get_quiz_id') }}">Edit My Quiz</a>
                 <a href="{{ url_for('logout') }}">Log Out</a>
             </div>

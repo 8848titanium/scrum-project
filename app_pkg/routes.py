@@ -1,3 +1,6 @@
+import random
+import string
+
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -13,6 +16,7 @@ from app_pkg.models import *
 
 ROLES = ['lecturer', 'student']
 CHOICES = ['A', 'B', 'C', 'D']
+PIN_LENGTH = 6
 
 # Define a global variable to store user info after successfully login to the system.
 global current_pin
@@ -97,10 +101,13 @@ def lecturer_main():
     return render_template('lecturer_main.html', quizzes=Quiz.query.filter_by(user_id=current_user.id))
 
 
-@app.route('/student_main', methods=['GET', 'POST'])
-@login_required
-def student_main():
-    return render_template('student_main.html')
+@app.route('/create_quiz', methods=['GET', 'POST'])
+def create_quiz():
+    quiz = Quiz(user_id=current_user.id, name='The New Quiz',
+                pin=''.join(random.choice(string.digits) for i in range(PIN_LENGTH)))
+    db.session.add(quiz)
+    db.session.commit()
+    return redirect(url_for('lecturer_main'))
 
 
 @app.route('/new_quiz', methods=['GET', 'POST'])
@@ -115,6 +122,12 @@ def load_quiz():
     a, b, c, d = questions[0].get('choices')
     return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (
         questions[0].get('question'), a, b, c, d)
+
+
+@app.route('/student_main', methods=['GET', 'POST'])
+@login_required
+def student_main():
+    return render_template('student_main.html')
 
 
 @app.route('/lec_add_question', methods=['GET', 'POST'])
