@@ -50,10 +50,6 @@ class JoinQuizForm(FlaskForm):
             raise ValidationError('Please try a different pin.')
 
 
-class AddQuizForm(FlaskForm):
-    pass
-
-
 class AddQuestionForm(FlaskForm):
     question = StringField('Question:', validators=[DataRequired()])
     choice_a = StringField('Choice A:', validators=[DataRequired()])

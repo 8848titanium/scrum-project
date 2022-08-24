@@ -497,6 +497,19 @@ input::-webkit-inner-spin-button {
     font-size: 20px;
 }
 
+#add-btn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #1E3A81;
+    height: 50px;
+    width: 20%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 15px;
+    position: absolute;
+}
+
 .cards-layout {
     display: flex;
 
@@ -574,12 +587,6 @@ input::-webkit-inner-spin-button {
 .lecturer-list {
     background-image: url('../images/student_quiz_bg.gif');
     background-size: 100% 100%;
-}
-
-.lecturer-list .create-button button{
-    position:absolute;
-    top:20px;
-    right:250px;
 }
 
 .quiz-creation {

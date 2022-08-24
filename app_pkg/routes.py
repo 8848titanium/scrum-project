@@ -6,9 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app_pkg import app
-from app_pkg import db
 from app_pkg.forms import *
-# from app_pkg.user_handler import *
 from app_pkg.models import *
 
 # import pymysql
@@ -110,9 +108,22 @@ def create_quiz():
     return redirect(url_for('lecturer_main'))
 
 
-@app.route('/new_quiz', methods=['GET', 'POST'])
-def new_quiz():
-    return render_template("new_quiz.html")
+@app.route('/edit_quiz/', methods=['GET', 'POST'])
+def edit_quiz():
+    quiz_id = request.args.get("id")
+    print(quiz_id)
+
+
+@app.route('/get_quiz_id', methods=['GET', 'POST'])
+def get_quiz_id():
+    most_recent_quiz = conn_mul("SELECT MAX(id) FROM quiz WHERE user_id = '%s'" % current_user.id)
+    all_quiz_id = conn_mul("SELECT id FROM quiz WHERE user_id = '%s'" % current_user.id)
+    quiz_id_list = []
+    for row in all_quiz_id:
+        quiz_id_list.append(row[0])
+        # 这里可以execute javascript就是往网页上添加按钮
+    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list),
+                           quiz_count=most_recent_quiz[0][0])
 
 
 @app.route('/load_quiz', methods=['GET', 'POST'])
@@ -168,11 +179,6 @@ def my_quiz():
     return render_template('my_quiz.html', user=current_user, user_name=current_user.username, all_quiz=all_quiz_string)
 
 
-@app.route('/js_test', methods=['GET', 'POST'])
-def js_test():
-    return render_template('js_test.html', question_count=5)
-
-
 @app.route('/view_my_quiz', methods=['GET', 'POST'])
 def view_my_quiz():
     global current_quiz_id
@@ -200,24 +206,6 @@ def view_my_quiz():
     return render_template('view_my_quiz.html', quiz_id=current_quiz_id, question=current_quiz_question,
                            A=current_quiz_choiceA, B=current_quiz_choiceB, C=current_quiz_choiceC,
                            D=current_quiz_choiceD, question_id=current_quiz_question_id)
-
-
-# 如果不用[0][0]只用[0]的话会传回一个tuple
-
-
-@app.route('/get_quiz_id', methods=['GET', 'POST'])
-def get_quiz_id():
-    most_recent_quiz = conn_mul("SELECT MAX(id) FROM quiz WHERE user_id = '%s'" % current_user.id)
-    all_quiz_id = conn_mul("SELECT id FROM quiz WHERE user_id = '%s'" % current_user.id)
-    quiz_id_list = []
-    for row in all_quiz_id:
-        quiz_id_list.append(row[0])
-        # 这里可以execute javascript就是往网页上添加按钮
-    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list),
-                           quiz_count=most_recent_quiz[0][0])
-
-
-# edit_my_quiz() tuple - 处理成string并存为变量 - 就可以被读了！处理成-opt1 ,question,opt2这样子
 
 
 @app.route('/edit_my_quiz', methods=['GET', 'POST'])
