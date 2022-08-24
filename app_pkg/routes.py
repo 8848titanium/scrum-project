@@ -100,150 +100,57 @@ def lecturer_main():
 
 
 @app.route('/create_quiz', methods=['GET', 'POST'])
+@login_required
 def create_quiz():
-    quiz = Quiz(user_id=current_user.id, name='The New Quiz',
-                pin=''.join(random.choice(string.digits) for i in range(PIN_LENGTH)))
-    db.session.add(quiz)
+    quiz_entry = Quiz(user_id=current_user.id, name='The New Quiz',
+                      pin=''.join(random.choice(string.digits) for _ in range(PIN_LENGTH)))
+    db.session.add(quiz_entry)
     db.session.commit()
     return redirect(url_for('lecturer_main'))
 
 
 @app.route('/edit_quiz/', methods=['GET', 'POST'])
+@login_required
 def edit_quiz():
-    quiz_id = request.args.get("id")
-    print(quiz_id)
+    the_quiz_id = request.args.get("id")
+    return render_template('edit_quiz.html', question_set=Question.query.filter_by(quiz_id=the_quiz_id),
+                           quiz_id=the_quiz_id)
 
 
-@app.route('/get_quiz_id', methods=['GET', 'POST'])
-def get_quiz_id():
-    most_recent_quiz = conn_mul("SELECT MAX(id) FROM quiz WHERE user_id = '%s'" % current_user.id)
-    all_quiz_id = conn_mul("SELECT id FROM quiz WHERE user_id = '%s'" % current_user.id)
-    quiz_id_list = []
-    for row in all_quiz_id:
-        quiz_id_list.append(row[0])
-        # 这里可以execute javascript就是往网页上添加按钮
-    return render_template('get_quiz_id.html', recent_quiz=most_recent_quiz[0][0], all_quiz=str(quiz_id_list),
-                           quiz_count=most_recent_quiz[0][0])
+@app.route('/create_question/', methods=['GET', 'POST'])
+@login_required
+def create_question():
+    quiz_id = request.args.get('id')
+    question_entry = Question(quiz_id=quiz_id, question="The New Question")
+    db.session.add(question_entry)
+    db.session.commit()
+    return redirect('/edit_quiz/?id=' + quiz_id)
 
 
-@app.route('/load_quiz', methods=['GET', 'POST'])
-def load_quiz():
-    global current_pin
-    questions = launch_quiz(current_pin)
-    a, b, c, d = questions[0].get('choices')
-    return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (
-        questions[0].get('question'), a, b, c, d)
+@app.route('/edit_question/', methods=['GET', 'POST'])
+@login_required
+def edit_question():
+    question = Question.query.filter_by(id=request.args.get("id")).first()
+
+    form = QuestionForm(data=question.__dict__)
+    if form.validate_on_submit():
+        answer = ""
+        for i, checkbox in enumerate(
+                [form.checkbox_a.data, form.checkbox_b.data, form.checkbox_c.data, form.checkbox_d.data]):
+            if checkbox:
+                answer += CHOICES[i]
+        question.question = form.question.data
+        question.choice_a = form.choice_a.data
+        question.choice_b = form.choice_b.data
+        question.choice_c = form.choice_c.data
+        question.choice_d = form.choice_d.data
+        question.answer = answer
+        db.session.commit()
+        return redirect('/edit_quiz/?id=' + str(question.quiz_id))
+    return render_template('edit_question.html', form=form, question=question)
 
 
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
     return render_template('student_main.html')
-
-
-@app.route('/lec_add_question', methods=['GET', 'POST'])
-def lec_add_question():
-    if not current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        quiz = Quiz(user_id=current_user.id)
-        answer = ''
-
-        if request.form.get('checkbox1') == "on":
-            answer = 'A'
-        if request.form.get('checkbox2') == "on":
-            answer = 'B'
-        if request.form.get('checkbox3') == "on":
-            answer = 'C'
-        if request.form.get('checkbox4') == "on":
-            answer = 'D'
-
-        quiz.add_question(request.form['question'], 0, answer)
-        return my_quiz()
-
-
-@app.route('/my_quiz', methods=['GET', 'POST'])
-def my_quiz():
-    global current_quiz
-    all_quiz_id = conn_mul("SELECT * FROM quiz WHERE user_id = '%s'" % current_user.id)
-    all_quiz_string = "Those are all the quiz created:\n"
-    for row in all_quiz_id:
-        all_quiz_string += "Quiz id:\n"
-        all_quiz_string += str(row[0])
-        all_quiz_string += "Quiz detail:\n"
-        all_quiz_string += str(load_questions(row[0]))
-        all_quiz_string += "\n"
-    # current_quiz = load_questions(1) #quiz id
-    return render_template('my_quiz.html', user=current_user, user_name=current_user.username, all_quiz=all_quiz_string)
-
-
-@app.route('/view_my_quiz', methods=['GET', 'POST'])
-def view_my_quiz():
-    global current_quiz_id
-    global current_quiz_question
-    global current_quiz_question_id
-    global current_quiz_choiceA
-    global current_quiz_choiceB
-    global current_quiz_choiceC
-    global current_quiz_choiceD
-    global ids
-    try:
-        current_quiz_id = request.form['get_quiz_id']
-        all_question_id = [row[0] for row in
-                           conn_mul(f"SELECT question_id FROM question where quiz_id={current_quiz_id}")]
-        ids = iter(all_question_id)
-        current_quiz_question_id = next(ids)
-    except:
-        current_quiz_question_id = next(ids)
-    current_quiz_question = conn_mul(f"SELECT question FROM question where question_id={current_quiz_question_id}")[0][
-        0]
-    current_quiz_choiceA = conn_mul(f"SELECT A FROM question where question_id={current_quiz_question_id}")[0][0]
-    current_quiz_choiceB = conn_mul(f"SELECT B FROM question where question_id={current_quiz_question_id}")[0][0]
-    current_quiz_choiceC = conn_mul(f"SELECT C FROM question where question_id={current_quiz_question_id}")[0][0]
-    current_quiz_choiceD = conn_mul(f"SELECT D FROM question where question_id={current_quiz_question_id}")[0][0]
-    return render_template('view_my_quiz.html', quiz_id=current_quiz_id, question=current_quiz_question,
-                           A=current_quiz_choiceA, B=current_quiz_choiceB, C=current_quiz_choiceC,
-                           D=current_quiz_choiceD, question_id=current_quiz_question_id)
-
-
-@app.route('/edit_my_quiz', methods=['GET', 'POST'])
-def edit_my_quiz():
-    global current_quiz_id
-    global current_quiz_question
-    global current_quiz_choiceA
-    global current_quiz_choiceB
-    global current_quiz_choiceC
-    global current_quiz_choiceD
-    return render_template('edit_my_quiz.html', quiz_id=current_quiz_id, question=current_quiz_question,
-                           A=current_quiz_choiceA, B=current_quiz_choiceB, C=current_quiz_choiceC,
-                           D=current_quiz_choiceD)
-
-
-@app.route('/edit_quiz_question', methods=['GET', 'POST'])
-def edit_quiz_question():
-    question = request.form["question"]  # 这里出问题的可能原因是form没填？？
-    a = request.form["op1"]
-    b = request.form["op2"]
-    c = request.form["op3"]
-    d = request.form["op4"]
-    choices = [a, b, c, d]
-    answer = ''
-
-    if request.form.get('checkbox1') == "on":
-        answer = 'A'
-    if request.form.get('checkbox2') == "on":
-        answer = 'B'
-    if request.form.get('checkbox3') == "on":
-        answer = 'C'
-    if request.form.get('checkbox4') == "on":
-        answer = 'D'
-
-    # write_cmd = f"UPDATE question SET question = '{question}' WHERE question_id=1;UPDATE question SET A = '{a}' WHERE question_id=1;UPDATE question SET B = '{b}' WHERE question_id=1;UPDATE question SET C = '{c}' WHERE question_id=1;UPDATE question SET D = '{d}' WHERE question_id=1;"
-    # write_cmd = f"UPDATE question SET question = '{question}' WHERE question_id=1;"
-    # write_cmd = "UPDATE question SET question = ' Hi ' WHERE question_id=1;"
-    write_cmd = f"UPDATE question SET question = '{question}' WHERE question_id={current_quiz_question_id};"
-    conn_non(write_cmd)
-    # return view_my_quiz()
-    return my_quiz()

@@ -36,8 +36,6 @@ VALUES (3, 'maybe the third?', 3, 162534);
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (1, 1, 'Quiz 1 Q1?', 'MCQ', 'Quiz 1 A', 'Quiz 1 B', 'Quiz 1 C', 'Quiz 1 D', 'A');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (2, 2, 'Quiz 2 Q1?', 'MCQM', 'Quiz 2 A', 'Quiz 2 B', 'Quiz 2 C', 'Quiz 2 D', 'BD');
+VALUES (2, 2, 'Quiz 2 Q1?', 'MCQ', 'Quiz 2 A', 'Quiz 2 B', 'Quiz 2 C', 'Quiz 2 D', 'BD');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (3, 3, 'Quiz 3 Q1?', 'TF', 'Quiz 3 A', 'Quiz 3 B', null, null, 'B');
-INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (4, 2, 'Quiz 2 Q2?', 'BLANK', null, null, null, null, 'Filled');

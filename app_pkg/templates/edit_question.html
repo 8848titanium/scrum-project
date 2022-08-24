@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if question %}
+        <form name="question-form" action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.question.label }}<br>
+                {{ form.question() }}
+                {% for error in form.question.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_a.label }}<br>
+                {{ form.checkbox_a() }}
+                {{ form.choice_a() }}
+                {% for error in form.choice_a.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_b.label }}<br>
+                {{ form.checkbox_b() }}
+                {{ form.choice_b() }}
+                {% for error in form.choice_b.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_c.label }}<br>
+                {{ form.checkbox_c() }}
+                {{ form.choice_c() }}
+                {% for error in form.choice_c.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_d.label }}<br>
+                {{ form.checkbox_d() }}
+                {{ form.choice_d() }}
+                {% for error in form.choice_d.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                <label>Answer:</label><br>
+                {{ question.answer }}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    {% endif %}
+{% endblock %}
