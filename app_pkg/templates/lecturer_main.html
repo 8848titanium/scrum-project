@@ -3,7 +3,7 @@
     <div class="lecturer-list">
         <div class="header">
             <nav>
-                <image src="../static/images/logo.png" class="logo"></image>
+                <a href="/"><image src="../static/images/logo.png" class="logo"></image></a>
                 <h1>Welcome {{ current_user.username }}</h1>
             </nav>
         </div>
@@ -26,10 +26,9 @@
         <div class="dropdown">
             <button class="drop-btn">{{ current_user.username }}</button>
             <div class="dropdown-content">
-                <a href="#">Switch Account</a>
-                <a href="/login">Log Out</a>
-                <a href="/new_quiz">Create quiz</a>
-                <a href="/get_quiz_id">Edit My Quiz</a>
+                <a href="{{ url_for('new_quiz') }}">Create quiz</a>
+                <a href="{{ url_for('get_quiz_id') }}">Edit My Quiz</a>
+                <a href="{{ url_for('logout') }}">Log Out</a>
             </div>
         </div>
     </div>

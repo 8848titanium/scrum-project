@@ -6,13 +6,12 @@
                 <image src="../static/images/logo.png" class="logo"></image>
             </nav>
         </div>
-    
         <div class="dropdown">
-            <button class="drop-btn">{{current_user.username}}</button>
-                <div class="dropdown-content">
-                    <a href="#">Switch Account</a>
-                    <a href="/login">Log Out</a>
-                </div>
+            <button class="drop-btn">{{ current_user.username }}</button>
+            <div class="dropdown-content">
+                <a href="#">Switch Account</a>
+                <a href="/login">Log Out</a>
+            </div>
         </div>
         <div class="quiz-creation" id="test">
             <form name="add-question" action="" method="post">
@@ -59,14 +58,11 @@
                 <p>{{ form.submit() }}</p>
             </form>
         </div>
-        
     </div>
-
-<script>
-function displayFeedback() {
-  let prompt = 'Upload successfully!'
-  alert(prompt);
-}
-</script>
-
+    <script>
+        function displayFeedback() {
+            let prompt = 'Upload successfully!'
+            alert(prompt);
+        }
+    </script>
 {% endblock %}

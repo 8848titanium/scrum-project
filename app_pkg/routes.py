@@ -103,16 +103,9 @@ def student_main():
     return render_template('student_main.html')
 
 
-@app.route('/quiz_lecturer', methods=['GET', 'POST'])
-@login_required
-def quiz_lecturer():
-    return render_template('quiz_lecturer.html')
-
-
-@app.route('/create_quiz', methods=['GET', 'POST'])
-@login_required
-def create_quiz():
-    return render_template('create_quiz.html')
+@app.route('/new_quiz', methods=['GET', 'POST'])
+def new_quiz():
+    return render_template("new_quiz.html")
 
 
 @app.route('/load_quiz', methods=['GET', 'POST'])
@@ -122,11 +115,6 @@ def load_quiz():
     a, b, c, d = questions[0].get('choices')
     return '<span>%s</span><span>%s</span><span>%s</span><span>%s</span><span>%s</span>' % (
         questions[0].get('question'), a, b, c, d)
-
-
-@app.route('/new_quiz', methods=['GET', 'POST'])
-def new_quiz():
-    return render_template("quiz_lecturer.html", user=current_user.username)
 
 
 @app.route('/lec_add_question', methods=['GET', 'POST'])
