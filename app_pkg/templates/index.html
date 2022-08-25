@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="header">
-        <a href="/"><image src="../static/images/logo.png" class="logo"></image></a>
+        <a href="/">
+            <image src="../static/images/logo.png" class="logo"></image>
+        </a>
         <nav>
             <h1>Happy Learning</h1>
             <ul class="nav-links">
@@ -16,17 +18,18 @@
                         <li class="btn">Login</li>
                     </a>
                 {% else %}
-                    {%  if current_user.type == "student" %}
+                    {% if current_user.type == "student" %}
                         <a href="{{ url_for('student_main') }}">
-                            <li class="btn">{{current_user.username}}</li>
+                            <li class="btn">{{ current_user.username }}</li>
                         </a>
                     {% else %}
                         <a href="{{ url_for('lecturer_main') }}">
-                            <li class="btn">{{current_user.username}}</li>
+                            <li class="btn">{{ current_user.username }}</li>
                         </a>
-                    {%  endif %}
+                    {% endif %}
                     <a href="{{ url_for('logout') }}">
-                        <li class="btn">Logout<li>
+                        <li class="btn">Logout
+                        <li>
                     </a>
                 {% endif %}
             </ul>

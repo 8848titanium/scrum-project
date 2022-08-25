@@ -1,4 +1,4 @@
-from app_pkg import app, db
+from app_pkg import app
 from app_pkg.models import *
 
 

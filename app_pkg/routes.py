@@ -9,23 +9,9 @@ from app_pkg import app
 from app_pkg.forms import *
 from app_pkg.models import *
 
-# import pymysql
-# import traceback
-
 ROLES = ['lecturer', 'student']
 CHOICES = ['A', 'B', 'C', 'D']
 PIN_LENGTH = 6
-
-# Define a global variable to store user info after successfully login to the system.
-global current_pin
-global current_quiz
-global current_quiz_question
-global current_quiz_question_id
-global current_question_choiceA
-global current_question_choiceB
-global current_question_choiceC
-global current_question_choiceD
-global ids
 
 
 @app.route('/', methods=['GET', 'POST'])
