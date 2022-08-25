@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
     <div class="student-list">
         <div class="header">
             <nav>
@@ -10,19 +9,27 @@
                 <h1>Welcome {{ current_user.username }}</h1>
             </nav>
         </div>
+        <div class="quiz">
+            <h2>Recent Completed Quizzes</h2>
+            <div class="cards-layout">
+                {% if completed_quizzes %}
+                    {% for quiz in completed_quizzes %}
+                        <div class="cards">
+                            <a href="/student_check_quiz/?id={{ quiz.quiz_id }}" style="text-decoration: none;">
+                                <div class="card">
+                                    <p class="card_title">{{ quiz.name }} with score: {{ quiz.score }}</p>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
         <div class="dropdown">
             <button class="drop-btn">{{ current_user.username }}</button>
             <div class="dropdown-content">
-                <a href="#">Switch Account</a>
                 <a href="/login">Log Out</a>
             </div>
-        </div>
-
-        <div class="quiz">
-            <h2>Recent Quiz</h2>
-            <button class="quiz-name1">Quiz Name Teacher's name</button>
-            <button class="quiz-name2">Quiz Name Teacher's name</button>
-            <button class="quiz-name3">Quiz Name Teacher's name</button>
         </div>
     </div>
 {% endblock %}

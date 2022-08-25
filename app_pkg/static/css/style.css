@@ -472,24 +472,6 @@ input::-webkit-inner-spin-button {
     background-color: #3badff;
 }
 
-.quiz-name1 {
-    position: absolute;
-    top: 100px;
-    left: 100px;
-}
-
-.quiz-name2 {
-    position: absolute;
-    top: 100px;
-    left: 350px;
-}
-
-.quiz-name3 {
-    position: absolute;
-    top: 100px;
-    left: 600px;
-}
-
 .quiz {
     padding-left: 16px;
     position: fixed;

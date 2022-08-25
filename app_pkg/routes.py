@@ -139,4 +139,13 @@ def edit_question():
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
-    return render_template('student_main.html')
+    return render_template('student_main.html',
+                           completed_quizzes=db.session.query(Score).join(Quiz).filter(
+                               Score.student_id == current_user.id))
+
+
+@app.route('/student_check_quiz/', methods=['GET', 'POST'])
+@login_required
+def student_check_quiz():
+    the_quiz_id = request.args.get("id")
+    return render_template('student_check_quiz.html')
