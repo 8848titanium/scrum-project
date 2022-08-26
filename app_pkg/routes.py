@@ -17,7 +17,7 @@ PIN_LENGTH = 6
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = JoinQuizForm()
+    form = JoinQuizForm()  # arg.request - from url, url - ?  # 有form的时候就直接从forms.py里get前端input
     if form.validate_on_submit():
         return quiz_pin(form)
     return render_template('index.html', title='Home', form=form)
@@ -130,9 +130,12 @@ def edit_question():
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
-    return render_template('student_main.html',
-                           completed_quizzes=db.session.query(Score).join(Quiz).filter(
-                               Score.student_id == current_user.id))
+    flash("welcome dear student.")
+    return render_template('student_main.html')
+    # return render_template('student_main.html',
+    #                        completed_quizzes=
+    #                        ))
+
 
 
 @app.route('/student_check_quiz/', methods=['GET', 'POST'])
@@ -145,8 +148,23 @@ def student_check_quiz():
 @app.route('/quiz_pin', methods=['GET', 'POST'])
 @login_required
 def quiz_pin(form):
-    quiz = Quiz.query.filter_by(pin=form.pin.data).first()
+    quiz = Quiz.query.filter_by(pin=form.pin.data).first() # get whole quiz table from db
+    quiz_id = quiz.id
+    print(quiz)
     if quiz:
-        return render_template('student_do_quiz.html', )
+        return redirect('/student_do_quiz/?id=' + str(quiz_id))  # jump to def name url_for to route, while?id is
+        # return render_template('student_do_quiz.html', )
     else:
-        return redirect(url_for('index'))
+        return redirect(url_for('index'))  # url_for jump to function index, student_do_quiz+/ - directly url
+
+
+@app.route('/student_do_quiz/', methods=['GET', 'POST'])
+@login_required
+def student_do_quiz():
+    the_quiz_id = request.args.get("id")
+    questions = Question.query.filter_by(id=the_quiz_id)  # all questions from the quiz
+
+    return render_template('student_do_quiz.html', questions=questions)
+
+# @app.route('/student_do_quiz', method=['GET', 'POST']) # tab's bizarre adventure
+
