@@ -39,4 +39,13 @@ INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`
 VALUES (2, 2, 'Quiz 2 Q1?', 'MCQ', 'Quiz 2 A', 'Quiz 2 B', 'Quiz 2 C', 'Quiz 2 D', 'BD');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (3, 3, 'Quiz 3 Q1?', 'TF', 'Quiz 3 A', 'Quiz 3 B', null, null, 'B');
-INSERT INTO score(`quiz_id`, `score`, `student_id`) VALUES (1, 100, 2);
+INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
+VALUES (4, 1, 'A', 'MCQ', 'fsdfsddsf', 'fsdfdsfsdfsd', 'fdsfsdfsf', 'fsdfsdfsf', 'A');
+INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
+VALUES (5, 1, 'B', 'MCQ', 'fdsfsfsd', 'sdfdsfs', 'fsddsff', 'fsdf', 'B');
+INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
+VALUES (6, 1, 'CD', 'MCQ', 'gfsdgdfg', 'fdsafsaf', 'bfdg', 'gdfgvbd', 'CD');
+INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
+VALUES (7, 1, 'B-TF', 'TF', 'fdasfasas', 'asbfdsvb', null, null, 'B');
+INSERT INTO score(`quiz_id`, `score`, `student_id`)
+VALUES (1, 100, 2);

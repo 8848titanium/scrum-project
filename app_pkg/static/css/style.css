@@ -370,59 +370,6 @@ input::-webkit-inner-spin-button {
     left: 800px;
 }
 
-/* .student-list .headerlinks a {
-    float: left;
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 1 0px 16px;
-    text-decoration: none;
-    font-size: 18px;
-}
-
-.student-list .headerlinks a:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.student-list .headerlinks a.active {
-    background-color: #2196F3;
-    color: white;
-}
-
-.student-list .headerlinks .search-container {
-    float: right;
-    position: fixed;
-    top: 40px;
-    left: 20px;
-    font-size: 17px;
-    border-radius: 30px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-
-.student-list .headerlinks .search-container button {
-    float: right;
-    padding: 6px;
-    background: #5d9cc9;
-    font-size: 28px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
-
-.headerlinks .search-container button:hover {
-    background: #3badff;
-}
-
-.headerlinks input[type=text] {
-    padding: 6px;
-    margin-top: 4px;
-    font-size: 25px;
-    border: none;
-    border-radius: 15px;
-} */
-
 .drop-btn {
     background-color: #0384fc;
     position: absolute;
@@ -663,12 +610,13 @@ input::-webkit-inner-spin-button {
     text-align: center;
 }
 
-.student-quiz_bg {
+.student-quiz-box {
     background-color: #98d8e3;
     background-size: 100% 100%;
     position: absolute;
-    height: 350px;
-    width: 600px;
+    height: auto;
+    min-height: 50%;
+    width: 70%;
     top: 50%;
     left: 50%;
     font-size: 40px;
@@ -678,65 +626,10 @@ input::-webkit-inner-spin-button {
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.student-quiz {
+.student-quiz-content {
     font-size: 30px;
     position: fixed;
     left: 5px;
-}
-
-.quiz_previous_btn {
-    font-size: 20px;
-    color: #1E3A81;
-    background-color: #98d8e3;
-    padding: 10px 30px;
-    cursor: pointer;
-    outline: none;
-    border-radius: 20px;
-    border: none;
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    text-decoration: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.quiz_next_btn {
-    font-size: 20px;
-    color: #1E3A81;
-    background-color: #98d8e3;
-    padding: 10px 30px;
-    cursor: pointer;
-    outline: none;
-    border-radius: 20px;
-    border: none;
-    position: fixed;
-    bottom: 10px;
-    left: 200px;
-    text-decoration: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.student-quiz_button {
-    font-size: 20px;
-    color: #1E3A81;
-    background: #fff;
-    background-color: #98d8e3;
-    padding: 10px 30px;
-    cursor: pointer;
-    outline: none;
-    border-radius: 20px;
-    border: none;
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    text-decoration: none;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.quiz-music {
-    position: fixed;
-    bottom: 300px;
-    left: 800px;
 }
 
 /* toggle in label designing */

@@ -70,15 +70,6 @@ def register():
     return render_template('signup.html', title='Signup', form=form)
 
 
-@app.route('/quiz_pin', methods=['GET', 'POST'])
-@login_required
-def quiz_pin(form):
-    quiz = Quiz.query.filter_by(pin=form.pin.data).first()
-    if quiz is None:
-        return redirect(url_for('index'))
-    return render_template('quiz_student.html')
-
-
 @app.route('/lecturer_main', methods=['GET', 'POST'])
 @login_required
 def lecturer_main():
@@ -147,5 +138,15 @@ def student_main():
 @app.route('/student_check_quiz/', methods=['GET', 'POST'])
 @login_required
 def student_check_quiz():
-    the_quiz_id = request.args.get("id")
+    # the_quiz_id = request.args.get("id")
     return render_template('student_check_quiz.html')
+
+
+@app.route('/quiz_pin', methods=['GET', 'POST'])
+@login_required
+def quiz_pin(form):
+    quiz = Quiz.query.filter_by(pin=form.pin.data).first()
+    if quiz:
+        return render_template('student_do_quiz.html', )
+    else:
+        return redirect(url_for('index'))
