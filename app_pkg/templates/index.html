@@ -45,16 +45,18 @@
             <p>Get better at what you love while being mentored by the best in the game!</p>
 
         </div>
-        <div class="Join-quiz">
-            <form name="pin-form" action="" method="post">
-                {{ form.pin(placeholder='Your PIN') }}
-                {{ form.hidden_tag() }}
-                {% for error in form.pin.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-                {{ form.submit() }}
-            </form>
-        </div>
+        {% if current_user.is_anonymous or current_user.type == "student" %}
+            <div class="Join-quiz">
+                <form name="pin-form" action="" method="post">
+                    {{ form.pin(placeholder='Your PIN') }}
+                    {{ form.hidden_tag() }}
+                    {% for error in form.pin.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                    {{ form.submit() }}
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
 
