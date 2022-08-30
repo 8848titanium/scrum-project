@@ -1,4 +1,4 @@
-from app_pkg import app
+from app_pkg import app, socketio
 from app_pkg.models import *
 
 
@@ -9,3 +9,4 @@ def make_shell_context():
 
 # add extra line of code to dodge pycharm reformatting
 app = app
+socketio = socketio

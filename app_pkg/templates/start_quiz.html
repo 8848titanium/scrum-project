@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+    <header>
+        <script type="text/javascript">
+            Array.prototype.next = function () {
+                return this[++this.current];
+            };
+            Array.prototype.prev = function () {
+                return this[--this.current];
+            };
+            Array.prototype.current = 0;
+
+            let questions = {{ questions|safe }};
+            let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
+            let the_question, answer;
+
+            function showQuestion() {
+                the_question = current_question.question;
+                console.log(current_question);
+                answer = current_question.answer;
+                document.getElementById('question').innerHTML = current_question.question;
+                document.getElementById('A').value = current_question.choice_a;
+                document.getElementById('B').value = current_question.choice_b;
+                document.getElementById('C').value = current_question.choice_c;
+                document.getElementById('D').value = current_question.choice_d;
+                if ('{{ current_user.type }}' === "lecturer") {
+                    document.getElementById(answer).setAttribute("class", "answer");
+                }
+            }
+
+            function handler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+
+            function choicePicked(choice) {
+                if (choice === answer) {
+                    document.getElementById(answer).setAttribute("class", "answer");
+                } else {
+                    document.getElementById(choice).setAttribute("class", "wrong");
+                }
+                document.addEventListener("click", handler, true);
+            }
+
+            function nextQuestion() {
+                current_question = JSON.parse(JSON.stringify(questions.next()));
+                showQuestion();
+            }
+
+            window.onload = function () {
+                if ('{{ current_user.type }}' === "lecturer") {
+                document.getElementById('pin').innerHTML = {{ PIN }};}
+                showQuestion();
+            };
+        </script>
+    </header>
+    {% if current_user.type == "lecturer" %}
+        <div>PIN for this Quiz: <span id="pin"></span></div>
+        <div>Question: <span id="question"></span></div>
+        <input type="button" value="Next" id="add-btn" onclick="nextQuestion()"/><br><br><br><br><br>
+        <div class="choices">
+            <input type="button" id="A" value="" onclick=""/>&emsp;
+            <input type="button" id="B" value="" onclick=""/><br>
+            <input type="button" id="C" value="" onclick=""/>&emsp;
+            <input type="button" id="D" value="" onclick=""/>
+        </div>
+    {% else %}
+        <div>Question: <span id="question"></span></div>
+        <div class="choices">
+            <input type="button" id="A" value="" onclick="choicePicked('A')"/>&emsp;
+            <input type="button" id="B" value="" onclick="choicePicked('B')"/><br>
+            <input type="button" id="C" value="" onclick="choicePicked('C')"/>&emsp;
+            <input type="button" id="D" value="" onclick="choicePicked('D')"/>
+        </div>
+    {% endif %}
+{% endblock %}

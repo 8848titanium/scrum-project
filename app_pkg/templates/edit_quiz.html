@@ -2,7 +2,11 @@
 {% block content %}
     <a href="/create_question/?id={{ quiz_id }}">
         <button id="add-btn">Add A Question</button>
-    </a><br><br><br><br><br>
+    </a><br><br><br><br>
+    <a href="/start_quiz/?id={{ quiz_id }}">
+        <button id="add-btn">Start This Quiz</button>
+    </a>
+    <br><br><br><br><br>
     <div>
         {% if question_set %}
             {% for a_question in question_set %}

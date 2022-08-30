@@ -1,11 +1,13 @@
+import json
 import random
 import string
 
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_socketio import emit
 from werkzeug.urls import url_parse
 
-from app_pkg import app
+from app_pkg import app, socketio
 from app_pkg.forms import *
 from app_pkg.models import *
 
@@ -48,6 +50,9 @@ def login():
 
 @app.route('/logout')
 def logout():
+    for quiz in Quiz.query:
+        quiz.pin = None
+        db.session.commit()
     logout_user()
     return redirect(url_for('index'))
 
@@ -80,7 +85,7 @@ def lecturer_main():
 @login_required
 def create_quiz():
     quiz_entry = Quiz(user_id=current_user.id, name='The New Quiz',
-                      pin=''.join(random.choice(string.digits) for _ in range(PIN_LENGTH)))
+                      pin=None)
     db.session.add(quiz_entry)
     db.session.commit()
     return redirect(url_for('lecturer_main'))
@@ -142,16 +147,25 @@ def student_check_quiz():
     return render_template('student_check_quiz.html')
 
 
-@app.route('/pin_to_quiz', methods=['GET', 'POST'])
+@app.route('/start_quiz/', methods=['GET', 'POST'])
+@login_required
+def start_quiz():
+    the_quiz_id = request.args.get("id")
+    current_quiz = Quiz.query.filter_by(id=the_quiz_id).first()
+    if current_user.type == "lecturer":
+        current_quiz.pin = ''.join(random.choice(string.digits) for _ in range(PIN_LENGTH))
+        db.session.commit()
+    questions = Question.query.filter_by(quiz_id=the_quiz_id)  # all questions from the quiz
+    list_of_questions = []
+    for question in questions:
+        question_dict = dict(question.__dict__)
+        question_dict.pop('_sa_instance_state', None)
+        list_of_questions.append(question_dict)
+    return render_template('start_quiz.html', questions=json.dumps(list_of_questions), PIN=current_quiz.pin)
+
+
 @login_required
 def pin_to_quiz(form):
     quiz = Quiz.query.filter_by(pin=form.pin.data).first()  # get whole quiz table from db
     if quiz:
-        return redirect('/student_do_quiz/?id=' + str(quiz.id))  # jump to direct url
-
-
-@app.route('/student_do_quiz/', methods=['GET', 'POST'])
-@login_required
-def student_do_quiz():
-    questions = Question.query.filter_by(quiz_id=request.args.get("id"))  # all questions from the quiz
-    return render_template('student_do_quiz.html', questions=questions)
+        return redirect('/start_quiz/?id=' + str(quiz.id))  # jump to direct url
