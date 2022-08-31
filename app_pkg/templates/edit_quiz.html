@@ -10,8 +10,10 @@
     <div>
         {% if question_set %}
             {% for a_question in question_set %}
+        <div class="studentquiz_bg">
                 <a href="/edit_question/?quiz_id={{ quiz_id }}&id={{ a_question.id }}" style="text-decoration: none;">
                     <p>Question: {{ a_question.question }}</p>
+                <div class="studentquiz">
                     <p>Type: {{ a_question.type }}</p>
                     <p>A: {{ a_question.choice_a }}</p>
                     <p>B: {{ a_question.choice_b }}</p>
@@ -19,7 +21,9 @@
                     <p>D: {{ a_question.choice_d }}</p>
                     <p>Answer: {{ a_question.answer }}</p>
                     <p>------------------------------------------------------</p>
+                </div>
                 </a>
+        </div>
             {% endfor %}
         {% endif %}
     </div>

@@ -429,14 +429,15 @@ input::-webkit-inner-spin-button {
 #add-btn {
     font-size: 18px;
     font-weight: bolder;
-    background: #1E3A81;
+    background: #98d8e3;
     height: 50px;
     width: 20%;
     border: none;
     outline: none;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 20px;
     position: absolute;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .cards-layout {
@@ -694,4 +695,22 @@ input::-webkit-inner-spin-button {
 
 .wrong {
     background-color: #ff0000 !important;
+}
+
+.studentquiz {
+	font-size: 30px;
+	position:fixed;
+	left: 5px;
+
+}
+.studentquiz_bg {
+
+    background-size: 100% 100%;
+	position: absolute;
+	font-size: 20px;
+	border-radius: 20px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
 }
