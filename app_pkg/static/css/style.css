@@ -437,6 +437,24 @@ input::-webkit-inner-spin-button {
     cursor: pointer;
     border-radius: 20px;
     position: absolute;
+    left: 100px;
+    top: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#add-btn_start {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 20%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: absolute;
+    right:100px;
+    top: 40px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -698,19 +716,24 @@ input::-webkit-inner-spin-button {
 }
 
 .studentquiz {
-	font-size: 30px;
+	font-size: 25px;
 	position:fixed;
-	left: 5px;
-
-}
-.studentquiz_bg {
-
-    background-size: 100% 100%;
-	position: absolute;
-	font-size: 20px;
+	left: 40%;
+	top: 20%;
+	border: 15px #98d8e3;
 	border-radius: 20px;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	padding: 50px;
+    margin: 20px;
+	background-color: #98d8e3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
+.student_quiz {
+	font-size: 25px;
+	border: 15px #98d8e3;
+	border-radius: 20px;
+	padding: 50px;
+    margin: 20px;
+	background-color: #98d8e3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

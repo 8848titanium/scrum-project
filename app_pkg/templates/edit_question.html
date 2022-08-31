@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
     {% if question %}
+    <div class="studentquiz">
         <form name="question-form" action="" method="post">
             {{ form.hidden_tag() }}
             <p>
@@ -48,5 +49,6 @@
             </p>
             <p>{{ form.submit() }}</p>
         </form>
+    </div>
     {% endif %}
 {% endblock %}

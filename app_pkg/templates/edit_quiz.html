@@ -2,18 +2,17 @@
 {% block content %}
     <a href="/create_question/?id={{ quiz_id }}">
         <button id="add-btn">Add A Question</button>
-    </a><br><br><br><br>
+    </a>
     <a href="/start_quiz/?id={{ quiz_id }}">
-        <button id="add-btn">Start This Quiz</button>
+        <button id="add-btn_start">Start This Quiz</button>
     </a>
     <br><br><br><br><br>
     <div>
         {% if question_set %}
             {% for a_question in question_set %}
-        <div class="studentquiz_bg">
+            <div class="student_quiz">
                 <a href="/edit_question/?quiz_id={{ quiz_id }}&id={{ a_question.id }}" style="text-decoration: none;">
                     <p>Question: {{ a_question.question }}</p>
-                <div class="studentquiz">
                     <p>Type: {{ a_question.type }}</p>
                     <p>A: {{ a_question.choice_a }}</p>
                     <p>B: {{ a_question.choice_b }}</p>
@@ -21,9 +20,8 @@
                     <p>D: {{ a_question.choice_d }}</p>
                     <p>Answer: {{ a_question.answer }}</p>
                     <p>------------------------------------------------------</p>
-                </div>
                 </a>
-        </div>
+            </div>
             {% endfor %}
         {% endif %}
     </div>
