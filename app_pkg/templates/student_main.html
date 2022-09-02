@@ -17,7 +17,8 @@
                         <div class="cards">
                             <a href="/student_check_quiz/?id={{ quiz.quiz_id }}" style="text-decoration: none;">
                                 <div class="card">
-                                    <p class="card_title">{{ quiz.name }} with score: {{ quiz.score }}</p>
+                                    <p class="card_title">{{ quiz.name }} with
+                                        score: {{ quiz.score }}/{{ num_of_questions[quiz.quiz_id] }}</p>
                                 </div>
                             </a>
                         </div>

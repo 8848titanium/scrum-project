@@ -21,7 +21,9 @@ PIN_LENGTH = 6
 def index():
     form = JoinQuizForm()  # arg.request - from url, url - ?  # 有form的时候就直接从forms.py里get前端input
     if form.validate_on_submit():
-        return pin_to_quiz(form)
+        quiz = Quiz.query.filter_by(pin=form.pin.data).first()  # get quiz from db
+        if quiz:
+            return redirect('/start_quiz/?id=' + str(quiz.id))  # jump to direct url
     return render_template('index.html', title='Home', form=form)
 
 
@@ -50,9 +52,10 @@ def login():
 
 @app.route('/logout')
 def logout():
-    for quiz in Quiz.query:
-        quiz.pin = None
-        db.session.commit()
+    if current_user.type == "lecturer":
+        for quiz in Quiz.query.filter_by(user_id=current_user.id):
+            quiz.pin = None
+            db.session.commit()
     logout_user()
     return redirect(url_for('index'))
 
@@ -135,9 +138,11 @@ def edit_question():
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
-    return render_template('student_main.html',
-                           completed_quizzes=db.session.query(Score).join(Quiz).filter(
-                               Score.student_id == current_user.id))
+    quizzes_have_done = db.session.query(Score).join(Quiz).filter(Score.student_id == current_user.id)
+    num_of_questions = {}
+    for quiz in quizzes_have_done:
+        num_of_questions[quiz.quiz_id] = db.session.query(Question).filter_by(quiz_id=quiz.quiz_id).count()
+    return render_template('student_main.html', completed_quizzes=quizzes_have_done, num_of_questions=num_of_questions)
 
 
 @app.route('/student_check_quiz/', methods=['GET', 'POST'])
@@ -161,11 +166,16 @@ def start_quiz():
         question_dict = dict(question.__dict__)
         question_dict.pop('_sa_instance_state', None)
         list_of_questions.append(question_dict)
-    return render_template('start_quiz.html', questions=json.dumps(list_of_questions), PIN=current_quiz.pin)
+    return render_template('start_quiz.html', questions=json.dumps(list_of_questions), PIN=current_quiz.pin, quiz_id=the_quiz_id)
 
 
+@app.route("/send_quiz_result", methods=["get", "post"])
 @login_required
-def pin_to_quiz(form):
-    quiz = Quiz.query.filter_by(pin=form.pin.data).first()  # get whole quiz table from db
-    if quiz:
-        return redirect('/start_quiz/?id=' + str(quiz.id))  # jump to direct url
+def receive_grade():
+    mark_on_questions = request.get_json()
+    quiz_id = mark_on_questions["quiz_id"]
+    current_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
+    score.score = sum(mark_on_questions.values())
+    db.session.commit()
+    return "grade saved!"
