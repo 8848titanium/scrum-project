@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz lectuer</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"></script>
+</head>
+<body>
+
+<!--teacher js-->
+<script charset="utf-8" type="text/javascript">
+        $(document).ready(function() {
+        var socket = io.connect("http://localhost:5000")
+
+        socket.on('connect', function() {
+            socket.send("User connected!");
+            $('#startBtn').hide();
+        });
+
+        socket.on('message', function(data) {
+            $('#attendants').append($('<p>').text(data));
+        })
+
+        $('#joinBtn').on('click', function(){
+            socket.send($('#username').val());
+            $('#username').hide();
+            $('#joinBtn').hide();
+            $('#startBtn').show();
+        });
+
+        $('#startBtn').on('click', function(){
+            $('#attendants').hide();
+            $('#startBtn').hide();
+            socket.emit('ask for question')
+            socket.on('display question', function(question, choice_a, choice_b, choice_c, choice_d, answer){
+                $('#question').append($('<p>').text(question));
+                $('#question').append($('<button>').text(choice_a));
+                $('#question').append($('<button>').text(choice_b));
+                $('#question').append($('<button>').text(choice_c));
+                $('#question').append($('<button>').text(choice_d));
+                $('#question').append($('<p>').text("Answer:" + answer));
+            });
+        });
+    })
+</script>
+
+<!--teacher html element-->
+
+    <div id="attendants"><p>Attendants:</p></div>
+
+    <input type="text" id="username" placeholder="Username">
+    <button id="joinBtn">Join</button>
+    <button id="startBtn">Start Quiz</button>
+
+    <div id="question"></div>
+<!--    <button id="nextQuestionBtn">Next</button>-->
+</body>
+</html>
