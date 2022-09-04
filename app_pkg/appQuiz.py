@@ -14,7 +14,7 @@ question_list = [question_1, question_2]
 
 @app.route('/')
 def index():
-    return render_template('indexQuizLecturer.html')
+    return render_template('flaskIfTest.html', quiz_pin="PIN : 123456")
 
 
 @socketio.on('message')
@@ -43,11 +43,6 @@ def ask_for_question():
     choice_d = current_question.get("D")
     answer = current_question.get("Answer")
     emit("display question", (question, choice_a, choice_b, choice_c, choice_d, answer), broadcast=True)
-
-# @socketio.on('chosen_answer')
-# def chosen_answer(answer):
-#     # question_list.remove(question_list[0])
-#     emit('Answer chosen', answer, broadcast=True)
 
 
 if __name__ == '__main__':
