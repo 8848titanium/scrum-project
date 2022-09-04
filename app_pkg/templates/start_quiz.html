@@ -42,7 +42,6 @@
                     student_answer[current_question.id] = false;
                     {#document.getElementById(choice).setAttribute("class", "wrong");#}
                 }
-                console.log(student_answer);
                 nextQuestion();
                 {#document.addEventListener("click", handler, true);#}
             }
