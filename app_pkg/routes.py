@@ -178,4 +178,4 @@ def receive_grade():
     score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
     score.score = sum(mark_on_questions.values())
     db.session.commit()
-    return "grade saved!"
+    return "grade saved!" 

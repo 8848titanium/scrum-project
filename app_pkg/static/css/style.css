@@ -29,8 +29,8 @@ body {
     width: 40px;
     height: 54px;
     position: absolute;
-    top: 29px;
-    left: 53px;
+    top: 3%;
+    left: 2.5%;
 }
 
 nav {
@@ -46,14 +46,14 @@ nav h1 {
     color: #FFF;
     font-weight: bolder;
     position: absolute;
-    left: 106px;
-    top: 40px;
+    left: 5%;
+    top: 4%;
 }
 
 nav ul {
     position: absolute;
-    right: 16px;
-    top: 29px;
+    right: 1%;
+    top: 4%;
 }
 
 nav ul li {
@@ -98,17 +98,17 @@ nav ul li {
     font-weight: bolder;
 }
 
-.Join-quiz {
-    position: fixed;
-    width: 10%;
-    left: 100px;
-    bottom: 54px;
+.join-quiz {
+    position: absolute;
+    left: 10%;
+    bottom: 10%;
+    width: 230px;
     background-color: #FFF;
     border-radius: 20px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.Join-quiz input[type="text"] {
+.join-quiz input[type="text"] {
     width: 100%;
     height: 50%;
     outline: none;
@@ -116,14 +116,10 @@ nav ul li {
     border-radius: 15px;
     font-size: 32px;
     font-weight: bolder;
+    text-align: center;
 }
 
-.Join-quiz input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    display: none;
-}
-
-.Join-quiz input[type="submit"] {
+.join-quiz input[type="submit"] {
     font-size: 30px;
     font-weight: bolder;
     background: #1E3A81;
@@ -135,6 +131,13 @@ input::-webkit-inner-spin-button {
     outline: none;
     cursor: pointer;
     border-radius: 15px;
+}
+
+.join-quiz span{
+    color: red;
+    position: absolute;
+    left: 5%;
+    top: -25%;
 }
 
 .login {
@@ -151,9 +154,9 @@ input::-webkit-inner-spin-button {
     height: 450px;
     background: rgba(0, 170, 255, 0.547);
     color: #fff;
+    position: absolute;
     top: 50%;
     left: 50%;
-    position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 50px 30px;
@@ -248,9 +251,9 @@ input::-webkit-inner-spin-button {
     height: auto;
     background: rgba(0, 170, 255, 0.547);
     color: #fff;
+    position: absolute;
     top: 50%;
     left: 50%;
-    position: absolute;
     transform: translate(-50%, -50%);
     box-sizing: border-box;
     padding: 20px 30px;
@@ -311,7 +314,7 @@ input::-webkit-inner-spin-button {
 .signup-box a[type="link"] {
     text-decoration: none;
     position: absolute;
-    left: 90px;
+    left: 25%;
     font-size: 15px;
     line-height: 10px;
     color: red;
@@ -421,8 +424,8 @@ input::-webkit-inner-spin-button {
 
 .quiz {
     padding-left: 16px;
-    position: fixed;
-    top: 120px;
+    position: absolute;
+    top: 11%;
     font-size: 20px;
 }
 
@@ -645,10 +648,72 @@ input::-webkit-inner-spin-button {
     0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+
 .student-quiz-content {
     font-size: 30px;
     position: fixed;
     left: 5px;
+}
+
+.student-quiz {
+	font-size: 30px;
+	position: absolute;
+	left: 5%;
+}
+
+.quiz_previous_btn {
+	font-size: 20px;
+	color: #1E3A81;
+    background-color: #98d8e3;
+    padding: 10px 30px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+	border: none;
+	position: absolute;
+	bottom: 5%;
+	left: 5%;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.quiz_next_btn {
+	font-size: 20px;
+	color: #1E3A81;
+    background-color: #98d8e3;
+    padding: 10px 30px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+	border: none;
+	position: fixed;
+	bottom: 10px;
+	left: 200px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.studentquiz_button {
+	font-size: 20px;
+	color: #1E3A81;
+    background: #fff;
+    background-color: #98d8e3;
+    padding: 10px 30px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 20px;
+	border: none;
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.quizmusic {
+	position:fixed;
+	bottom: 300px;
+	left: 800px;
 }
 
 /* toggle in label designing */

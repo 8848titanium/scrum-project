@@ -45,6 +45,7 @@
             <p>Get better at what you love while being mentored by the best in the game!</p>
 
         </div>
+
         {% if current_user.is_anonymous or current_user.type == "student" %}
             <div class="Join-quiz">
                 <form name="pin-form" action="" method="post">
@@ -57,6 +58,19 @@
                 </form>
             </div>
         {% endif %}
+
+        <div class="join-quiz">
+            <form name="pin-form" action="" method="post">
+                {{ form.hidden_tag() }}
+                {% for error in form.pin.errors %}
+                <span>[{{ error }}]</span>    
+                {% endfor %}
+
+                {{ form.pin(placeholder='Your PIN') }}
+                {{ form.submit() }}
+            </form>
+        </div>
+
     </div>
 {% endblock %}
 
