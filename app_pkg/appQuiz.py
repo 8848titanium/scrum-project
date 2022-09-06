@@ -47,4 +47,3 @@ def ask_for_question():
 
 if __name__ == '__main__':
     socketio.run(app, debug=True)
-
