@@ -6,7 +6,6 @@ app = Flask(__name__)
 app.config['SECRET'] = "secret!123"
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-active_users = []
 question_1 = {"Question": "Q1:How are you?", "A": "Good", "B": "Not Bad", "C": "Fine", "D": "OK", "Answer": "A"}
 question_2 = {"Question": "Q2:Is this Q2?", "A": "Yes", "B": "No", "C": "Not Sure", "D": "Sure No", "Answer": "A"}
 question_list = [question_1, question_2]
@@ -14,7 +13,7 @@ question_list = [question_1, question_2]
 
 @app.route('/')
 def index():
-    return render_template('flaskIfTest.html', quiz_pin="PIN : 123456")
+    return render_template('indexQuizLecturer.html', quiz_pin="PIN : 123456")
 
 
 @socketio.on('message')

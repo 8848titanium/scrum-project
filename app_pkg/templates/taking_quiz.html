@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-    <header>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js" type="text/javascript"></script>
+    <head>
+    <title>In Quiz Game</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"
+                type="text/javascript"></script>
         <script type="text/javascript">
+            // add prev and next method to array type
             Array.prototype.next = function () {
                 return this[++this.current];
             };
@@ -12,7 +15,7 @@
             };
             Array.prototype.current = 0;
 
-            let questions = {{ questions|safe }};
+            let questions = {{ the_quiz|safe }};
             let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
             let student_answer = {"quiz_id": {{quiz_id}}};
@@ -66,31 +69,28 @@
             }
 
             window.onload = function () {
-                if ('{{ current_user.type }}' === "lecturer") {
-                    document.getElementById('pin').innerHTML = {{ PIN }};
-                }
                 showQuestion();
             };
         </script>
-    </header>
+    </head>
     <div id="taking_quiz">
         {% if current_user.type == "lecturer" %}
-            <div>PIN for this Quiz: <span id="pin"></span></div>
             <div>Question: <span id="question"></span></div>
             <input type="button" value="Next" id="add-btn" onclick="nextQuestion()"/><br><br><br><br><br>
             <div class="choices">
-                <input class="sync" type="button" id="A" value="" onclick=""/>&emsp;
-                <input class="sync" type="button" id="B" value="" onclick=""/><br>
-                <input class="sync" type="button" id="C" value="" onclick=""/>&emsp;
-                <input class="sync" type="button" id="D" value="" onclick=""/>
+                <input type="button" id="A" value="" onclick=""/>&emsp;
+                <input type="button" id="B" value="" onclick=""/><br>
+                <input type="button" id="C" value="" onclick=""/>&emsp;
+                <input type="button" id="D" value="" onclick=""/>
             </div>
         {% else %}
             <div>Question: <span id="question"></span></div>
             <div class="choices">
-                <input class="sync" type="button" id="A" value="" onclick="choicePicked('A')"/>&emsp;
-                <input class="sync" type="button" id="B" value="" onclick="choicePicked('B')"/><br>
-                <input class="sync" type="button" id="C" value="" onclick="choicePicked('C')"/>&emsp;
-                <input class="sync" type="button" id="D" value="" onclick="choicePicked('D')"/>
+                <input type="button" id="A" value="" onclick="choicePicked('A')"/>&emsp;
+                <input type="button" id="B" value="" onclick="choicePicked('B')"/><br>
+                <input type="button" id="C" value="" onclick="choicePicked('C')"/>&emsp;
+                <input type="button" id="D" value="" onclick="choicePicked('D')"/>
             </div>
-        {% endif %}</div>
+        {% endif %}
+    </div>
 {% endblock %}

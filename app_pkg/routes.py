@@ -4,9 +4,9 @@ import string
 
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
-from flask_socketio import emit
 from werkzeug.urls import url_parse
 
+from flask_socketio import emit, send
 from app_pkg import app, socketio
 from app_pkg.forms import *
 from app_pkg.models import *
@@ -23,7 +23,7 @@ def index():
     if form.validate_on_submit():
         quiz = Quiz.query.filter_by(pin=form.pin.data).first()  # get quiz from db
         if quiz:
-            return redirect('/start_quiz/?id=' + str(quiz.id))  # jump to direct url
+            return redirect('/waiting/?id=' + str(quiz.id))  # jump to direct url
     return render_template('index.html', title='Home', form=form)
 
 
@@ -152,21 +152,28 @@ def student_check_quiz():
     return render_template('student_check_quiz.html')
 
 
-@app.route('/start_quiz/', methods=['GET', 'POST'])
+@app.route('/waiting/', methods=['GET', 'POST'])
 @login_required
-def start_quiz():
+def waiting():
     the_quiz_id = request.args.get("id")
     current_quiz = Quiz.query.filter_by(id=the_quiz_id).first()
     if current_user.type == "lecturer":
         current_quiz.pin = ''.join(random.choice(string.digits) for _ in range(PIN_LENGTH))
         db.session.commit()
+    return render_template("waiting.html", quiz_id=the_quiz_id, PIN=current_quiz.pin)
+
+
+@app.route('/taking_quiz/', methods=['GET', 'POST'])
+@login_required
+def taking_quiz():
+    the_quiz_id = request.args.get("id")
     questions = Question.query.filter_by(quiz_id=the_quiz_id)  # all questions from the quiz
     list_of_questions = []
     for question in questions:
         question_dict = dict(question.__dict__)
         question_dict.pop('_sa_instance_state', None)
         list_of_questions.append(question_dict)
-    return render_template('start_quiz.html', questions=json.dumps(list_of_questions), PIN=current_quiz.pin, quiz_id=the_quiz_id)
+    return render_template('taking_quiz.html', quiz_id=the_quiz_id, the_quiz=json.dumps(list_of_questions))
 
 
 @app.route("/send_quiz_result", methods=["get", "post"])
@@ -178,4 +185,37 @@ def receive_grade():
     score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
     score.score = sum(mark_on_questions.values())
     db.session.commit()
-    return "grade saved!" 
+    return "grade saved!"
+
+
+question_1 = {"Question": "Q1:How are you?", "A": "Good", "B": "Not Bad", "C": "Fine", "D": "OK", "Answer": "A"}
+question_2 = {"Question": "Q2:Is this Q2?", "A": "Yes", "B": "No", "C": "Not Sure", "D": "Sure No", "Answer": "A"}
+question_list = [question_1, question_2]
+
+
+@socketio.on('message')
+def handle_message(message):
+    print("Received message:" + message)
+    if message != "User connected!":
+        send(message, broadcast=True)
+    # if message == "Display question":
+    #     send(question_list, broadcast=True)
+    # send(data)  # send message received to the connected client - push to client on event message
+    # # send message on FE - to the @socketio.on('message')
+
+
+@socketio.event
+def display_question():
+    emit("display question", broadcast=True)
+
+
+@socketio.on('ask for question')
+def ask_for_question():
+    current_question = question_1
+    question = current_question.get("Question")
+    choice_a = current_question.get("A")
+    choice_b = current_question.get("B")
+    choice_c = current_question.get("C")
+    choice_d = current_question.get("D")
+    answer = current_question.get("Answer")
+    emit("display question", (question, choice_a, choice_b, choice_c, choice_d, answer), broadcast=True)
