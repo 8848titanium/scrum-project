@@ -31,9 +31,8 @@ $(document).ready(function() {
 
 
 $(window).on('load', function() {
-    if  (user_type == "teacher") {
-        $('#attendants').append($('<p>').text("A teacher joined"));
-        $('#attendants').append($('<p>').text("Quiz Pin: 123456"));
+    if  (user_type === "teacher") {
+        $('#attendants').append($('<p>').text("A teacher joined")).append($('<p>').text("Quiz Pin: 123456"));
         $('#username').hide();
         $('#joinBtn').hide();
 
