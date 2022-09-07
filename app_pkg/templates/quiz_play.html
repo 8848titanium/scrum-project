@@ -52,7 +52,7 @@
             let questions = {{ the_quiz|safe }};
             let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
-            let student_answer = {"quiz_id": {{quiz_id}}};
+            let student_answers = {"quiz_id": {{quiz_id}}};
 
             function showQuestion() {
                 let question = '<div>Question: <span id="question"></span></div>';
@@ -82,10 +82,10 @@
             function choicePicked(choice) {
                 console.log(socket.emit("get current question"));
                 if (choice === answer) {
-                    student_answer[current_question.id] = true;
+                    student_answers[current_question.id] = true;
                     document.getElementById(answer).setAttribute("class", "answer");
                 } else {
-                    student_answer[current_question.id] = false;
+                    student_answers[current_question.id] = false;
                     document.getElementById(choice).setAttribute("class", "wrong");
                 }
             }
@@ -106,13 +106,14 @@
                     fetch(`/send_quiz_result`, {
                         method: "POST",
                         credentials: "include",
-                        body: JSON.stringify(student_answer),
+                        body: JSON.stringify(student_answers),
                         cache: "no-cache",
                         headers: new Headers({
                             "content-type": "application/json"
                         })
                     })
-                    document.getElementById("taking_quiz").innerHTML = "<h1>Quiz Finished!</h1>";
+                    document.getElementById("on_going_question").innerHTML = "<h1>Quiz Finished!</h1>";
+                    socket.send(document.getElementById("on_going_question").innerHTML.toString());
                 }
             }
 

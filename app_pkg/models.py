@@ -52,7 +52,8 @@ class Question(db.Model):
 
 
 class Score(db.Model):
-    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
     score = db.Column(db.Integer)
     student_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 

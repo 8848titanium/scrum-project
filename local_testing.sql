@@ -23,29 +23,35 @@ INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
 VALUES (3, "Hansen", "888@outlook.com",
         "pbkdf2:sha256:260000$Pzcml73HMhU0stRp$37b2976f81d032f90b62c3ead8b574d4d0f032978a7ee6d820cd8c5af13d466d",
         'lecturer');
+INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
+VALUES (4, "www", "321@outlook.com",
+        "pbkdf2:sha256:260000$bzyD040C4NlJQCkl$ab1b4cc3ed2cb65b24ea38a7760508fb42ed6e54c72c558277156e71eac3a318",
+        'student');
 
 # Quizzes
-INSERT INTO quiz(`id`, `name`, `user_id`, `pin`)
-VALUES (1, 'this is first quiz', 1, 123456);
-INSERT INTO quiz(`id`, `name`, `user_id`, `pin`)
-VALUES (2, 'second quiz lah', 1, 654321);
-INSERT INTO quiz(`id`, `name`, `user_id`, `pin`)
-VALUES (3, 'maybe the third?', 3, 162534);
+INSERT INTO quiz(`id`, `name`, `user_id`)
+VALUES (1, 'this is first quiz', 1);
+INSERT INTO quiz(`id`, `name`, `user_id`)
+VALUES (2, 'second quiz lah', 1);
+INSERT INTO quiz(`id`, `name`, `user_id`)
+VALUES (3, 'maybe the third?', 3);
 
 # Questions
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (1, 1, 'Quiz 1 Q1?', 'MCQ', 'Quiz 1 A', 'Quiz 1 B', 'Quiz 1 C', 'Quiz 1 D', 'A');
+VALUES (1, 1, 'Quiz 1 Q1?', 'MCQ', 'Quiz 1 A', 'Quiz 1 B', 'Quiz 1 C', 'Quiz 1 D', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (2, 2, 'Quiz 2 Q1?', 'MCQ', 'Quiz 2 A', 'Quiz 2 B', 'Quiz 2 C', 'Quiz 2 D', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (3, 3, 'Quiz 3 Q1?', 'TF', 'Quiz 3 A', 'Quiz 3 B', null, null, 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (4, 1, 'A', 'MCQ', 'fsdfsddsf', 'fsdfdsfsdfsd', 'fdsfsdfsf', 'fsdfsdfsf', 'A');
+VALUES (4, 1, '???', 'MCQ', 'fsdfsddsf', 'fsdfdsfsdfsd', 'fdsfsdfsf', 'fsdfsdfsf', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (5, 1, 'B', 'MCQ', 'fdsfsfsd', 'sdfdsfs', 'fsddsff', 'fsdf', 'B');
+VALUES (5, 1, 'ok?', 'MCQ', 'fdsfsfsd', 'sdfdsfs', 'fsddsff', 'fsdf', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (6, 1, 'CD', 'MCQ', 'gfsdgdfg', 'fdsafsaf', 'bfdg', 'gdfgvbd', 'C');
+VALUES (6, 1, 'no...', 'MCQ', 'gfsdgdfg', 'fdsafsaf', 'bfdg', 'gdfgvbd', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (7, 1, 'B-TF', 'TF', 'fdasfasas', 'asbfdsvb', null, null, 'B');
-INSERT INTO score(`quiz_id`, `score`, `student_id`)
-VALUES (1, 100, 2);
+VALUES (7, 1, 'TF??', 'TF', 'fdasfasas', 'asbfdsvb', null, null, 'B');
+INSERT INTO score(`id`, `quiz_id`, `score`, `student_id`)
+VALUES (1, 1, 0, 2);
+INSERT INTO score(`id`, `quiz_id`, `score`, `student_id`)
+VALUES (2, 1, 0, 4);
