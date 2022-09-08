@@ -1,34 +1,43 @@
-# This is an learning application developed by Group A3.
+# This is a learning application developed by Group A3.
 
-Group A3 members: Fangyu Li, Xing Gao, Chenyuhan Shen, Jiawei Guo, Yue Cao, Weijun Chew, Junwen Zhang, Jiaqi Zhao.
+## Group A3 members:
+**Main Beck-end:** Jiawei Guo(8848titanium)
 
-Setting up Python virtual environment
+**Front-end Framework:** Jiawei Guo(@8848titanium)
 
-```
-$ python -m venv myENV
-```
+**Deputy Back-end:** Chenyuhan Shen(@chenyuhanjcu), Jiaqi Zhao(@LX-Vincent)
 
-Activate the environment
+**Front-end Styling:** Fangyu Li(@LiFangYuBIT), Xing Gao(@Xing-Gao-FROM-PRC), Yue Cao(@CP1404-YueCao), Weijun Chew(@CWJ02), Junwen Zhang(@zhangjunwenzzz)
 
-```
-$ source myENV/bin/activate
-```
 
-install flask and update pip
-
-```
-$ pip install flask
-$ pip install --upgrade pip
-```
-
-manage packages installed:
-
-```
-$ pip freeze > requirements.txt
-```
-
-Later when you clone or start fresh, you can install packages:
-
+## Requirements:
+* ### Install all modules in requirements.txt
 ```
 $ pip install -r requirments.txt
 ```
+* ### Since db modeling for mysql can't operate without an existed database, please create one in your local environment.
+```
+CREATE DATABASE IF NOT EXISTS `YourDatabaseName` DEFAULT CHARACTER SET UTF8MB4;
+```
+* ### You may need to edit the config.py to use your local database.
+```
+'mysql://username:password@localhost/YourDatabaseName'
+```
+* ### Initial local database(mysql) with below commands
+```
+$ flask db init | flask db migrate | flask db upgrade
+```
+* ### Now run the project!
+
+
+## How to run:
+### 1. run below with python environment activate
+```
+$ flask run
+```
+### 2. run api.py as normal Python program
+```
+$ python api.py
+```
+### 3. run api.py as flask app in pycharm
+![img.png](img.png)

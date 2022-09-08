@@ -3,9 +3,6 @@
 # you may need to edit the config.py to use your local database
 CREATE DATABASE IF NOT EXISTS `happylearning` DEFAULT CHARACTER SET UTF8MB4;
 
-# !!!!!! !!!!!! Execute below command in commandline:
-# flask db init | flask db migrate | flask db upgrade
-
 
 # Demo
 USE happylearning;
