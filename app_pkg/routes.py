@@ -4,9 +4,9 @@ import string
 
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
+from flask_socketio import emit, send
 from werkzeug.urls import url_parse
 
-from flask_socketio import emit, send
 from app_pkg import app, socketio
 from app_pkg.forms import *
 from app_pkg.models import *
@@ -147,13 +147,6 @@ def student_main():
     for quiz in quizzes_have_done:
         num_of_questions[quiz.quiz_id] = db.session.query(Question).filter_by(quiz_id=quiz.quiz_id).count()
     return render_template('student_main.html', completed_quizzes=quizzes_have_done, num_of_questions=num_of_questions)
-
-
-@app.route('/student_check_quiz/', methods=['GET', 'POST'])
-@login_required
-def student_check_quiz():
-    # the_quiz_id = request.args.get("id")
-    return render_template('student_check_quiz.html')
 
 
 @app.route('/quiz_play/<pin>', methods=['GET', 'POST'])

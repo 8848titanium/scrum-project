@@ -15,12 +15,10 @@
                 {% if completed_quizzes %}
                     {% for quiz in completed_quizzes %}
                         <div class="cards">
-                            <a href="/student_check_quiz/?id={{ quiz.quiz_id }}" style="text-decoration: none;">
-                                <div class="card">
-                                    <p class="card_title">{{ quiz.name }} with
-                                        score: {{ quiz.score }}/{{ num_of_questions[quiz.quiz_id] }}</p>
-                                </div>
-                            </a>
+                            <div class="card" style="text-decoration: none;">
+                                <p class="card_title">{{ quiz.name }} with
+                                    score: {{ quiz.score }}/{{ num_of_questions[quiz.quiz_id] }}</p>
+                            </div>
                         </div>
                     {% endfor %}
                 {% endif %}
