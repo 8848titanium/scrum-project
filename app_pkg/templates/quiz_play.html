@@ -1,5 +1,3 @@
-
-
 {% extends "base.html" %}
 {% block content %}
     <head>
@@ -7,39 +5,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.2/socket.io.js"></script>
         <script type="text/javascript">
-            // socket handler
-            let socket = io.connect("http://localhost:5000");
-            let abcd = ['A', 'B', 'C', 'D'];
-
-            $(document).ready(function () {
-                socket.on('connect', function () {
-                    socket.send("User connected!");
-                });
-
-                socket.on('message', function (data) {
-                    if (data.includes('<')) {
-                        if ("{{ current_user.type }}" === "student") {
-                            $('#on_going_question').empty().append(data).remove($('#nextBtn'));
-                        }
-                    } else if ("{{ current_user.type }}" === "lecturer") {
-                        $('#players').append($('<p>').text(data));
-                    }
-                });
-
-                $('#startBtn').on('click', function () {
-                    $('#waiting').hide();
-                    showQuestion();
-                    socket.send(document.getElementById("on_going_question").innerHTML.toString());
-                    let choices = document.getElementsByClassName("choices")[0].querySelectorAll(".choice");
-                    for (let i = 0; i < choices.length; i++) {
-                        choices[i].setAttribute("onclick", '');
-                    }
-                    document.getElementById("on_going_question").innerHTML +=
-                        '<input type="button" value="Next" id="nextBtn" onclick="nextQuestion()"/>';
-                });
-            });
-
-            // question setup
             // add prev and next method to array type
             Array.prototype.next = function () {
                 return this[++this.current];
@@ -47,87 +12,122 @@
             Array.prototype.prev = function () {
                 return this[--this.current];
             };
-            Array.prototype.current = 0;
+            Array.prototype.current = 0;</script>
+        <script type="text/javascript">
+            // socket handler
+            let socket = io.connect("http://localhost:5000");
+            const abcd = ['A', 'B', 'C', 'D'];
+
+            $(document).ready(() => {
+                socket.on('connect', () => {
+                    socket.send("User connected!");
+                })
+                socket.on('message', (data) => {
+                    if ("{{ current_user.type }}" === "lecturer") {
+                        $('#players').append($('<p>').text(data));
+                    }
+                })
+                socket.on("show-question-block", () => {
+                    $('#waiting').hide();
+                    $('#on_going_question').show();
+                })
+                socket.on("show-finish-quiz", () => {
+                    $('#on_going_question').hide();
+                    $('#quiz_finish').show();
+                })
+            })
 
             let questions = {{ the_quiz|safe }};
+            console.log(questions, questions.current);
             let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
             let student_answers = {"quiz_id": {{quiz_id}}};
 
-            function showQuestion() {
-                let question = '<div>Question: <span id="question"></span></div>';
-                question += '<div class="choices">';
-                for (let i = 0; i < 4; i++) {
-                    question += '<input class="choice" id="' + abcd[i] + '"' + '/>&emsp;';
-                }
-                question += '</div>';
-                document.getElementById("on_going_question").innerHTML = question;
-                let choices = document.getElementsByClassName("choices")[0].querySelectorAll(".choice");
-                // set onclick attribute to all available options
-                for (let i = 0; i < choices.length; i++) {
-                    choices[i].setAttribute("onclick", 'choicePicked("' + abcd[i] + '")');
-                    choices[i].setAttribute("type", "button");
-                    choices[i].setAttribute("value", "");
-                }
-                // set question content
-                answer = current_question.answer;
-                document.getElementById('question').innerHTML = current_question.question;
-                document.getElementById('A').value = current_question.choice_a;
-                document.getElementById('B').value = current_question.choice_b;
-                document.getElementById('C').value = current_question.choice_c;
-                document.getElementById('D').value = current_question.choice_d;
-                // document.getElementById(answer).setAttribute("class", "answer");
-            }
-
-            function choicePicked(choice) {
-                console.log(socket.emit("get current question"));
-                if (choice === answer) {
-                    student_answers[current_question.id] = true;
-                    document.getElementById(answer).setAttribute("class", "answer");
-                } else {
-                    student_answers[current_question.id] = false;
-                    document.getElementById(choice).setAttribute("class", "wrong");
-                }
-            }
-
-            function nextQuestion() {
-                if (!!questions.next()) {
-                    current_question = JSON.parse(JSON.stringify(questions.next()));
-                    document.getElementById(answer).removeAttribute("class");
-                    showQuestion();
-                    socket.send(document.getElementById("on_going_question").innerHTML.toString());
-                    let choices = document.getElementsByClassName("choices")[0].querySelectorAll(".choice");
-                    for (let i = 0; i < choices.length; i++) {
-                        choices[i].setAttribute("onclick", '');
+            $(window).on('load', () => {
+                socket.on("show-question-content", () => {
+                    answer = current_question.answer;
+                    document.getElementById('question').innerHTML = current_question.question;
+                    document.getElementById('A').value = current_question.choice_a;
+                    document.getElementById('B').value = current_question.choice_b;
+                    document.getElementById('C').value = current_question.choice_c;
+                    document.getElementById('D').value = current_question.choice_d;
+                    if ('{{ current_user.type }}' === "lecturer") {
+                        document.getElementById(answer).setAttribute("class", "answer");
                     }
-                    document.getElementById("on_going_question").innerHTML +=
-                        '<input type="button" value="Next" id="nextBtn" onclick="nextQuestion()"/>';
-                } else {
-                    fetch(`/send_quiz_result`, {
-                        method: "POST",
-                        credentials: "include",
-                        body: JSON.stringify(student_answers),
-                        cache: "no-cache",
-                        headers: new Headers({
-                            "content-type": "application/json"
-                        })
-                    })
-                    document.getElementById("on_going_question").innerHTML = "<h1>Quiz Finished!</h1>";
-                    socket.send(document.getElementById("on_going_question").innerHTML.toString());
-                }
-            }
-
-            $(window).on('load', function () {
+                })
+                socket.on("show-next-question", () => {
+                    let next_question = questions.next();
+                    if (!!next_question) {
+                        current_question = JSON.parse(JSON.stringify(next_question));
+                        document.getElementById("A").removeAttribute("class");
+                        document.getElementById("B").removeAttribute("class");
+                        document.getElementById("C").removeAttribute("class");
+                        document.getElementById("D").removeAttribute("class");
+                        socket.emit("ask-question-content");
+                    } else {
+                        socket.emit("ask-finish-quiz");
+                        console.log(student_answers);
+                        if ("{{ current_user.type }}" === "student") {
+                            fetch(`/send_quiz_result`, {
+                                method: "POST",
+                                credentials: "include",
+                                body: JSON.stringify(student_answers),
+                                cache: "no-cache",
+                                headers: new Headers({
+                                    "content-type": "application/json"
+                                })
+                            })
+                        }
+                    }
+                })
+                socket.on("show-select-choice", (choice) => {
+                    if (choice === answer) {
+                        student_answers[current_question.id] = true;
+                        document.getElementById(answer).setAttribute("class", "answer");
+                    } else {
+                        student_answers[current_question.id] = false;
+                        document.getElementById(choice).setAttribute("class", "wrong");
+                    }
+                    {#document.addEventListener("click", handler, true);#}
+                })
+                $('#on_going_question').hide();
+                $('#quiz_finish').hide();
                 if ("{{ current_user.type }}" === "lecturer") {
-                    $('#players').append($('<p>').text("Yeah-oo! Lecturer {{ current_user.username }} has initiated the game!"));
+                    socket.send("Yeah-oo! Lecturer {{ current_user.username }} has initiated the game!\r");
                 } else {
                     $('#startBtn').hide();
                     socket.send("Kaboom!!! Student {{ current_user.username }} has joined the game!\r");
                 }
-            });
+                $('#startBtn').on('click', () => {
+                    socket.emit("ask-question-block");
+                    socket.emit("ask-question-content");
+                })
+                $('#nextBtn').on('click', () => {
+                    socket.emit("ask-next-question");
+                })
+                if ("{{ current_user.type }}" === "student") {
+                    $('#A').on('click', () => {
+                        socket.emit("ask-choice-A");
+                    })
+                    $('#B').on('click', () => {
+                        socket.emit("ask-choice-B");
+                    })
+                    $('#C').on('click', () => {
+                        socket.emit("ask-choice-C");
+                    })
+                    $('#D').on('click', () => {
+                        socket.emit("ask-choice-D");
+                    })
+                }
+            })
+
+            function handler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
         </script>
     </head>
-    <div id="on_going_question">
+    <div id="waiting">
         <button id="startBtn">Let's Go!!!</button>
         {% if current_user.type == "lecturer" %}
             <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
@@ -136,4 +136,17 @@
             <p>quiz_play for the lecturer to start...</p>
         {% endif %}
     </div>
+    <div id="on_going_question">
+        {% if current_user.type == "lecturer" %}
+            <input type="button" value="Next" id="nextBtn"/><br><br><br><br><br>
+        {% endif %}
+        <div>Question: <span id="question"></span></div>
+        <div class="choices">
+            <input type="button" id="A" value=""/>&emsp;
+            <input type="button" id="B" value=""/><br>
+            <input type="button" id="C" value=""/>&emsp;
+            <input type="button" id="D" value=""/>
+        </div>
+    </div>
+    <div id="quiz_finish">Quiz Finished!</div>
 {% endblock %}
