@@ -52,6 +52,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    # remove all pin when lecturer logout
     if current_user.type == "lecturer":
         for quiz in Quiz.query.filter_by(user_id=current_user.id):
             quiz.pin = None
@@ -98,9 +99,9 @@ def create_quiz():
 @login_required
 def edit_quiz():
     the_quiz_id = request.args.get("id")
-    # the_pin = ''.join(random.choice(string.digits) for _ in range(PIN_LENGTH))
-    # Quiz.query.filter_by(id=the_quiz_id).first().pin = the_pin
-    # db.session.commit()
+    the_pin = ''.join(random.choice(string.digits) for _ in range(PIN_LENGTH))
+    Quiz.query.filter_by(id=the_quiz_id).first().pin = the_pin
+    db.session.commit()
     return render_template('edit_quiz.html', question_set=Question.query.filter_by(quiz_id=the_quiz_id),
                            quiz_id=the_quiz_id, pin=Quiz.query.filter_by(id=the_quiz_id).first().pin)
 
@@ -159,7 +160,6 @@ def student_check_quiz():
 @login_required
 def quiz_play(pin):
     quiz_id = Quiz.query.filter_by(pin=pin).first().id
-    current_quiz = Quiz.query.filter_by(id=quiz_id).first()
     questions = Question.query.filter_by(quiz_id=quiz_id)  # all questions from the quiz
     list_of_questions = []
     for question in questions:
@@ -182,6 +182,9 @@ def receive_grade():
     else:
         score = Score(student_id=current_user.id, quiz_id=current_quiz.id, score=total_mark)
         db.session.add(score)
+    db.session.commit()
+    # reset pin after quiz finished
+    current_quiz.pin = None
     db.session.commit()
     return "grade saved!"
 
