@@ -238,3 +238,8 @@ def choice_c():
 @socketio.on("ask-choice-D")
 def choice_d():
     emit("show-select-choice", 'D')
+
+
+@socketio.on("ask-prevent-choice")
+def prevent_choice():
+    emit("show-enable-choice", broadcast=True)

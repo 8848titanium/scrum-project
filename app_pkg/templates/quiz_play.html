@@ -35,6 +35,9 @@
                     $('#on_going_question').hide();
                     $('#quiz_finish').show();
                 })
+                socket.on("show-enable-choice", () => {
+                    document.removeEventListener("click", handler, true);
+                })
             })
 
             let questions = {{ the_quiz|safe }};
@@ -88,7 +91,7 @@
                         student_answers[current_question.id] = false;
                         document.getElementById(choice).setAttribute("class", "wrong");
                     }
-                    {#document.addEventListener("click", handler, true);#}
+                    document.addEventListener("click", handler, true);
                 })
                 $('#on_going_question').hide();
                 $('#quiz_finish').hide();
@@ -104,6 +107,7 @@
                 })
                 $('#nextBtn').on('click', () => {
                     socket.emit("ask-next-question");
+                    socket.emit("ask-prevent-choice");
                 })
                 if ("{{ current_user.type }}" === "student") {
                     $('#A').on('click', () => {
