@@ -166,17 +166,22 @@ def quiz_play(pin):
         question_dict = dict(question.__dict__)
         question_dict.pop('_sa_instance_state', None)
         list_of_questions.append(question_dict)
-    return render_template("quiz_play.html", quiz=current_quiz, quiz_id=quiz_id, PIN=pin, the_quiz=json.dumps(list_of_questions))
+    return render_template("quiz_play.html", quiz_id=quiz_id, PIN=pin, the_quiz=json.dumps(list_of_questions))
 
 
 @app.route("/send_quiz_result", methods=["get", "post"])
 @login_required
 def receive_grade():
     mark_on_questions = request.get_json()
-    quiz_id = mark_on_questions["quiz_id"]
+    quiz_id = mark_on_questions.pop("quiz_id")
     current_quiz = Quiz.query.filter_by(id=quiz_id).first()
     score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
-    score.score = sum(mark_on_questions.values())
+    total_mark = sum(mark_on_questions.values())
+    if score:
+        score.score = total_mark
+    else:
+        score = Score(student_id=current_user.id, quiz_id=current_quiz.id, score=total_mark)
+        db.session.add(score)
     db.session.commit()
     return "grade saved!"
 
@@ -188,6 +193,45 @@ def handle_message(message):
         send(message, broadcast=True)
 
 
-@socketio.on('ask-show-question-block')
+def ack():
+    print('message was received!')
+
+
+@socketio.on('ask-question-block')
 def question_block():
-    emit("show question block", broadcast=True)
+    emit("show-question-block", broadcast=True)
+
+
+@socketio.on("ask-question-content")
+def question_content():
+    emit("show-question-content", broadcast=True)
+
+
+@socketio.on("ask-next-question")
+def next_question():
+    emit("show-next-question", broadcast=True)
+
+
+@socketio.on("ask-finish-quiz")
+def finish_quiz():
+    emit("show-finish-quiz", broadcast=True)
+
+
+@socketio.on("ask-choice-A")
+def choice_a():
+    emit("show-select-choice", 'A')
+
+
+@socketio.on("ask-choice-B")
+def choice_b():
+    emit("show-select-choice", 'B', )
+
+
+@socketio.on("ask-choice-C")
+def choice_c():
+    emit("show-select-choice", 'C')
+
+
+@socketio.on("ask-choice-D")
+def choice_d():
+    emit("show-select-choice", 'D')
