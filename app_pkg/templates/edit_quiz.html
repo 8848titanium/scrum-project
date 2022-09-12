@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
+    <div class="header">
+        <nav>
+            <a href="/lecturer_main">
+                <image src="../static/images/logo.png" class="logo"></image>
+            </a>
+            <h1><a href="/lecturer_main">Happy Learning</a></h1>
+        </nav>
+    </div>
+
     <a href="/create_question/?id={{ quiz_id }}">
-        <button id="add-btn">Add A Question</button>
+        <button id="add-quiz-btn">Add A Question</button>
     </a>
     <a href="/quiz_play/{{ pin }}">
         <button id="add-btn_start">Start This Quiz</button>
@@ -20,7 +29,6 @@
                         <p>C: {{ a_question.choice_c }}</p>
                         <p>D: {{ a_question.choice_d }}</p>
                         <p>Answer: {{ a_question.answer }}</p>
-                        <p>------------------------------------------------------</p>
                     </a>
                 </div>
             {% endfor %}
