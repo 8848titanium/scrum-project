@@ -768,10 +768,15 @@ nav ul li {
     display: none;
 }
 
+
+.choices{
+}
+
 .choices input {
-    display: block;
-    width: 200px;
-    height: 200px;
+    margin: 30px 50px;
+    display:inline;
+    width: 500px;
+    height: 250px;
     border: none;
     background-color: #5d9cc9;
     color: white;
@@ -827,8 +832,8 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-size: 48px;
     position: absolute;
-    top: 20% !important;
-    left: 50% !important;
+    top: 5% !important;
+    right: 5% !important;
 }
 
 .question-list{
