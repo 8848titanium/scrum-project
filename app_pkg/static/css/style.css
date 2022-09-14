@@ -456,8 +456,13 @@ nav ul li {
     cursor: pointer;
     border-radius: 20px;
     position: absolute;
+<<<<<<< Updated upstream
     right: 20%;
     top: 40px;
+=======
+    left: 5%;
+    top: 5%;
+>>>>>>> Stashed changes
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -472,10 +477,32 @@ nav ul li {
     cursor: pointer;
     border-radius: 20px;
     position: absolute;
+<<<<<<< Updated upstream
     right: 3%;
     top: 40px;
+=======
+    right: 5%;
+    top: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+#del-quiz-btn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 20%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+>>>>>>> Stashed changes
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 
 .cards-layout {
     display: flex;
