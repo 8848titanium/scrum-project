@@ -430,6 +430,22 @@ nav ul li {
     font-size: 20px;
 }
 
+#history-btn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 12%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: fixed;
+    left: 25%;
+    top: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 #add-quiz-btn {
     font-size: 18px;
     font-weight: bolder;
@@ -784,10 +800,6 @@ nav ul li {
     display: none;
 }
 
-
-.choices{
-}
-
 .choices input {
     margin: 30px 50px;
     display:inline;
@@ -858,9 +870,8 @@ nav ul li {
 }
 
 .quizname{
-    position:absolute;
-    top:1%;
-    left:30%;
+    text-align: center;
+
 }
 
 .waiting button{
