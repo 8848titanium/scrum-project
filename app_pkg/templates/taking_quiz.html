@@ -75,7 +75,7 @@
     </head>
     <div id="taking_quiz">
         {% if current_user.type == "lecturer" %}
-            <div>Question: <span id="question"></span></div>
+            <div class="question_title">Question: <span id="question"></span></div>
             <input type="button" value="Next" id="add-btn" onclick="nextQuestion()"/><br><br><br><br><br>
             <div class="choices">
                 <input type="button" id="A" value="" onclick=""/>&emsp;

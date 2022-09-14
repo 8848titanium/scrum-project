@@ -15,13 +15,13 @@
     <a href="/quiz_play/{{ pin }}">
         <button id="add-btn_start">Start This Quiz</button>
     </a>
-    <br><br><br><br><br>
     <div>
         {% if question_set %}
             {% for a_question in question_set %}
                 <div class="student_quiz">
                     <a href="/edit_question/?quiz_id={{ quiz_id }}&id={{ a_question.id }}"
                        style="text-decoration: none;">
+                    <div class="question_text">
                         <p>Question: {{ a_question.question }}</p>
                         <p>Type: {{ a_question.type }}</p>
                         <p>A: {{ a_question.choice_a }}</p>
@@ -29,6 +29,7 @@
                         <p>C: {{ a_question.choice_c }}</p>
                         <p>D: {{ a_question.choice_d }}</p>
                         <p>Answer: {{ a_question.answer }}</p>
+                    </div>
                     </a>
                 </div>
             {% endfor %}
