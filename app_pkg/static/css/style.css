@@ -831,10 +831,12 @@ nav ul li {
 }
 
 .studentquiz {
-    font-size: 25px;
+    font-size: 28px;
     position: fixed;
-    left: 40%;
+    width:400px;
+    left: 37%;
     top: 20%;
+
     border: 15px #98d8e3;
     border-radius: 20px;
     padding: 50px;
