@@ -8,6 +8,7 @@
 body {
     background-image: url('../images/student_quiz_bg.gif');
     background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 .header {

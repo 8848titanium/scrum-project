@@ -131,15 +131,17 @@
             }
         </script>
     </head>
-    <div id="waiting">
-        <button id="startBtn" style="position: absolute; top:50%; right:50%;">Let's Go!!!</button>
-        {% if current_user.type == "lecturer" %}
-            <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
-            <div id="players"><p>Players:</p></div>
-        {% else %}
-            <p>quiz_play for the lecturer to start...</p>
-        {% endif %}
-    </div>
+    <center>
+        <div id="waiting">
+            <button id="startBtn">Let's Go!!!</button>
+            {% if current_user.type == "lecturer" %}
+                <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
+                <div id="players"><p>Players:</p></div>
+            {% else %}
+                <p>quiz_play for the lecturer to start...</p>
+            {% endif %}
+        </div>
+    </center>
     <div id="on_going_question">
         {% if current_user.type == "lecturer" %}
             <input type="button" value="Next" id="nextBtn" /><br><br><br><br><br>
