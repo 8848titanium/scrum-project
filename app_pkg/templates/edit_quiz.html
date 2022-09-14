@@ -9,19 +9,21 @@
         </nav>
     </div>
 
+    <p id="quizname"contenteditable="true">quiz name66666666666666666666666666</p>
+
     <a href="/create_question/?id={{ quiz_id }}">
         <button id="add-quiz-btn">Add A Question</button>
     </a>
     <a href="/quiz_play/{{ pin }}">
         <button id="add-btn_start">Start This Quiz</button>
     </a>
-    <div>
+    <br><br><br><br><br>
+    <div class="question-list">
         {% if question_set %}
             {% for a_question in question_set %}
                 <div class="student_quiz">
                     <a href="/edit_question/?quiz_id={{ quiz_id }}&id={{ a_question.id }}"
                        style="text-decoration: none;">
-                    <div class="question_text">
                         <p>Question: {{ a_question.question }}</p>
                         <p>Type: {{ a_question.type }}</p>
                         <p>A: {{ a_question.choice_a }}</p>
@@ -29,10 +31,13 @@
                         <p>C: {{ a_question.choice_c }}</p>
                         <p>D: {{ a_question.choice_d }}</p>
                         <p>Answer: {{ a_question.answer }}</p>
-                    </div>
                     </a>
                 </div>
             {% endfor %}
         {% endif %}
     </div>
+
+    <a href="/delete_question/?id={{ quiz_id }}">
+        <button id="del-quiz-btn">Delete This Quiz</button>
+    </a>
 {% endblock %}

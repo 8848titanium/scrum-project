@@ -8,6 +8,7 @@
 body {
     background-image: url('../images/student_quiz_bg.gif');
     background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 .header {
@@ -80,7 +81,7 @@ nav ul li {
 }
 
 .content {
-    margin-top: 100px;
+    margin-top: 200px;
     max-width: 600px;
 }
 
@@ -423,26 +424,10 @@ nav ul li {
 }
 
 .quiz {
-    padding-left: 100px;
+    padding-left: 16px;
     position: absolute;
-    top: 10%;
+    top: 11%;
     font-size: 20px;
-}
-
-#add-btn {
-    font-size: 18px;
-    font-weight: bolder;
-    background: #0384fc;
-    height: 50px;
-    width: 10%;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    border-radius: 20px;
-    position: absolute;
-    right: 13%;
-    top: -6%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 #add-quiz-btn {
@@ -454,10 +439,10 @@ nav ul li {
     border: none;
     outline: none;
     cursor: pointer;
-    border-radius: 15px;
-    position: absolute;
+    border-radius: 20px;
+    position: fixed;
     right: 20%;
-    top: 40px;
+    top: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -470,10 +455,42 @@ nav ul li {
     border: none;
     outline: none;
     cursor: pointer;
-    border-radius: 15px;
-    position: absolute;
-    right: 3%;
-    top: 40px;
+    border-radius: 20px;
+    position: fixed;
+    right: 5%;
+    top: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#del-quiz-btn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 12%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#startBtn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 12%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -767,10 +784,15 @@ nav ul li {
     display: none;
 }
 
+
+.choices{
+}
+
 .choices input {
-    display: block;
-    width: 200px;
-    height: 200px;
+    margin: 30px 50px;
+    display:inline;
+    width: 500px;
+    height: 250px;
     border: none;
     background-color: #5d9cc9;
     color: white;
@@ -826,16 +848,29 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-size: 48px;
     position: absolute;
-    top: 20% !important;
-    left: 50% !important;
+    top: 5% !important;
+    right: 5% !important;
 }
 
-.taking_quiz.question_title {
-    font-size: 25px;
-    border: 15px #98d8e3;
-    border-radius: 20px;
-    padding: 50px;
-    margin: 20px;
-    background-color: #98d8e3;
+.question-list{
+    position:absolute;
+    top:12%;
 }
 
+.quizname{
+    position:absolute;
+    top:1%;
+    left:30%;
+}
+
+.waiting button{
+    position:absolute;
+    top:50%;
+    left:50%;
+}
+
+.quizPIN{
+    position: absolute;
+    left: 45%;
+    top: 45%;
+}

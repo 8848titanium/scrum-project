@@ -115,6 +115,15 @@ def create_question():
     db.session.commit()
     return redirect('/edit_quiz/?id=' + quiz_id)
 
+@app.route('/delete_question/', methods=['GET', 'POST'])
+@login_required
+def delete_question():
+    quiz_id = request.args.get('id')
+    question_entry = " "
+    db.session.add(question_entry)
+    db.session.commit()
+    return redirect('/edit_quiz/?id=' + quiz_id)
+
 
 @app.route('/edit_question/', methods=['GET', 'POST'])
 @login_required
