@@ -478,6 +478,21 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+#startBtn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 12%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: fixed;
+    right: 5%;
+    bottom: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 
 .cards-layout {
     display: flex;
@@ -852,4 +867,10 @@ nav ul li {
     position:absolute;
     top:50%;
     left:50%;
+}
+
+.quizPIN{
+    position: absolute;
+    left: 45%;
+    top: 45%;
 }
