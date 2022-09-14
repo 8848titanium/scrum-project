@@ -80,7 +80,7 @@ nav ul li {
 }
 
 .content {
-    margin-top: 100px;
+    margin-top: 200px;
     max-width: 600px;
 }
 
@@ -828,4 +828,9 @@ nav ul li {
     position: absolute;
     top: 20% !important;
     left: 50% !important;
+}
+
+.question-list{
+    position:absolute;
+    top:12%;
 }
