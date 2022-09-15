@@ -132,7 +132,7 @@
         </script>
     </head>
     <div id="waiting" style="position:relative;top:40px;">
-        <center>
+        <div style="text-align: center;">
             <button id="startBtn">Let's Go!!!</button>
             {% if current_user.type == "lecturer" %}
                 <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
@@ -140,7 +140,7 @@
             {% else %}
                 <p>quiz_play for the lecturer to start...</p>
             {% endif %}
-        </center>
+        </div>
     </div>
 
     <div id="on_going_question">
@@ -148,13 +148,11 @@
             <input type="button" value="Next" id="nextBtn"/><br><br><br><br><br>
         {% endif %}
         <div style="text-align: center;font-size:60px;">Question: <span id="question"></span></div>
-        <div class="choices">
-            <center>
-                <input type="button" id="A" value=""/>
-                <input type="button" id="B" value=""/><br>
-                <input type="button" id="C" value=""/>
-                <input type="button" id="D" value=""/>
-            </center>
+        <div class="choices" style="text-align: center">
+            <input type="button" id="A" value=""/>
+            <input type="button" id="B" value=""/><br>
+            <input type="button" id="C" value=""/>
+            <input type="button" id="D" value=""/>
         </div>
     </div>
     <div id="quiz_finish">Quiz Finished!</div>
