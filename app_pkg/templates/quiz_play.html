@@ -133,9 +133,9 @@
     </head>
     <div id="waiting" style="position:relative;top:40px;">
         <center>
-            <button id="startBtn" >Let's Go!!!</button>
+            <button id="startBtn">Let's Go!!!</button>
             {% if current_user.type == "lecturer" %}
-                <h3 id="quizPIN" >The Game PIN: {{ PIN }}</h3>
+                <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
                 <div id="players"><p>Players:</p></div>
             {% else %}
                 <p>quiz_play for the lecturer to start...</p>
@@ -145,7 +145,7 @@
 
     <div id="on_going_question">
         {% if current_user.type == "lecturer" %}
-            <input type="button" value="Next" id="nextBtn" /><br><br><br><br><br>
+            <input type="button" value="Next" id="nextBtn"/><br><br><br><br><br>
         {% endif %}
         <div style="text-align: center;font-size:60px;">Question: <span id="question"></span></div>
         <div class="choices">
@@ -160,6 +160,6 @@
     <div id="quiz_finish">Quiz Finished!</div>
 
     <audio controls hidden="true" autoplay loop="loop">
-        <source src="../static/css/studentquiz_music.mp3" type="audio/mpeg">
+        <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">
     </audio>
 {% endblock %}
