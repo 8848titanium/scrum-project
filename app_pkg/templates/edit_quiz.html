@@ -1,8 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-    <head>
-
-    </head>
     <div class="header">
         <nav>
             <a href="/">
@@ -11,7 +8,7 @@
             <h1><a href="/">Happy Learning</a></h1>
         </nav>
     </div>
-    <a href="/quiz_history/{{ quiz.id }}">
+    <a href="/edit_quiz/quiz_history/{{ quiz.id }}">
         <button id="history-btn">Quiz History</button>
     </a>
     <a href="/create_question/{{ quiz.id }}">

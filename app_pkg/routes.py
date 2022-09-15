@@ -109,10 +109,13 @@ def edit_quiz(quiz_id):
                            quiz=the_quiz)
 
 
-@app.route('/quiz_history', methods=['GET', 'POST'])
+@app.route('/edit_quiz/quiz_history/<quiz_id>', methods=['GET', 'POST'])
 @login_required
-def quiz_history():
-    return render_template('quiz_history.html')
+def quiz_history(quiz_id):
+    num_of_questions = db.session.query(Question).filter_by(quiz_id=quiz_id).count()
+    user_join_score = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
+        Score.student_id == User.id).all()
+    return render_template('quiz_history.html', user_join_score=user_join_score, num_of_questions=num_of_questions)
 
 
 @app.route('/delete_quiz/', methods=['GET', 'POST'])
