@@ -11,10 +11,10 @@
             <h1><a href="/">Happy Learning</a></h1>
         </nav>
     </div>
-    <a href="#">
+    <a href="/quiz_history/{{ quiz.id }}">
         <button id="history-btn">Quiz History</button>
     </a>
-    <a href="/create_question/?id={{ quiz.id }}">
+    <a href="/create_question/{{ quiz.id }}">
         <button id="add-quiz-btn">Add A Question</button>
     </a>
     <a href="/quiz_play/{{ quiz.pin }}">
@@ -25,7 +25,7 @@
         {% if question_set %}
             {% for a_question in question_set %}
                 <div class="student_quiz">
-                    <a href="/edit_question/?quiz_id={{ quiz.id }}&id={{ a_question.id }}"
+                    <a href="/edit_question/{{ quiz.id }}/?id={{ a_question.id }}"
                        style="text-decoration: none;">
                         <p>Question: {{ a_question.question }}</p>
                         <p>Type: {{ a_question.type }}</p>
