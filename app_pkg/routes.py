@@ -102,8 +102,11 @@ def edit_quiz():
     the_pin = ''.join(random.choice(string.digits) for _ in range(PIN_LENGTH))
     the_quiz = Quiz.query.filter_by(id=quiz_id).first()
     the_quiz.pin = the_pin
+    form = QuizNameForm()
+    if form.validate_on_submit():
+        the_quiz.name = form.name.data
     db.session.commit()
-    return render_template('edit_quiz.html', question_set=Question.query.filter_by(quiz_id=quiz_id), quiz=the_quiz)
+    return render_template('edit_quiz.html', form=form, question_set=Question.query.filter_by(quiz_id=quiz_id), quiz=the_quiz)
 
 
 @app.route('/delete_quiz/', methods=['GET', 'POST'])

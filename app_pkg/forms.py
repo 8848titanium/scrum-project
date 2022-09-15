@@ -62,3 +62,8 @@ class QuestionForm(FlaskForm):
     choice_d = StringField('Choice D:', validators=[DataRequired()])
     checkbox_d = BooleanField()
     submit = SubmitField('Submit question')
+
+
+class QuizNameForm(FlaskForm):
+    name = StringField('Quiz Name:', validators=[DataRequired()])
+    submit = SubmitField('Apply Name Changes')
