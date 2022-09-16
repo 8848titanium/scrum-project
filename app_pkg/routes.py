@@ -123,6 +123,12 @@ def quiz_history(quiz_id):
 def delete_quiz():
     quiz_id = request.args.get('id')
     the_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    questions = Question.query.filter_by(quiz_id=quiz_id)
+    scores = Score.query.filter_by(quiz_id=quiz_id)
+    for score in scores:
+        db.session.delete(score)
+    for question in questions:
+        db.session.delete(question)
     db.session.delete(the_quiz)
     db.session.commit()
     return redirect(url_for('lecturer_main'))
