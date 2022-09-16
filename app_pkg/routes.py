@@ -95,41 +95,52 @@ def create_quiz():
     return redirect(url_for('lecturer_main'))
 
 
-@app.route('/edit_quiz/', methods=['GET', 'POST'])
+@app.route('/edit_quiz/<quiz_id>', methods=['GET', 'POST'])
 @login_required
-def edit_quiz():
-    the_quiz_id = request.args.get("id")
+def edit_quiz(quiz_id):
     the_pin = ''.join(random.choice(string.digits) for _ in range(PIN_LENGTH))
-    Quiz.query.filter_by(id=the_quiz_id).first().pin = the_pin
+    the_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    the_quiz.pin = the_pin
+    form = QuizNameForm()
+    if form.validate_on_submit():
+        the_quiz.name = form.name.data
     db.session.commit()
-    return render_template('edit_quiz.html', question_set=Question.query.filter_by(quiz_id=the_quiz_id),
-                           quiz_id=the_quiz_id, pin=Quiz.query.filter_by(id=the_quiz_id).first().pin)
+    return render_template('edit_quiz.html', form=form, question_set=Question.query.filter_by(quiz_id=quiz_id),
+                           quiz=the_quiz)
 
 
-@app.route('/create_question/', methods=['GET', 'POST'])
+@app.route('/edit_quiz/quiz_history/<quiz_id>', methods=['GET', 'POST'])
 @login_required
-def create_question():
+def quiz_history(quiz_id):
+    num_of_questions = db.session.query(Question).filter_by(quiz_id=quiz_id).count()
+    user_join_score = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
+        Score.student_id == User.id).all()
+    return render_template('quiz_history.html', user_join_score=user_join_score, num_of_questions=num_of_questions)
+
+
+@app.route('/delete_quiz/', methods=['GET', 'POST'])
+@login_required
+def delete_quiz():
     quiz_id = request.args.get('id')
+    the_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    db.session.delete(the_quiz)
+    db.session.commit()
+    return redirect(url_for('lecturer_main'))
+
+
+@app.route('/create_question/<quiz_id>', methods=['GET', 'POST'])
+@login_required
+def create_question(quiz_id):
     question_entry = Question(quiz_id=quiz_id, question="The New Question")
     db.session.add(question_entry)
     db.session.commit()
-    return redirect('/edit_quiz/?id=' + quiz_id)
+    return redirect('/edit_quiz/' + quiz_id)
 
-@app.route('/delete_question/', methods=['GET', 'POST'])
+
+@app.route('/edit_question/<quiz_id>/', methods=['GET', 'POST'])
 @login_required
-def delete_question():
-    quiz_id = request.args.get('id')
-    question_entry = " "
-    db.session.add(question_entry)
-    db.session.commit()
-    return redirect('/edit_quiz/?id=' + quiz_id)
-
-
-@app.route('/edit_question/', methods=['GET', 'POST'])
-@login_required
-def edit_question():
+def edit_question(quiz_id):
     question = Question.query.filter_by(id=request.args.get("id")).first()
-
     form = QuestionForm(data=question.__dict__)
     if form.validate_on_submit():
         answer = ""
@@ -144,7 +155,7 @@ def edit_question():
         question.choice_d = form.choice_d.data
         question.answer = answer
         db.session.commit()
-        return redirect('/edit_quiz/?id=' + str(question.quiz_id))
+        return redirect('/edit_quiz/' + str(question.quiz_id))
     return render_template('edit_question.html', form=form, question=question)
 
 

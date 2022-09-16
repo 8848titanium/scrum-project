@@ -2,23 +2,19 @@
 {% block content %}
     <div class="header">
         <nav>
-            <a href="/lecturer_main">
+            <a href="/">
                 <image src="../static/images/logo.png" class="logo"></image>
             </a>
-            <h1><a href="/lecturer_main">Happy Learning</a></h1>
+            <h1><a href="/">Happy Learning</a></h1>
         </nav>
     </div>
-    <div class="quiz_title">
-    <p class="quizname"contenteditable="true">Your quiz name</p>
-    </div>
-    <a href="#">
+    <a href="/edit_quiz/quiz_history/{{ quiz.id }}">
         <button id="history-btn">Quiz History</button>
     </a>
-
-    <a href="/create_question/?id={{ quiz_id }}">
+    <a href="/create_question/{{ quiz.id }}">
         <button id="add-quiz-btn">Add A Question</button>
     </a>
-    <a href="/quiz_play/{{ pin }}">
+    <a href="/quiz_play/{{ quiz.pin }}">
         <button id="add-btn_start">Start This Quiz</button>
     </a>
     <br><br><br><br><br>
@@ -26,7 +22,7 @@
         {% if question_set %}
             {% for a_question in question_set %}
                 <div class="student_quiz">
-                    <a href="/edit_question/?quiz_id={{ quiz_id }}&id={{ a_question.id }}"
+                    <a href="/edit_question/{{ quiz.id }}/?id={{ a_question.id }}"
                        style="text-decoration: none;">
                         <p>Question: {{ a_question.question }}</p>
                         <p>Type: {{ a_question.type }}</p>
@@ -40,8 +36,20 @@
             {% endfor %}
         {% endif %}
     </div>
-
-    <a href="/delete_question/?id={{ quiz_id }}">
+    <div class="quizNameForm">
+        <form name="quiz-name-form" action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.name.label }}<br>
+                {{ form.name(value=quiz.name) }}<br>
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+    <a href="{{ url_for("lecturer_main") }}">
+        <button id="go-back-btn">Back to All Quizzes</button>
+    </a>
+    <a href="/delete_quiz/?id={{ quiz.id }}">
         <button id="del-quiz-btn">Delete This Quiz</button>
     </a>
 {% endblock %}
