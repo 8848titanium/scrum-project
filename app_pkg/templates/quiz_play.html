@@ -39,6 +39,12 @@
                 socket.on("receive-enable-choice", () => {
                     document.removeEventListener("click", handler, true);
                 })
+                socket.on("receive-reset-countdown", () => {
+                    $('#countdown').hide();
+                    $('#nextBtn').show();
+                    document.getElementById('beginCountdown').value = 10;
+                    document.getElementById('beginCountdownText').innerText = "10";
+                })
                 socket.on("receive-one-second", () => {
                     let timeleft = Number(document.getElementById('beginCountdown').value);
                     timeleft = Number(document.getElementById('beginCountdown').value) - 1;
@@ -47,12 +53,8 @@
                         document.getElementById('beginCountdownText').textContent = timeleft.toString();
                         if (timeleft === 0) {
                             socket.emit("ask-reset-countdown");
-                            document.getElementById('nextBtn').click();
                         }
                     });
-                })
-                socket.on("receive-reset-countdown", () => {
-                    document.getElementById('beginCountdown').value = 10;
                 })
             })
 
@@ -123,6 +125,8 @@
                 $('#nextBtn').on('click', () => {
                     socket.emit("ask-next-question");
                     socket.emit("ask-prevent-choice");
+                    $('#countdown').show();
+                    $('#nextBtn').hide();
                     socket.emit("ask-countdown");
                 })
                 if ("{{ current_user.type }}" === "student") {
@@ -164,7 +168,7 @@
         {% if current_user.type == "lecturer" %}
             <input type="button" value="Next" id="nextBtn" hidden/><br><br><br><br><br>
         {% endif %}
-        <div>
+        <div id="countdown">
             <progress value="10" max="10" id="beginCountdown"></progress>
             <p><span id="beginCountdownText">10</span>S Left!!!</p>
         </div>

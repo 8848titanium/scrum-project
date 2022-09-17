@@ -263,7 +263,7 @@ def prevent_choice():
 
 @socketio.on("ask-countdown")
 def one_second():
-    for i in range(10, -1, -1):
+    for i in range(10, 0, -1):
         time.sleep(1)
         emit("receive-one-second", broadcast=True)
 
