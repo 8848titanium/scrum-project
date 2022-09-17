@@ -422,7 +422,9 @@ nav ul li {
 .dropdown:hover .drop-btn {
     background-color: #3badff;
 }
-
+.dropdown:hover .add-quiz-btn {
+    background-color: #3badff;
+}
 .quiz {
     padding-left: 16px;
     position: absolute;
@@ -490,6 +492,22 @@ nav ul li {
     border-radius: 20px;
     position: fixed;
     right: 5%;
+    bottom: 5%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#go-back-btn {
+    font-size: 18px;
+    font-weight: bolder;
+    background: #98d8e3;
+    height: 50px;
+    width: 12%;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 20px;
+    position: fixed;
+    left: 5%;
     bottom: 5%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -832,17 +850,9 @@ nav ul li {
 
 
 .studentquiz {
-    font-size: 28px;
-    position: fixed;
-    width:400px;
-    left: 37%;
-    top: 20%;
-    border: 15px #98d8e3;
-    border-radius: 20px;
-    padding: 50px;
-    margin: 20px;
-    background-color: #98d8e3;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-image: url('../images/student_quiz_bg.gif');
+    background-size: 100% 100%;
+    background-attachment: fixed;
 }
 
 .student_quiz {
@@ -851,7 +861,7 @@ nav ul li {
     border: 15px #98d8e3;
     position: relative;
     left: 20%;
-    top:20px;
+    top:100px;
     border-radius: 20px;
     height:290px;
     width: 500px;
@@ -911,5 +921,19 @@ nav ul li {
     padding:3px;
     border-radius:15px;
     background-color: #ffffff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.quizNameForm{
+    font-size: 20px;
+    position: absolute;
+    width:250px;
+    left: 5%;
+    top: 10%;
+    border: 15px #98d8e3;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #98d8e3;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
