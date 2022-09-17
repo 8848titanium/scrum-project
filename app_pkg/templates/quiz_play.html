@@ -24,6 +24,7 @@
                 })
                 socket.on('message', (data) => {
                     if ("{{ current_user.type }}" === "lecturer") {
+
                         $('#players').append($('<p>').text(data));
                     }
                 })
@@ -35,8 +36,23 @@
                     $('#on_going_question').hide();
                     $('#quiz_finish').show();
                 })
-                socket.on("show-enable-choice", () => {
+                socket.on("receive-enable-choice", () => {
                     document.removeEventListener("click", handler, true);
+                })
+                socket.on("receive-one-second", () => {
+                    let timeleft = Number(document.getElementById('beginCountdown').value);
+                    timeleft = Number(document.getElementById('beginCountdown').value) - 1;
+                    return new Promise((resolve, reject) => {
+                        document.getElementById('beginCountdown').value = timeleft;
+                        document.getElementById('beginCountdownText').textContent = timeleft.toString();
+                        if (timeleft === 0) {
+                            socket.emit("ask-reset-countdown");
+                            document.getElementById('nextBtn').click();
+                        }
+                    });
+                })
+                socket.on("receive-reset-countdown", () => {
+                    document.getElementById('beginCountdown').value = 10;
                 })
             })
 
@@ -93,8 +109,6 @@
                     }
                     document.addEventListener("click", handler, true);
                 })
-                $('#on_going_question').hide();
-                $('#quiz_finish').hide();
                 if ("{{ current_user.type }}" === "lecturer") {
                     socket.send("Yeah-oo! Lecturer {{ current_user.username }} has initiated the game!\r");
                 } else {
@@ -104,10 +118,12 @@
                 $('#startBtn').on('click', () => {
                     socket.emit("ask-question-block");
                     socket.emit("ask-question-content");
+                    socket.emit("ask-countdown");
                 })
                 $('#nextBtn').on('click', () => {
                     socket.emit("ask-next-question");
                     socket.emit("ask-prevent-choice");
+                    socket.emit("ask-countdown");
                 })
                 if ("{{ current_user.type }}" === "student") {
                     $('#A').on('click', () => {
@@ -131,6 +147,7 @@
             }
         </script>
     </head>
+
     <div id="waiting" style="position:relative;top:40px;">
         <div style="text-align: center;">
             <button id="startBtn">Let's Go!!!</button>
@@ -138,15 +155,19 @@
                 <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
                 <div id="players"><p>Players:</p></div>
             {% else %}
-                <p>quiz_play for the lecturer to start...</p>
+                <p>Waiting for the lecturer to start the game...</p>
             {% endif %}
         </div>
     </div>
 
-    <div id="on_going_question">
+    <div id="on_going_question" hidden>
         {% if current_user.type == "lecturer" %}
-            <input type="button" value="Next" id="nextBtn"/><br><br><br><br><br>
+            <input type="button" value="Next" id="nextBtn" hidden/><br><br><br><br><br>
         {% endif %}
+        <div>
+            <progress value="10" max="10" id="beginCountdown"></progress>
+            <p><span id="beginCountdownText">10</span>S Left!!!</p>
+        </div>
         <div style="text-align: center;font-size:60px;">Question: <span id="question"></span></div>
         <div class="choices" style="text-align: center">
             <input type="button" id="A" value=""/>
@@ -155,9 +176,10 @@
             <input type="button" id="D" value=""/>
         </div>
     </div>
-    <div id="quiz_finish">Quiz Finished!</div>
 
-    <audio controls hidden="true" autoplay loop="loop">
+    <div id="quiz_finish" hidden>Quiz Finished!</div>
+
+    <audio controls hidden autoplay loop="loop">
         <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">
     </audio>
 {% endblock %}

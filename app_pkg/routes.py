@@ -1,6 +1,7 @@
 import json
 import random
 import string
+import time
 
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
@@ -215,10 +216,6 @@ def handle_message(message):
         send(message, broadcast=True)
 
 
-def ack():
-    print('message was received!')
-
-
 @socketio.on('ask-question-block')
 def question_block():
     emit("show-question-block", broadcast=True)
@@ -261,4 +258,16 @@ def choice_d():
 
 @socketio.on("ask-prevent-choice")
 def prevent_choice():
-    emit("show-enable-choice", broadcast=True)
+    emit("receive-enable-choice", broadcast=True)
+
+
+@socketio.on("ask-countdown")
+def one_second():
+    for i in range(10, -1, -1):
+        time.sleep(1)
+        emit("receive-one-second", broadcast=True)
+
+
+@socketio.on("ask-reset-countdown")
+def reset_countdown():
+    emit("receive-reset-countdown", broadcast=True)
