@@ -2,8 +2,7 @@
 {% block content %}
     {% if question %}
 
-        <div class="studentquiz">
-            <form name="question-form" action="" method="post">
+            <form name="question-form" style="font-size: 28px;position: fixed;width:400px;left: 35%;top: 5%;border: 15px #98d8e3;border-radius: 20px;padding: 50px;margin: 20px;background-color: #98d8e3;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" action="" method="post">
                 {{ form.hidden_tag() }}
                 <p>
                     {{ form.question.label }}<br>
@@ -50,6 +49,5 @@
                 </p>
                 <p>{{ form.submit() }}</p>
             </form>
-        </div>
-    {% endif %}
+{% endif %}
 {% endblock %}
