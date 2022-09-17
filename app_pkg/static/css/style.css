@@ -840,6 +840,10 @@ nav ul li {
     font-size: 20px;
 }
 
+.selected {
+    background-color: #0c2ba9 !important;
+}
+
 .answer {
     background-color: #098000 !important;
 }

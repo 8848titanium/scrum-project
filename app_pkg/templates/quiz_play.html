@@ -24,17 +24,12 @@
                 })
                 socket.on('message', (data) => {
                     if ("{{ current_user.type }}" === "lecturer") {
-
                         $('#players').append($('<p>').text(data));
                     }
                 })
-                socket.on("show-question-block", () => {
-                    $('#waiting').hide();
-                    $('#on_going_question').show();
-                })
                 socket.on("show-finish-quiz", () => {
-                    $('#on_going_question').hide();
-                    $('#quiz_finish').show();
+                    $('#onGoingQuestion').hide();
+                    $('#quizFinish').show();
                 })
                 socket.on("show-countdown-block", () => {
                     $('#countdown').show();
@@ -44,11 +39,14 @@
                 })
                 socket.on("receive-reset-countdown", () => {
                     $('#countdown').hide();
-                    $('#nextBtn').show();
+                    $('#checkScoreBoard').show();
                     document.getElementById('beginCountdown').value = 10;
                     document.getElementById('beginCountdownText').innerText = "10";
                     if ('{{ current_user.type }}' === "lecturer") {
                         document.getElementById(answer).setAttribute("class", "answer");
+                    } else {
+                        let status = user_choice === answer ? "answer" : "wrong";
+                        document.getElementById(user_choice).setAttribute("class", status);
                     }
                 })
                 socket.on("receive-one-second", () => {
@@ -62,16 +60,46 @@
                         }
                     });
                 })
+                socket.on("show-populate-scoreboard", (rank_scores) => {
+                    $('#checkScoreBoard').hide();
+                    $('#onGoingQuestion').hide();
+                    $('#scoreBoard').show();
+                    $('#nextBtn').show();
+                    rank_scores = getDescendingSortedHash(rank_scores);
+                    let i = 1;
+                    for (let entry in rank_scores) {
+                        let row = document.getElementById('scoreBoardTable').insertRow(i);
+                        i += 1;
+                        let username = row.insertCell(0);
+                        let rank_score = row.insertCell(1);
+                        username.innerHTML = entry;
+                        rank_score.innerHTML = rank_scores[entry];
+                    }
+                })
             })
 
+            function getDescendingSortedHash(inputHash) {
+                let resultHash = {};
+
+                let keys = Object.keys(inputHash);
+                keys.sort(function (a, b) {
+                    return inputHash[a] - inputHash[b]
+                }).reverse().forEach(function (k) {
+                    resultHash[k] = inputHash[k];
+                });
+                return resultHash;
+            }
+
             let questions = {{ the_quiz|safe }};
-            console.log(questions, questions.current);
             let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
             let student_answers = {"quiz_id": {{quiz_id}}};
+            let user_choice;
 
             $(window).on('load', () => {
                 socket.on("show-question-content", () => {
+                    $('#waiting').hide();
+                    $('#onGoingQuestion').show();
                     answer = current_question.answer;
                     document.getElementById('question').innerHTML = current_question.question;
                     document.getElementById('A').value = current_question.choice_a;
@@ -79,7 +107,12 @@
                     document.getElementById('C').value = current_question.choice_c;
                     document.getElementById('D').value = current_question.choice_d;
                 })
-                socket.on("show-next-question", () => {
+                socket.on("show-next-question", (rank_scores) => {
+                    for (let entry in rank_scores) {
+                        document.getElementById('scoreBoardTable').deleteRow(1);
+                    }
+                    $('#scoreBoard').hide();
+                    $('#onGoingQuestion').show();
                     let next_question = questions.next();
                     if (!!next_question) {
                         current_question = JSON.parse(JSON.stringify(next_question));
@@ -87,10 +120,9 @@
                         document.getElementById("B").removeAttribute("class");
                         document.getElementById("C").removeAttribute("class");
                         document.getElementById("D").removeAttribute("class");
-                        socket.emit("ask-question-content");
+                        socket.emit("ask-question-content", Date.now());
                     } else {
                         socket.emit("ask-finish-quiz");
-                        console.log(student_answers);
                         if ("{{ current_user.type }}" === "student") {
                             fetch(`/send_quiz_result`, {
                                 method: "POST",
@@ -105,13 +137,14 @@
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
+                    student_answers[current_question.id] = choice === answer;
                     if (choice === answer) {
-                        student_answers[current_question.id] = true;
-                        document.getElementById(answer).setAttribute("class", "answer");
+                        socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now());
                     } else {
-                        student_answers[current_question.id] = false;
-                        document.getElementById(choice).setAttribute("class", "wrong");
+                        socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now(), true);
                     }
+                    user_choice = choice;
+                    document.getElementById(choice).setAttribute("class", "selected");
                     document.addEventListener("click", handler, true);
                 })
                 if ("{{ current_user.type }}" === "lecturer") {
@@ -122,11 +155,14 @@
                 }
                 $('#startBtn').on('click', () => {
                     socket.emit("ask-question-block");
-                    socket.emit("ask-question-content");
+                    socket.emit("ask-question-content", Date.now());
                     socket.emit("ask-countdown");
                 })
+                $('#checkScoreBoard').on('click', () => {
+                    socket.emit("ask-scoreboard");
+                })
                 $('#nextBtn').on('click', () => {
-                    socket.emit("ask-next-question");
+                    socket.emit("ask-next-question", Date.now());
                     socket.emit("ask-prevent-choice");
                     socket.emit("ask-countdown-block");
                     $('#nextBtn').hide();
@@ -167,10 +203,12 @@
         </div>
     </div>
 
-    <div id="on_going_question" hidden>
-        {% if current_user.type == "lecturer" %}
-            <input type="button" value="Next" id="nextBtn" hidden/><br><br><br><br><br>
-        {% endif %}
+    {% if current_user.type == "lecturer" %}
+            <input type="button" value="Check Scores" id="checkScoreBoard" hidden/>
+            <input type="button" value="Next" id="nextBtn" hidden/>
+    {% endif %}
+
+    <div id="onGoingQuestion" hidden>
         <div id="countdown">
             <progress value="10" max="10" id="beginCountdown"></progress>
             <p><span id="beginCountdownText">10</span>S Left!!!</p>
@@ -184,7 +222,16 @@
         </div>
     </div>
 
-    <div id="quiz_finish" hidden>Quiz Finished!</div>
+    <div id="scoreBoard" hidden>
+        <table id="scoreBoardTable">
+            <tr>
+                <th>Student Username</th>&emsp;&emsp;
+                <th>Rank Score</th>
+            </tr>
+        </table>
+    </div>
+
+    <div id="quizFinish" hidden>Quiz Finished!</div>
 
     <audio controls hidden autoplay loop="loop">
         <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">

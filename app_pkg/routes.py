@@ -15,6 +15,11 @@ from app_pkg.models import *
 ROLES = ['lecturer', 'student']
 CHOICES = ['A', 'B', 'C', 'D']
 PIN_LENGTH = 6
+COUNTDOWN = 10
+GAP_ANSWERING_TIME = 2
+
+question_launch_time = 0
+current_rank_scores = {}
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -222,13 +227,18 @@ def question_block():
 
 
 @socketio.on("ask-question-content")
-def question_content():
+def question_content(time_stamp):
+    global question_launch_time
+    question_launch_time = time_stamp
     emit("show-question-content", broadcast=True)
 
 
 @socketio.on("ask-next-question")
-def next_question():
-    emit("show-next-question", broadcast=True)
+def next_question(time_stamp):
+    global question_launch_time
+    global current_rank_scores
+    question_launch_time = time_stamp
+    emit("show-next-question", current_rank_scores, broadcast=True)
 
 
 @socketio.on("ask-finish-quiz")
@@ -256,6 +266,23 @@ def choice_d():
     emit("show-select-choice", 'D')
 
 
+@socketio.on("ask-answer-time")
+def answer_time(username, time_answered, is_wrong=False):
+    global current_rank_scores
+    rank_score = 0 if is_wrong else round(
+        ((COUNTDOWN + GAP_ANSWERING_TIME - (time_answered - question_launch_time) / 1000) / COUNTDOWN) * 1000)
+    if username not in current_rank_scores:
+        current_rank_scores[username] = 0
+    current_rank_scores[username] += rank_score
+    print(username, "with score", rank_score)
+
+
+@socketio.on("ask-scoreboard")
+def populate_scoreboard():
+    global current_rank_scores
+    emit("show-populate-scoreboard", current_rank_scores, broadcast=True)
+
+
 @socketio.on("ask-prevent-choice")
 def prevent_choice():
     emit("receive-enable-choice", broadcast=True)
@@ -268,7 +295,7 @@ def show_countdown():
 
 @socketio.on("ask-countdown")
 def one_second():
-    for i in range(10, 0, -1):
+    for i in range(COUNTDOWN, 0, -1):
         time.sleep(1)
         emit("receive-one-second", broadcast=True)
 
