@@ -36,6 +36,9 @@
                     $('#on_going_question').hide();
                     $('#quiz_finish').show();
                 })
+                socket.on("show-countdown-block", () => {
+                    $('#countdown').show();
+                });
                 socket.on("receive-enable-choice", () => {
                     document.removeEventListener("click", handler, true);
                 })
@@ -44,6 +47,9 @@
                     $('#nextBtn').show();
                     document.getElementById('beginCountdown').value = 10;
                     document.getElementById('beginCountdownText').innerText = "10";
+                    if ('{{ current_user.type }}' === "lecturer") {
+                        document.getElementById(answer).setAttribute("class", "answer");
+                    }
                 })
                 socket.on("receive-one-second", () => {
                     let timeleft = Number(document.getElementById('beginCountdown').value);
@@ -72,9 +78,6 @@
                     document.getElementById('B').value = current_question.choice_b;
                     document.getElementById('C').value = current_question.choice_c;
                     document.getElementById('D').value = current_question.choice_d;
-                    if ('{{ current_user.type }}' === "lecturer") {
-                        document.getElementById(answer).setAttribute("class", "answer");
-                    }
                 })
                 socket.on("show-next-question", () => {
                     let next_question = questions.next();
@@ -125,7 +128,7 @@
                 $('#nextBtn').on('click', () => {
                     socket.emit("ask-next-question");
                     socket.emit("ask-prevent-choice");
-                    $('#countdown').show();
+                    socket.emit("ask-countdown-block");
                     $('#nextBtn').hide();
                     socket.emit("ask-countdown");
                 })

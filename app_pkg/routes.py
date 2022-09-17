@@ -261,6 +261,11 @@ def prevent_choice():
     emit("receive-enable-choice", broadcast=True)
 
 
+@socketio.on("ask-countdown-block")
+def show_countdown():
+    emit("show-countdown-block", broadcast=True)
+
+
 @socketio.on("ask-countdown")
 def one_second():
     for i in range(10, 0, -1):
