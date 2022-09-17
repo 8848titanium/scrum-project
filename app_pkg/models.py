@@ -48,13 +48,15 @@ class Question(db.Model):
     answer = db.Column(db.String(255), index=True)
 
     def __repr__(self):
-        return f"<Question {self.id}: {self.type} type, {self.question}, {[self.choice_a, self.choice_b, self.choice_c, self.choice_d]}, answer: {self.answer}>"
+        return f"<Question {self.id}: {self.type} type, {self.question}," \
+               f"{[self.choice_a, self.choice_b, self.choice_c, self.choice_d]}, answer: {self.answer}> "
 
 
 class Score(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
     score = db.Column(db.Integer)
+    rank_score = db.Column(db.Integer)
     student_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):

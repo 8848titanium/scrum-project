@@ -48,7 +48,7 @@ INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`
 VALUES (6, 1, 'no...', 'MCQ', 'gfsdgdfg', 'fdsafsaf', 'bfdg', 'gdfgvbd', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (7, 1, 'TF??', 'TF', 'fdasfasas', 'asbfdsvb', null, null, 'B');
-INSERT INTO score(`id`, `quiz_id`, `score`, `student_id`)
-VALUES (1, 1, 0, 2);
-INSERT INTO score(`id`, `quiz_id`, `score`, `student_id`)
-VALUES (2, 1, 0, 4);
+INSERT INTO score(`id`, `quiz_id`, `score`, `rank_score`, `student_id`)
+VALUES (1, 1, 0, 1232, 2);
+INSERT INTO score(`id`, `quiz_id`, `score`, `rank_score`, `student_id`)
+VALUES (2, 1, 0, 1159, 4);
