@@ -10,7 +10,7 @@
             {% for row in user_join_score %}
                 <tr>
                     <td>{{ row[1].username }}</td>
-                    <td>{{ row[0].score }}</td>
+                    <td>{{ row[0].score }}/{{ num_of_questions }}</td>
                 </tr>
             {% endfor %}
         </table>
