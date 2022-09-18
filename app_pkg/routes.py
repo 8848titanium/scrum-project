@@ -266,8 +266,8 @@ def choice_d():
     emit("show-select-choice", 'D')
 
 
-@socketio.on("ask-answer-time")
-def answer_time(username, time_answered, is_wrong=False):
+@socketio.on("calculate-rank-score")
+def calculate_rank_score(username, time_answered, is_wrong=False):
     global current_rank_scores
     rank_score = 0 if is_wrong else round(
         ((COUNTDOWN + GAP_ANSWERING_TIME - (time_answered - question_launch_time) / 1000) / COUNTDOWN) * 1000)

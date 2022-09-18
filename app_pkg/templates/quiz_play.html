@@ -14,7 +14,6 @@
             };
             Array.prototype.current = 0;</script>
         <script type="text/javascript">
-            // socket handler
             let socket = io.connect("http://localhost:5000");
             const abcd = ['A', 'B', 'C', 'D'];
 
@@ -27,9 +26,34 @@
                         $('#players').append($('<p>').text(data));
                     }
                 })
+            })
+
+            function getDescendingSortedHash(inputHash) {
+                let resultHash = {};
+
+                let keys = Object.keys(inputHash);
+                keys.sort(function (a, b) {
+                    return inputHash[a] - inputHash[b]
+                }).reverse().forEach(function (k) {
+                    resultHash[k] = inputHash[k];
+                });
+                return resultHash;
+            }
+
+            let questions = {{ the_quiz|safe }};
+            let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
+            let answer;
+            let student_answers = {"quiz_id": {{quiz_id}}};
+            let user_choice;
+
+            $(window).on('load', () => {
                 socket.on("show-finish-quiz", () => {
                     $('#onGoingQuestion').hide();
                     $('#quizFinish').show();
+                })
+                socket.on("show-question-block", () => {
+                    $('#waiting').hide();
+                    $('#onGoingQuestion').show();
                 })
                 socket.on("show-countdown-block", () => {
                     $('#countdown').show();
@@ -47,7 +71,7 @@
                         if (!(user_choice === undefined) && !(user_choice === answer)) {
                             document.getElementById(user_choice).setAttribute("class", "wrong");
                         } else {
-                            socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now(), true);
+                            socket.emit("calculate-rank-score", "{{ current_user.username }}", Date.now(), true);
                         }
                     }
                 })
@@ -75,30 +99,7 @@
                         document.getElementById("scoreBoardTable").innerHTML += html;
                     }
                 })
-            })
-
-            function getDescendingSortedHash(inputHash) {
-                let resultHash = {};
-
-                let keys = Object.keys(inputHash);
-                keys.sort(function (a, b) {
-                    return inputHash[a] - inputHash[b]
-                }).reverse().forEach(function (k) {
-                    resultHash[k] = inputHash[k];
-                });
-                return resultHash;
-            }
-
-            let questions = {{ the_quiz|safe }};
-            let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
-            let answer;
-            let student_answers = {"quiz_id": {{quiz_id}}};
-            let user_choice;
-
-            $(window).on('load', () => {
                 socket.on("show-question-content", () => {
-                    $('#waiting').hide();
-                    $('#onGoingQuestion').show();
                     answer = current_question.answer;
                     document.getElementById('question').innerHTML = current_question.question;
                     document.getElementById('A').value = current_question.choice_a;
@@ -107,11 +108,10 @@
                     document.getElementById('D').value = current_question.choice_d;
                 })
                 socket.on("show-next-question", (rank_scores) => {
-                    for (let entry in rank_scores) {
-                        document.getElementById('scoreBoardTable').deleteRow(1);
-                    }
+                    document.getElementById('scoreBoardTable').innerHTML = "<tr><th>#</th><th>Usernames</th><th>Scores</th></tr>";
                     $('#scoreBoard').hide();
-                    $('#onGoingQuestion').show();
+                    $('#nextBtn').hide();
+                    socket.emit("ask-prevent-choice");
                     let next_question = questions.next();
                     if (!!next_question) {
                         current_question = JSON.parse(JSON.stringify(next_question));
@@ -119,9 +119,9 @@
                         document.getElementById("B").removeAttribute("class");
                         document.getElementById("C").removeAttribute("class");
                         document.getElementById("D").removeAttribute("class");
+                        socket.emit("ask-question-block");
                         socket.emit("ask-question-content", Date.now());
                     } else {
-                        socket.emit("ask-finish-quiz");
                         if ("{{ current_user.type }}" === "student") {
                             fetch(`/send_quiz_result`, {
                                 method: "POST",
@@ -133,14 +133,15 @@
                                 })
                             })
                         }
+                        socket.emit("ask-finish-quiz");
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
                     student_answers[current_question.id] = choice === answer;
                     if (choice === answer) {
-                        socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now());
+                        socket.emit("calculate-rank-score", "{{ current_user.username }}", Date.now());
                     } else {
-                        socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now(), true);
+                        socket.emit("calculate-rank-score", "{{ current_user.username }}", Date.now(), true);
                     }
                     user_choice = choice;
                     document.getElementById(choice).setAttribute("class", "selected");
@@ -155,17 +156,19 @@
                 $('#startBtn').on('click', () => {
                     socket.emit("ask-question-block");
                     socket.emit("ask-question-content", Date.now());
+                    socket.emit("ask-countdown-block");
                     socket.emit("ask-countdown");
                 })
                 $('#checkScoreBoard').on('click', () => {
                     socket.emit("ask-scoreboard");
                 })
                 $('#nextBtn').on('click', () => {
-                    socket.emit("ask-next-question", Date.now());
-                    socket.emit("ask-prevent-choice");
-                    socket.emit("ask-countdown-block");
                     $('#nextBtn').hide();
-                    socket.emit("ask-countdown");
+                    socket.emit("ask-next-question", Date.now());
+                    if (!(questions.current === (questions.length - 1))) {
+                        socket.emit("ask-countdown-block");
+                        socket.emit("ask-countdown");
+                    }
                 })
                 if ("{{ current_user.type }}" === "student") {
                     $('#A').on('click', () => {
@@ -221,6 +224,13 @@
         </div>
     </div>
 
+    <div id="quizFinish" hidden>Quiz Finished!<br>
+    <a href="{{ url_for("index") }}"><input type="button" value="Go back to Home page"></a>
+    <div id="champion"></div>
+    <div id="runnerUp"></div>
+    <div id="secondRunnerUp"></div>
+    </div>
+
     <div id="scoreBoard" hidden>
         <table id="scoreBoardTable">
             <tr>
@@ -230,8 +240,6 @@
             </tr>
         </table>
     </div>
-
-    <div id="quizFinish" hidden>Quiz Finished!</div>
 
     <audio controls hidden autoplay loop="loop">
         <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">
