@@ -45,8 +45,12 @@
                     if ('{{ current_user.type }}' === "lecturer") {
                         document.getElementById(answer).setAttribute("class", "answer");
                     } else {
-                        let status = user_choice === answer ? "answer" : "wrong";
-                        document.getElementById(user_choice).setAttribute("class", status);
+                        document.getElementById(answer).setAttribute("class", answer);
+                        if (!(user_choice === null) && !(user_choice === answer)) {
+                            document.getElementById(user_choice).setAttribute("class", "wrong");
+                        } else {
+                            socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now(), true);
+                        }
                     }
                 })
                 socket.on("receive-one-second", () => {
@@ -204,8 +208,8 @@
     </div>
 
     {% if current_user.type == "lecturer" %}
-            <input type="button" value="Check Scores" id="checkScoreBoard" hidden/>
-            <input type="button" value="Next" id="nextBtn" hidden/>
+        <input type="button" value="Check Scores" id="checkScoreBoard" hidden/>
+        <input type="button" value="Next" id="nextBtn" hidden/>
     {% endif %}
 
     <div id="onGoingQuestion" hidden>
