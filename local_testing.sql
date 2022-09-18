@@ -25,7 +25,7 @@ VALUES (2, 'second quiz lah', 1);
 
 # Questions
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (1, 1, 'What is Scrum?', 'MCQ', 'Huh?', 'A secret of Singaporean food', 'A project development Methodology', 'A piece of poop', 'C');
+VALUES (1, 1, 'What is Scrum?', 'MCQ', 'Huh?', 'A secret of Singaporean food', 'A project development Methodology', 'Typo right? Scum is someone being 💩', 'C');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (2, 2, 'What does Scrum Master do?', 'MCQ', 'An expert of making the secret food', 'Facilitate Scrum to a team by ensuring Scrum Framework is followed', 'Rush development team to code', 'None of Others', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
