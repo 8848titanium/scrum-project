@@ -155,26 +155,16 @@ def create_question(quiz_id):
 def edit_question(quiz_id):
     question = Question.query.filter_by(id=request.args.get("id")).first()
     form = QuestionForm(data=question.__dict__)
-    if question.answer == "A":
-        form.checkbox_a.data = True
-    elif question.answer == "B":
-        form.checkbox_b.data = True
-    elif question.answer == "C":
-        form.checkbox_c.data = True
-    elif question.answer == "D":
-        form.checkbox_d.data = True
+    for field in form:
+        if field.type == "BooleanField":
+            if question.answer == field.name[-1].upper():
+                field.data = True
     if form.validate_on_submit():
-        answer = ""
-        for i, checkbox in enumerate(
-                [form.checkbox_a.data, form.checkbox_b.data, form.checkbox_c.data, form.checkbox_d.data]):
-            if checkbox:
-                answer += CHOICES[i]
         question.question = form.question.data
-        question.choice_a = form.choice_a.data
-        question.choice_b = form.choice_b.data
-        question.choice_c = form.choice_c.data
-        question.choice_d = form.choice_d.data
-        question.answer = answer
+        for field in form:
+            if field.type == "BooleanField":
+                if field.data:
+                    question.answer = field.name[-1].upper()
         db.session.commit()
         return redirect('/edit_quiz/' + str(quiz_id))
     return render_template('edit_question.html', form=form, question=question)
