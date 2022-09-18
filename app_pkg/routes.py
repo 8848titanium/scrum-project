@@ -119,9 +119,9 @@ def edit_quiz(quiz_id):
 @login_required
 def quiz_history(quiz_id):
     num_of_questions = db.session.query(Question).filter_by(quiz_id=quiz_id).count()
-    user_join_score = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
+    score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
         Score.student_id == User.id).all()
-    return render_template('quiz_history.html', user_join_score=user_join_score, num_of_questions=num_of_questions)
+    return render_template('quiz_history.html', score_join_user=score_join_user, num_of_questions=num_of_questions)
 
 
 @app.route('/delete_quiz/', methods=['GET', 'POST'])
@@ -174,11 +174,11 @@ def edit_question(quiz_id):
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
-    quizzes_have_done = db.session.query(Score).join(Quiz).filter(Score.student_id == current_user.id)
+    score_join_quiz = db.session.query(Score, Quiz).filter(Score.student_id == current_user.id).filter(Score.quiz_id == Quiz.id).all()
     num_of_questions = {}
-    for quiz in quizzes_have_done:
-        num_of_questions[quiz.quiz_id] = db.session.query(Question).filter_by(quiz_id=quiz.quiz_id).count()
-    return render_template('student_main.html', completed_quizzes=quizzes_have_done, num_of_questions=num_of_questions)
+    for row in score_join_quiz:
+        num_of_questions[row[1].id] = db.session.query(Question).filter_by(quiz_id=row[1].id).count()
+    return render_template('student_main.html', score_join_quiz=score_join_quiz, num_of_questions=num_of_questions)
 
 
 @app.route('/quiz_play/<pin>', methods=['GET', 'POST'])

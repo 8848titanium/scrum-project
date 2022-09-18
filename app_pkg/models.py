@@ -33,7 +33,7 @@ class Quiz(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f"<Quiz {self.id}: {self.pin} by Lecturer {self.user_id}>"
+        return f"<Quiz {self.id} with name <<{self.name}>> by Lecturer {self.user_id}>"
 
 
 class Question(db.Model):
@@ -60,4 +60,4 @@ class Score(db.Model):
     student_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return f"<Score of {self.score} on {self.quiz_id} for student {self.quiz_id}>"
+        return f"<Mark of {self.score} with score of {self.rank_score} on number {self.quiz_id} quiz for student {self.student_id}>"

@@ -12,12 +12,13 @@
         <div class="quiz">
             <h2>Recent Completed Quizzes</h2>
             <div class="cards-layout">
-                {% if completed_quizzes %}
-                    {% for quiz in completed_quizzes %}
+                {% if score_join_quiz %}
+                    {% for row in score_join_quiz %}
                         <div class="cards">
                             <div class="card" style="text-decoration: none;">
-                                <p class="card_title">{{ quiz.name }} with
-                                    score: {{ quiz.score }}/{{ num_of_questions[quiz.quiz_id] }}</p>
+                                <p class="card_title">Quiz: {{ row[1].name }}</p>
+                                <p class="card_mark">Mark: {{ row[0].score }}/{{ num_of_questions[row[1].id] }}</p>
+                                <p class="card_score">Score: {{ row[0].rank_score }}</p>
                             </div>
                         </div>
                     {% endfor %}

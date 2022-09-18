@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>The total number of questions for this quiz is: {{ num_of_questions }}</p>
-    <div>
-        <table>
+    <div id="scoreBoard">
+        <table id="scoreBoardTable">
             <tr>
-                <th>Student Username</th>
-                <th>Score</th>
+                <th>Usernames</th>
+                <th>Marks</th>
+                <th>Scores</th>
             </tr>
-            {% for row in user_join_score %}
+            {% for row in score_join_user %}
                 <tr>
                     <td>{{ row[1].username }}</td>
                     <td>{{ row[0].score }}/{{ num_of_questions }}</td>
+                    <td>{{ row[0].rank_score }}</td>
                 </tr>
             {% endfor %}
         </table>
