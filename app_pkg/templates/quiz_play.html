@@ -42,11 +42,9 @@
                     $('#checkScoreBoard').show();
                     document.getElementById('beginCountdown').value = 10;
                     document.getElementById('beginCountdownText').innerText = "10";
-                    if ('{{ current_user.type }}' === "lecturer") {
-                        document.getElementById(answer).setAttribute("class", "answer");
-                    } else {
-                        document.getElementById(answer).setAttribute("class", answer);
-                        if (!(user_choice === null) && !(user_choice === answer)) {
+                    document.getElementById(answer).setAttribute("class", "answer");
+                    if ("{{ current_user.type}}" === "student") {
+                        if (!(user_choice === undefined) && !(user_choice === answer)) {
                             document.getElementById(user_choice).setAttribute("class", "wrong");
                         } else {
                             socket.emit("ask-answer-time", "{{ current_user.username }}", Date.now(), true);
