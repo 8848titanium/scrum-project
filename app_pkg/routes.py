@@ -6,6 +6,7 @@ import time
 from flask import render_template, request, flash, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_socketio import emit, send
+from sqlalchemy import desc
 from werkzeug.urls import url_parse
 
 from app_pkg import app, socketio
@@ -174,7 +175,8 @@ def edit_question(quiz_id):
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():
-    score_join_quiz = db.session.query(Score, Quiz).filter(Score.student_id == current_user.id).filter(Score.quiz_id == Quiz.id).all()
+    score_join_quiz = db.session.query(Score, Quiz).filter(Score.student_id == current_user.id).filter(
+        Score.quiz_id == Quiz.id).all()
     num_of_questions = {}
     for row in score_join_quiz:
         num_of_questions[row[1].id] = db.session.query(Question).filter_by(quiz_id=row[1].id).count()
@@ -213,6 +215,8 @@ def receive_grade():
     # reset pin after quiz finished
     current_quiz.pin = None
     db.session.commit()
+    global current_rank_scores
+    current_rank_scores.pop(current_user.username)
     return "grade saved!"
 
 
@@ -243,9 +247,21 @@ def next_question(time_stamp):
     emit("show-next-question", current_rank_scores, broadcast=True)
 
 
+@socketio.on("check-scores-saved")
+def check_scores_saved():
+    global current_rank_scores
+    if not current_rank_scores:
+        emit("all-saved", broadcast=True)
+
+
 @socketio.on("ask-finish-quiz")
-def finish_quiz():
-    emit("show-finish-quiz", broadcast=True)
+def finish_quiz(quiz_id):
+    score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
+        Score.student_id == User.id).order_by(desc(Score.rank_score)).limit(3)
+    top_three = {}
+    for row in score_join_user:
+        top_three[row[1].username] = row[0].rank_score
+    emit("show-finish-quiz", top_three, broadcast=True)
 
 
 @socketio.on("ask-choice-A")

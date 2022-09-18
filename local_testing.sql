@@ -16,39 +16,21 @@ INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
 VALUES (2, "zjq", "123@outlook.com",
         "pbkdf2:sha256:260000$bzyD040C4NlJQCkl$ab1b4cc3ed2cb65b24ea38a7760508fb42ed6e54c72c558277156e71eac3a318",
         'student');
-INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
-VALUES (3, "Hansen", "888@outlook.com",
-        "pbkdf2:sha256:260000$Pzcml73HMhU0stRp$37b2976f81d032f90b62c3ead8b574d4d0f032978a7ee6d820cd8c5af13d466d",
-        'lecturer');
-INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
-VALUES (4, "www", "321@outlook.com",
-        "pbkdf2:sha256:260000$bzyD040C4NlJQCkl$ab1b4cc3ed2cb65b24ea38a7760508fb42ed6e54c72c558277156e71eac3a318",
-        'student');
 
 # Quizzes
 INSERT INTO quiz(`id`, `name`, `user_id`)
 VALUES (1, 'this is first quiz', 1);
 INSERT INTO quiz(`id`, `name`, `user_id`)
 VALUES (2, 'second quiz lah', 1);
-INSERT INTO quiz(`id`, `name`, `user_id`)
-VALUES (3, 'maybe the third?', 3);
 
 # Questions
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (1, 1, 'Quiz 1 Q1?', 'MCQ', 'Quiz 1 A', 'Quiz 1 B', 'Quiz 1 C', 'Quiz 1 D', 'B');
+VALUES (1, 1, 'What is Scrum?', 'MCQ', 'Huh?', 'A secret of Singaporean food', 'A project development Methodology', 'A piece of poop', 'C');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (2, 2, 'Quiz 2 Q1?', 'MCQ', 'Quiz 2 A', 'Quiz 2 B', 'Quiz 2 C', 'Quiz 2 D', 'B');
+VALUES (2, 2, 'What does Scrum Master do?', 'MCQ', 'An expert of making the secret food', 'Facilitate Scrum to a team by ensuring Scrum Framework is followed', 'Rush development team to code', 'None of Others', 'B');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (3, 3, 'Quiz 3 Q1?', 'TF', 'Quiz 3 A', 'Quiz 3 B', null, null, 'B');
+VALUES (3, 1, 'What is Scrum Cycle?', 'MCQ', 'A secret formula of Singaporean donut', 'A fun facility that children play to spin', 'A period of time when a team delivers a set amount of woks', 'None of Others', 'D');
 INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (4, 1, '???', 'MCQ', 'fsdfsddsf', 'fsdfdsfsdfsd', 'fdsfsdfsf', 'fsdfsdfsf', 'B');
-INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (5, 1, 'ok?', 'MCQ', 'fdsfsfsd', 'sdfdsfs', 'fsddsff', 'fsdf', 'B');
-INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (6, 1, 'no...', 'MCQ', 'gfsdgdfg', 'fdsafsaf', 'bfdg', 'gdfgvbd', 'B');
-INSERT INTO question(`id`, `quiz_id`, `question`, `type`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
-VALUES (7, 1, 'TF??', 'TF', 'fdasfasas', 'asbfdsvb', null, null, 'B');
+VALUES (4, 1, 'Do you think our site is awesome?', 'TF', 'Hell yes, looks awesome on my 144P palm PDA', 'Nah, looks lame on my ProMotion screen', null, null, 'A');
 INSERT INTO score(`id`, `quiz_id`, `score`, `rank_score`, `student_id`)
-VALUES (1, 1, 0, 1232, 2);
-INSERT INTO score(`id`, `quiz_id`, `score`, `rank_score`, `student_id`)
-VALUES (2, 1, 0, 1159, 4);
+VALUES (1, 1, 4, 3921, 2);

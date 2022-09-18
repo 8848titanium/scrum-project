@@ -40,6 +40,18 @@
                 return resultHash;
             }
 
+            function checkAllScoreSaved() {
+                while (true) {
+                    socket.emit("check-scores-saved");
+                    if (socket.on('all-saved', () => {
+                        return true;
+                    })) {
+                        break;
+                    }
+                }
+                return true;
+            }
+
             let questions = {{ the_quiz|safe }};
             let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
@@ -47,9 +59,14 @@
             let user_choice;
 
             $(window).on('load', () => {
-                socket.on("show-finish-quiz", () => {
+                socket.on("show-finish-quiz", (top_three) => {
                     $('#onGoingQuestion').hide();
                     $('#quizFinish').show();
+                    let the_tags = document.getElementById("quizFinish").getElementsByTagName("span");
+                    for (let i = 0; i < Object.keys(top_three).length * 2 - 1; i += 2) {
+                        the_tags[i].innerText = Object.keys(top_three)[i / 2];
+                        the_tags[i + 1].innerText = top_three[Object.keys(top_three)[i / 2]];
+                    }
                 })
                 socket.on("show-question-block", () => {
                     $('#waiting').hide();
@@ -134,7 +151,9 @@
                                 })
                             })
                         }
-                        socket.emit("ask-finish-quiz");
+                        if (checkAllScoreSaved()) {
+                            socket.emit("ask-finish-quiz", "{{ quiz_id }}");
+                        }
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
@@ -229,15 +248,15 @@
         <a href="{{ url_for("index") }}"><input type="button" value="Go back to Home page"></a>
         <div id="champion">
             <img src="../static/images/logo.png"><br>
-            <span id="champName">placeholder</span> won with <span id="champScore">placeholder</span>
+            <span id="champName"></span> won with <span id="champScore"></span>
         </div>
         <div id="firstRunnerUp">
             <img src="../static/images/logo.png"><br>
-            <span id="firstName">placeholder</span> won with <span id="firstScore">placeholder</span>
+            <span id="secondName"></span> won with <span id="secondScore"></span>
         </div>
         <div id="secondRunnerUp">
             <img src="../static/images/logo.png"><br>
-            <span id="secondName">placeholder</span> won with <span id="secondScore">placeholder</span>
+            <span id="thirdName"></span> won with <span id="thirdScore"></span>
         </div>
     </div>
 
