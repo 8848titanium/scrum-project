@@ -199,13 +199,15 @@ def quiz_play(pin):
 def receive_grade():
     mark_on_questions = request.get_json()
     quiz_id = mark_on_questions.pop("quiz_id")
+    rank_score = mark_on_questions.pop("rank_score")
     current_quiz = Quiz.query.filter_by(id=quiz_id).first()
     score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
     total_mark = sum(mark_on_questions.values())
     if score:
         score.score = total_mark
+        score.rank_score = rank_score
     else:
-        score = Score(student_id=current_user.id, quiz_id=current_quiz.id, score=total_mark)
+        score = Score(student_id=current_user.id, quiz_id=current_quiz.id, score=total_mark, rank_score=rank_score)
         db.session.add(score)
     db.session.commit()
     # reset pin after quiz finished

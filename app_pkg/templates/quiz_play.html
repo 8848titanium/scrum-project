@@ -123,6 +123,7 @@
                         socket.emit("ask-question-content", Date.now());
                     } else {
                         if ("{{ current_user.type }}" === "student") {
+                            student_answers["rank_score"] = rank_scores["{{ current_user.username }}"]
                             fetch(`/send_quiz_result`, {
                                 method: "POST",
                                 credentials: "include",
@@ -225,10 +226,19 @@
     </div>
 
     <div id="quizFinish" hidden>Quiz Finished!<br>
-    <a href="{{ url_for("index") }}"><input type="button" value="Go back to Home page"></a>
-    <div id="champion"></div>
-    <div id="runnerUp"></div>
-    <div id="secondRunnerUp"></div>
+        <a href="{{ url_for("index") }}"><input type="button" value="Go back to Home page"></a>
+        <div id="champion">
+            <img src="../static/images/logo.png"><br>
+            <span id="champName">placeholder</span> won with <span id="champScore">placeholder</span>
+        </div>
+        <div id="firstRunnerUp">
+            <img src="../static/images/logo.png"><br>
+            <span id="firstName">placeholder</span> won with <span id="firstScore">placeholder</span>
+        </div>
+        <div id="secondRunnerUp">
+            <img src="../static/images/logo.png"><br>
+            <span id="secondName">placeholder</span> won with <span id="secondScore">placeholder</span>
+        </div>
     </div>
 
     <div id="scoreBoard" hidden>
