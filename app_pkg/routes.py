@@ -155,6 +155,14 @@ def create_question(quiz_id):
 def edit_question(quiz_id):
     question = Question.query.filter_by(id=request.args.get("id")).first()
     form = QuestionForm(data=question.__dict__)
+    if question.answer == "A":
+        form.checkbox_a.data = True
+    elif question.answer == "B":
+        form.checkbox_b.data = True
+    elif question.answer == "C":
+        form.checkbox_c.data = True
+    elif question.answer == "D":
+        form.checkbox_d.data = True
     if form.validate_on_submit():
         answer = ""
         for i, checkbox in enumerate(
