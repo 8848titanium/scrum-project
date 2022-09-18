@@ -422,9 +422,11 @@ nav ul li {
 .dropdown:hover .drop-btn {
     background-color: #3badff;
 }
+
 .dropdown:hover .add-quiz-btn {
     background-color: #3badff;
 }
+
 .quiz {
     padding-left: 16px;
     position: absolute;
@@ -865,15 +867,16 @@ nav ul li {
     border: 15px #98d8e3;
     position: relative;
     left: 20%;
-    top:100px;
+    top: 100px;
     border-radius: 20px;
-    height:290px;
+    height: 290px;
     width: 500px;
     margin: 40px;
-    padding:30px;
+    padding: 30px;
     background-color: #98d8e3;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 .question_edit {
     font-size: 25px;
     border: 15px #98d8e3;
@@ -923,21 +926,21 @@ nav ul li {
     top: 45%;
 }
 
-.quiz_title{
-    font-size:25px;
+.quiz_title {
+    font-size: 25px;
     position: absolute;
     top: 90px;
-    left:5%;
-    padding:3px;
-    border-radius:15px;
+    left: 5%;
+    padding: 3px;
+    border-radius: 15px;
     background-color: #ffffff;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.quizNameForm{
+.quizNameForm {
     font-size: 20px;
     position: absolute;
-    width:250px;
+    width: 250px;
     left: 5%;
     top: 10%;
     border: 15px #98d8e3;

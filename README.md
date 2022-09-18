@@ -3,16 +3,20 @@
 ## Group A3 members:
 
 **Main Beck-end:**
+
 * Jiawei Guo([@8848titanium](https://github.com/8848titanium))
 
 **Front-end Framework:**
+
 * Jiawei Guo([@8848titanium](https://github.com/8848titanium))
 
 **Deputy Back-end:**
+
 * Chenyuhan Shen([@chenyuhanjcu](https://github.com/chenyuhanjcu))
 * Jiaqi Zhao([@LX-Vincent](https://github.com/LX-Vincent))
 
 **Front-end Styling:**
+
 * Fangyu Li([@LiFangYuBIT](https://github.com/LiFangYuBIT))
 * Xing Gao([@Xing-Gao-FROM-PRC](https://github.com/Xing-Gao-FROM-PRC))
 * Weijun Chew([@CWJ02](https://github.com/CWJ02))
