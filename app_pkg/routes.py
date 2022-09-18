@@ -167,7 +167,7 @@ def edit_question(quiz_id):
         question.choice_d = form.choice_d.data
         question.answer = answer
         db.session.commit()
-        return redirect('/edit_quiz/' + str(question.quiz_id))
+        return redirect('/edit_quiz/' + str(quiz_id))
     return render_template('edit_question.html', form=form, question=question)
 
 
@@ -274,7 +274,6 @@ def answer_time(username, time_answered, is_wrong=False):
     if username not in current_rank_scores:
         current_rank_scores[username] = 0
     current_rank_scores[username] += rank_score
-    print(username, "with score", rank_score)
 
 
 @socketio.on("ask-scoreboard")

@@ -68,14 +68,11 @@
                     $('#scoreBoard').show();
                     $('#nextBtn').show();
                     rank_scores = getDescendingSortedHash(rank_scores);
-                    let i = 1;
-                    for (let entry in rank_scores) {
-                        let row = document.getElementById('scoreBoardTable').insertRow(i);
-                        i += 1;
-                        let username = row.insertCell(0);
-                        let rank_score = row.insertCell(1);
-                        username.innerHTML = entry;
-                        rank_score.innerHTML = rank_scores[entry];
+                    let html = "";
+                    for (let i = 0; i < Object.keys(rank_scores).length; i++) {
+                        html = "<tr><td>" + (i + 1) + "</td><td>" + Object.keys(rank_scores)[i] + "</td>" +
+                            "<td>" + rank_scores[Object.keys(rank_scores)[i]] + "</td></tr>";
+                        document.getElementById("scoreBoardTable").innerHTML += html;
                     }
                 })
             })
@@ -227,8 +224,9 @@
     <div id="scoreBoard" hidden>
         <table id="scoreBoardTable">
             <tr>
-                <th>Student Username</th>&emsp;&emsp;
-                <th>Rank Score</th>
+                <th>#</th>
+                <th>Usernames</th>
+                <th>Scores</th>
             </tr>
         </table>
     </div>
