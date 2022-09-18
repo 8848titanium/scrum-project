@@ -5,17 +5,18 @@
         <script type="text/javascript">
             $(window).on('load', () => {
                 if ($('input[type=checkbox]:checked').length >= 1) {
-                        $('input[type=checkbox]').not(":checked").attr("disabled", true);
-                    } else
-                        $('input[type=checkbox]').not(":checked").removeAttr('disabled');
-                });
-
-
-            $('input[type=checkbox]').click(function () {
-                if ($('input[type=checkbox]:checked').length >= 1) {
                     $('input[type=checkbox]').not(":checked").attr("disabled", true);
-                } else
+                } else {
                     $('input[type=checkbox]').not(":checked").removeAttr('disabled');
+                }
+
+                $('input[type=checkbox]').click(function () {
+                    if ($('input[type=checkbox]:checked').length >= 1) {
+                        $('input[type=checkbox]').not(":checked").attr("disabled", true);
+                    } else {
+                        $('input[type=checkbox]').not(":checked").removeAttr('disabled');
+                    }
+                });
             });
 
         </script>
@@ -59,7 +60,7 @@
                 </p>
                 <p>
                     {{ form.choice_d.label }}<br>
-                    {{ form.checkbox_d()}}
+                    {{ form.checkbox_d() }}
                     {{ form.choice_d() }}
                     {% for error in form.choice_d.errors %}
                         <span style="color: red;">[{{ error }}]</span>
