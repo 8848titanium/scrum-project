@@ -6,68 +6,68 @@
             $(window).on('load', () => {
                 if ($('input[type=checkbox]:checked').length >= 1) {
                     $('input[type=checkbox]').not(":checked").attr("disabled", true);
+                    $('input[type=submit]').removeAttr('disabled');
                 } else {
                     $('input[type=checkbox]').not(":checked").removeAttr('disabled');
+                    $('input[type=submit]').attr("disabled", true);
                 }
-
                 $('input[type=checkbox]').click(function () {
                     if ($('input[type=checkbox]:checked').length >= 1) {
                         $('input[type=checkbox]').not(":checked").attr("disabled", true);
+                        $('input[type=submit]').removeAttr('disabled');
                     } else {
                         $('input[type=checkbox]').not(":checked").removeAttr('disabled');
+                        $('input[type=submit]').attr("disabled", true);
                     }
                 });
             });
-
         </script>
     </head>
     {% if question %}
-        <div>
-            <form name="question-form"
-                  style="font-size: 28px;position: fixed;width:400px;left: 35%;top: 5%;border: 15px #98d8e3;border-radius: 20px;padding: 50px;margin: 20px;background-color: #98d8e3;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
-                  action="" method="post">
-                {{ form.hidden_tag() }}
-                <p>
-                    {{ form.question.label }}<br>
-                    {{ form.question() }}
-                    {% for error in form.question.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
-                <p>
-                    {{ form.choice_a.label }}<br>
-                    {{ form.checkbox_a() }}
-                    {{ form.choice_a() }}
-                    {% for error in form.choice_a.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
-                <p>
-                    {{ form.choice_b.label }}<br>
-                    {{ form.checkbox_b() }}
-                    {{ form.choice_b() }}
-                    {% for error in form.choice_b.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
-                <p>
-                    {{ form.choice_c.label }}<br>
-                    {{ form.checkbox_c() }}
-                    {{ form.choice_c() }}
-                    {% for error in form.choice_c.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
-                <p>
-                    {{ form.choice_d.label }}<br>
-                    {{ form.checkbox_d() }}
-                    {{ form.choice_d() }}
-                    {% for error in form.choice_d.errors %}
-                        <span style="color: red;">[{{ error }}]</span>
-                    {% endfor %}
-                </p>
-                <p>{{ form.submit() }}</p>
-            </form>
-        </div>
+        <form name="question-form"
+              style="font-size: 28px;position: fixed;width:400px;left: 35%;top: 5%;border: 15px #98d8e3;border-radius: 20px;padding: 50px;margin: 20px;background-color: #98d8e3;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+              action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.question.label }}<br>
+                {{ form.question() }}
+                {% for error in form.question.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_a.label }}<br>
+                {{ form.checkbox_a() }}
+                {{ form.choice_a() }}
+                {% for error in form.choice_a.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_b.label }}<br>
+                {{ form.checkbox_b() }}
+                {{ form.choice_b() }}
+                {% for error in form.choice_b.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_c.label }}<br>
+                {{ form.checkbox_c() }}
+                {{ form.choice_c() }}
+                {% for error in form.choice_c.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.choice_d.label }}<br>
+                {{ form.checkbox_d() }}
+                {{ form.choice_d() }}
+                {% for error in form.choice_d.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit() }}</p>
+        </form>
     {% endif %}
 {% endblock %}
