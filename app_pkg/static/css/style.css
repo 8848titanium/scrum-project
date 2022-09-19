@@ -431,7 +431,7 @@ nav ul li {
     font-size: 20px;
 }
 
-#history-btn, #add-quiz-btn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn {
+#historyBtn, #add-quiz-btn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn {
     font-size: 18px;
     font-weight: bolder;
     background: #98d8e3;
@@ -445,9 +445,9 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#history-btn {
-    left: 40%;
-    top: 5%;
+#historyBtn {
+    right: 5%;
+    bottom: 15%;
 }
 
 #add-quiz-btn {
@@ -820,7 +820,7 @@ nav ul li {
 
 .question-list {
     position: absolute;
-    top: 12%;
+    top: 0%;
 }
 
 .quizName {
@@ -851,7 +851,7 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.quizNameForm {
+#quizNameForm {
     font-size: 20px;
     position: absolute;
     width: 250px;
@@ -871,6 +871,11 @@ table, th, td {
     border-collapse: collapse;
     width: 30%;
     text-align: center;
+}
+
+#editQuiz {
+    background-image: url('../images/student_quiz_bg.gif');
+    background-size: 100% 100%;
 }
 
 #quizPlay {
