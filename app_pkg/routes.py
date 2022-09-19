@@ -155,10 +155,6 @@ def create_question(quiz_id):
 def edit_question(quiz_id):
     question = Question.query.filter_by(id=request.args.get("id")).first()
     form = QuestionForm(data=question.__dict__)
-    for field in form:
-        if field.type == "BooleanField":
-            if question.answer == field.name[-1].upper():
-                field.data = True
     if form.validate_on_submit():
         question.question = form.question.data
         for field in form:
@@ -167,6 +163,10 @@ def edit_question(quiz_id):
                     question.answer = field.name[-1].upper()
         db.session.commit()
         return redirect('/edit_quiz/' + str(quiz_id))
+    for field in form:
+        if field.type == "BooleanField":
+            if question.answer == field.name[-1].upper():
+                field.data = True
     return render_template('edit_question.html', form=form, question=question)
 
 
