@@ -23,6 +23,7 @@
 * Chenyuhan Shen([@chenyuhanjcu](https://github.com/chenyuhanjcu))
 * Yue Cao([@CP1404-YueCao](https://github.com/CP1404-YueCao))
 * Junwen Zhang([@zhangjunwenzzz](https://github.com/zhangjunwenzzz))
+* Jiawei Guo([@8848titanium](https://github.com/8848titanium))
 
 ## Requirements:
 
