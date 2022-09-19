@@ -40,7 +40,6 @@ class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'))
     question = db.Column(db.String(255), index=True)
-    type = db.Column(db.String(20), index=True)
     choice_a = db.Column(db.String(255), index=True)
     choice_b = db.Column(db.String(255), index=True)
     choice_c = db.Column(db.String(255), index=True)
