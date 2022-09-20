@@ -741,9 +741,18 @@ nav ul li {
     display: none;
 }
 
-.choices input {
+#scoreBoard {
+    position: relative;
+    top: 20%;
+    left: 35%;
+}
+
+#choices {
+    text-align: center;
+}
+
+#choices input {
     margin: 30px 50px;
-    display: inline;
     width: 500px;
     height: 250px;
     border: none;
@@ -757,7 +766,7 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.choices input:hover {
+#choices input:hover {
     background-color: #3badff;
     color: white;
     font-size: 20px;
