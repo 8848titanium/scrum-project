@@ -67,7 +67,7 @@
                 {% endfor %}
             </p>
             <p>{{ form.submit() }}</p>
-            <a><input type="button" id="deleteQuestion" value="Delete This Question"></a>
+            <a href="/delete_question/{{question.id}}"><input type="button" id="deleteQuestionBtn" value="Delete This Question"></a>
         </form>
     {% endif %}
     </body>

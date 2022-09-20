@@ -172,6 +172,15 @@ def edit_question(quiz_id):
     return render_template('edit_question.html', form=form, question=question)
 
 
+@app.route('/delete_question/<question_id>', methods=['GET', 'POST'])
+def delete_question(question_id):
+    question = Question.query.filter_by(id=question_id).first()
+    quiz_id = question.quiz_id
+    db.session.delete(question)
+    db.session.commit()
+    return redirect('/edit_quiz/' + str(quiz_id))
+
+
 @app.route('/student_main', methods=['GET', 'POST'])
 @login_required
 def student_main():

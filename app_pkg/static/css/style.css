@@ -426,7 +426,7 @@ nav ul li {
     background-color: #3badff;
 }
 
-.dropdown:hover .add-quiz-btn {
+.dropdown:hover .addQuizBtn {
     background-color: #3badff;
 }
 
@@ -437,7 +437,7 @@ nav ul li {
     font-size: 20px;
 }
 
-#historyBtn, #add-quiz-btn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn {
+#historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn {
     font-size: 18px;
     font-weight: bolder;
     background: #98d8e3;
@@ -456,7 +456,7 @@ nav ul li {
     bottom: 15%;
 }
 
-#add-quiz-btn {
+#addQuizBtn {
     right: 20%;
     top: 5%;
 }
@@ -776,7 +776,7 @@ nav ul li {
     background-color: #ff0000 !important;
 }
 
-.question-list {
+#questionList {
     position: absolute;
     top: 18%;
     left: 20%;
@@ -797,7 +797,7 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.student_quiz {
+.singleQuestionEntry {
     font-size: 22px;
     text-align: center;
     border: 15px #98d8e3;

@@ -13,7 +13,7 @@
             <button id="historyBtn">Quiz History</button>
         </a>
         <a href="/create_question/{{ quiz.id }}">
-            <button id="add-quiz-btn">Add A Question</button>
+            <button id="addQuizBtn">Add A Question</button>
         </a>
         <a href="/quiz_play/{{ quiz.pin }}">
             <button id="add-btn_start">Start This Quiz</button>
@@ -26,11 +26,11 @@
                     {{ form.name(value=quiz.name) }}<br>
                 </p>
                 <p>{{ form.submit() }}</p>
-            </form>
-        <div class="question-list">
+        </form>
+        <div id="questionList">
             {% if question_set %}
                 {% for a_question in question_set %}
-                    <div class="student_quiz">
+                    <div class="singleQuestionEntry">
                     <a href="/edit_question/{{ quiz.id }}/?id={{ a_question.id }}"
                        style="text-decoration: none;">
                         <p>Question: {{ a_question.question }}</p>
