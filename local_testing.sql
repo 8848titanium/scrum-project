@@ -9,12 +9,12 @@ USE happylearning;
 # Users
 # password hash stored in SHA256 with salted pbkdf2: sample accounts use 123 & 456 as password for lecturer and student respectively
 INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
-VALUES (1, "Michael", "777@outlook.com",
-        "pbkdf2:sha256:260000$HfjeRMqkUsFMgfkm$e835eaa195d8c6170bd8cb629a4a6e1728040d678a26d2595c129ee2ce2d3142",
+VALUES (1, "Michael", "michael@mail.com",
+        "pbkdf2:sha256:260000$sgDUxgpSQkBC9ozl$f733f607c4174b238b45d3471694ba846da4c10fd3e8252265f5700a0be4f2f0",
         'lecturer');
 INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
-VALUES (2, "zjq", "123@outlook.com",
-        "pbkdf2:sha256:260000$bzyD040C4NlJQCkl$ab1b4cc3ed2cb65b24ea38a7760508fb42ed6e54c72c558277156e71eac3a318",
+VALUES (2, "Jw", "jw@mail.com",
+        "pbkdf2:sha256:260000$zNix0OSbqdRD2rz6$eba4d658e7c626d684a632a6696f82adf44196e411c490a085f7db1541a98201",
         'student');
 
 # Quizzes
