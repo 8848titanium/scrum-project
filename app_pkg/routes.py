@@ -161,14 +161,18 @@ def edit_question(quiz_id):
             if field.type == "BooleanField":
                 if field.data:
                     question.answer = field.name[-1].upper()
+            else:
+                if field.data:
+                    question.choice_a = form.choice_a.data
+                    question.choice_b = form.choice_b.data
+                    question.choice_c = form.choice_c.data
+                    question.choice_d = form.choice_d.data
         db.session.commit()
         return redirect('/edit_quiz/' + str(quiz_id))
     for field in form:
         if field.type == "BooleanField":
             if question.answer == field.name[-1].upper():
                 field.data = True
-        else:
-            field.type = "StringField"
     return render_template('edit_question.html', form=form, question=question)
 
 
