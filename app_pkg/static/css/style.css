@@ -258,7 +258,7 @@ nav ul li {
     color: red;
 }
 
-#signUp-box {
+#signUpForm {
     width: 360px;
     min-height: 570px;
     height: auto;
@@ -273,27 +273,27 @@ nav ul li {
     border-radius: 10px;
 }
 
-#signUp-box h1 {
+#signUpForm h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-#signUp-box h3 {
+#signUpForm h3 {
     padding: 0 0 10px;
     text-align: center;
 }
 
-#signUp-box p {
+#signUpForm p {
 
     font-weight: bold;
 }
 
-#signUp-box input {
+#signUpForm input {
     margin-bottom: 20px;
 }
 
-#signUp-box input[type="text"], input[type="password"] {
+#signUpForm input[type="text"], input[type="password"] {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -304,7 +304,7 @@ nav ul li {
     font-size: 16px;
 }
 
-#signUp-box input[type="submit"] {
+#signUpForm input[type="submit"] {
     margin-top: 8%;
     border-top: 10px;
     border: none;
@@ -317,14 +317,14 @@ nav ul li {
     border-radius: 10px;
 }
 
-#signUp-box input[type="submit"]:hover {
+#signUpForm input[type="submit"]:hover {
     cursor: pointer;
     background: #1E3A81;
     color: #fff;
 
 }
 
-#signUp-box a[type="link"] {
+#signUpForm a[type="link"] {
     text-decoration: none;
     position: absolute;
     left: 25%;
@@ -333,7 +333,7 @@ nav ul li {
     color: red;
 }
 
-#signUp-box a[type="link"]:hover {
+#signUpForm a[type="link"]:hover {
     color: yellow;
 }
 
