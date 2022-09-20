@@ -848,6 +848,13 @@ nav ul li {
     left: 50%;
 }
 
+#countdown {
+    position: relative;
+    top: 1%;
+    left: 45%;
+    margin: 0 0 1%;
+}
+
 .quizPIN {
     position: absolute;
     left: 45%;
