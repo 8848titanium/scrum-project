@@ -747,6 +747,12 @@ nav ul li {
     left: 35%;
 }
 
+#quizFinish {
+    position: relative;
+    top: 20%;
+    left: 45%;
+}
+
 #choices {
     text-align: center;
 }
