@@ -167,6 +167,8 @@ def edit_question(quiz_id):
         if field.type == "BooleanField":
             if question.answer == field.name[-1].upper():
                 field.data = True
+        else:
+            field.type = "StringField"
     return render_template('edit_question.html', form=form, question=question)
 
 
