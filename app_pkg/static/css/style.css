@@ -5,10 +5,9 @@
     font-family: "Rubik", 'Roboto', 'sans-serif'
 }
 
-body {
+#index {
     background-image: url('../images/background.png');
     background-size: 100% 100%;
-    background-attachment: fixed;
 }
 
 .header {
@@ -775,16 +774,34 @@ nav ul li {
     background-color: #ff0000 !important;
 }
 
+.question-list {
+    position: absolute;
+    top: 10%;
+    left:20%;
+}
+
+#quizNameForm {
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    left: 40%;
+    width: 220px;
+    border: 15px #98d8e3;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    background-color: #98d8e3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .student_quiz {
     font-size: 22px;
     text-align: center;
     border: 15px #98d8e3;
     position: relative;
-    left: 50%;
-    top: 100px;
     border-radius: 20px;
-    height: 20%;
-    width: 100%;
+    height: 250px;
+    width: 800px;
     margin: 40px;
     padding: 30px;
     background-color: #98d8e3;
@@ -818,11 +835,6 @@ nav ul li {
     right: 5%;
 }
 
-.question-list {
-    position: absolute;
-    top: 0%;
-}
-
 .quizName {
     text-align: center;
 
@@ -851,20 +863,6 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#quizNameForm {
-    font-size: 20px;
-    position: absolute;
-    width: 250px;
-    left: 5%;
-    top: 10%;
-    border: 15px #98d8e3;
-    border-radius: 20px;
-    padding: 10px;
-    margin: 20px;
-    background-color: #98d8e3;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
 table, th, td {
     border: 2px solid;
     border-spacing: 4px;
@@ -875,7 +873,8 @@ table, th, td {
 
 #editQuiz {
     background-image: url('../images/student_quiz_bg.gif');
-    background-size: 100% 100%;
+    background-size: cover;
+    background-repeat: repeat;
 }
 
 #quizPlay {
