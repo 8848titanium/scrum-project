@@ -270,6 +270,10 @@ def finish_quiz(quiz_id):
     top_three = {}
     for row in score_join_user:
         top_three[row[1].username] = row[0].rank_score
+    i = 1
+    while len(top_three) < 3:
+        top_three["Missing Player " + str(i)] = "Nothing"
+        i += 1
     emit("show-finish-quiz", top_three, broadcast=True)
 
 

@@ -750,7 +750,7 @@ nav ul li {
 #quizFinish {
     position: relative;
     top: 20%;
-    left: 45%;
+    text-align: center;
 }
 
 #choices {
