@@ -12,7 +12,7 @@
         <div class="quiz">
             <h2>Your Quizzes</h2>
             <a href="{{ url_for('create_quiz') }}" style="text-decoration: none;">
-                <button id="add-quiz-btn" style="background-color:98d8e3;right:15%;">Add A Quiz</button>
+                <button id="add-quiz-btn">Add A Quiz</button>
             </a>
             <div class="cards-layout">
                 {% if quizzes %}
@@ -20,7 +20,7 @@
                         <div class="cards">
                             <a href="/edit_quiz/{{ quiz.id }}" style="text-decoration: none;">
                                 <div class="card">
-                                    <p class="card_title">{{ quiz.name }}</p>
+                                    <p class="card_title">Quiz Name:<br>{{ quiz.name }}</p>
                                 </div>
                             </a>
                         </div>
