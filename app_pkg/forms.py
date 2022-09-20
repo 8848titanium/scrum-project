@@ -8,7 +8,7 @@ from app_pkg.models import *
 
 class LoginForm(FlaskForm):
     email = StringField('Email:', validators=[DataRequired(), Email(), Length(min=5, max=128)])
-    password = PasswordField('Password:', validators=[DataRequired()])
+    password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=32)])
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
@@ -27,7 +27,7 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired(), Length(max=32)])
     email = StringField('Email:', validators=[DataRequired(), Email(), Length(min=5, max=128)])
-    password = PasswordField('Password:', validators=[DataRequired()])
+    password = PasswordField('Password:', validators=[DataRequired(), Length(min=8, max=32)])
     password2 = PasswordField(
         'Confirm Password:', validators=[DataRequired(), EqualTo('password')])
     type = BooleanField()
