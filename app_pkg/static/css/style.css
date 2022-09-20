@@ -5,9 +5,25 @@
     font-family: "Rubik", 'Roboto', 'sans-serif'
 }
 
+#index, #about-us, #lecturerMain, #editQuiz, #quizHistory, #editQuestion, #studentMain, #quizPlay {
+    background-size: cover;
+    background-repeat: repeat;
+}
+
 #index {
     background-image: url('../images/background.png');
-    background-size: 100% 100%;
+}
+
+#aboutUs {
+    background-image: url('../images/aboutbg.png');
+}
+
+#lecturerMain, #editQuiz, #quizHistory, #editQuestion, #studentMain {
+    background-image: url('../images/student_quiz_bg.gif');
+}
+
+#quizPlay {
+    background-image: url('../images/quiz_play.gif');
 }
 
 .header {
@@ -138,7 +154,7 @@ nav ul li {
     top: -25%;
 }
 
-.login {
+#login {
     margin: 0;
     padding: 0;
     background-image: url("../images/loginbackground.png");
@@ -147,7 +163,7 @@ nav ul li {
     font-family: "poppins", sans-serif;
 }
 
-.login-box {
+#login-box {
     width: 360px;
     height: 450px;
     background: rgba(0, 170, 255, 0.547);
@@ -161,33 +177,33 @@ nav ul li {
     border-radius: 10px;
 }
 
-.login-box h1 {
+#login-box h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-.login-box h3 {
+#login-box h3 {
     padding: 0 0 10px;
     text-align: center;
 }
 
-.login-box p {
+#login-box p {
     margin: 0;
     padding: 0;
     font-weight: bold;
 }
 
-.login-box input {
+#login-box input {
     width: 100px;
     margin-bottom: 20px;
 }
 
-.login-box input[type="checkbox"] {
+#login-box input[type="checkbox"] {
     width: 5%;
 }
 
-.login-box input[type="text"], input[type="password"] {
+#login-box input[type="text"], input[type="password"] {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -198,7 +214,7 @@ nav ul li {
     font-size: 16px;
 }
 
-.login-box input[type="submit"] {
+#login-box input[type="submit"] {
     border: none;
     outline: none;
     height: 40px;
@@ -209,13 +225,13 @@ nav ul li {
     border-radius: 10px;
 }
 
-.login-box input[type="submit"]:hover {
+#login-box input[type="submit"]:hover {
     cursor: pointer;
     background: #1E3A81;
     color: #fff;
 }
 
-.login-box a {
+#login-box a {
     text-decoration: none;
     text-align: center;
     font-size: 15px;
@@ -223,11 +239,11 @@ nav ul li {
     color: red;
 }
 
-.login-box a:hover {
+#login-box a:hover {
     color: yellow;
 }
 
-.signup {
+#signUp {
     margin: 0;
     padding: 0;
     background-image: url("../images/signupbackground.png");
@@ -236,14 +252,14 @@ nav ul li {
     font-family: "poppins", sans-serif;
 }
 
-.signup .header h5 {
+#signUp .header h5 {
     position: fixed;
     top: 15px;
     left: 805px;
     color: red;
 }
 
-.signup-box {
+#signUp-box {
     width: 360px;
     min-height: 570px;
     height: auto;
@@ -258,27 +274,27 @@ nav ul li {
     border-radius: 10px;
 }
 
-.signup-box h1 {
+#signUp-box h1 {
     padding: 0 0 10px;
     text-align: center;
     font-size: 36px;
 }
 
-.signup-box h3 {
+#signUp-box h3 {
     padding: 0 0 10px;
     text-align: center;
 }
 
-.signup-box p {
+#signUp-box p {
 
     font-weight: bold;
 }
 
-.signup-box input {
+#signUp-box input {
     margin-bottom: 20px;
 }
 
-.signup-box input[type="text"], input[type="password"] {
+#signUp-box input[type="text"], input[type="password"] {
     width: 300px;
     border: none;
     border-bottom: 1px solid #fff;
@@ -289,7 +305,7 @@ nav ul li {
     font-size: 16px;
 }
 
-.signup-box input[type="submit"] {
+#signUp-box input[type="submit"] {
     margin-top: 8%;
     border-top: 10px;
     border: none;
@@ -302,14 +318,14 @@ nav ul li {
     border-radius: 10px;
 }
 
-.signup-box input[type="submit"]:hover {
+#signUp-box input[type="submit"]:hover {
     cursor: pointer;
     background: #1E3A81;
     color: #fff;
 
 }
 
-.signup-box a[type="link"] {
+#signUp-box a[type="link"] {
     text-decoration: none;
     position: absolute;
     left: 25%;
@@ -318,7 +334,7 @@ nav ul li {
     color: red;
 }
 
-.signup-box a[type="link"]:hover {
+#signUp-box a[type="link"]:hover {
     color: yellow;
 }
 
@@ -332,21 +348,17 @@ nav ul li {
     min-width: 1220px;
 }
 
-.about-us {
-    background-image: url('../images/aboutbg.png');
-    background-size: 100% 100%;
-}
 
-.about-us a {
+#aboutUs a {
     color: black;
 }
 
-.about-us a:hover {
+#aboutUs a:hover {
     color: #FF0000;
 
 }
 
-.about-us_box {
+#aboutUs_box {
     position: fixed;
     left: 80px;
     top: 180px;
@@ -359,12 +371,7 @@ nav ul li {
     border-radius: 10px;
 }
 
-.student-list {
-    background-image: url('../images/student_quiz_bg.gif');
-    background-size: 100% 100%;
-}
-
-.student-list .nav ul {
+#studentMain .nav ul {
     position: fixed;
     top: 50px;
     left: 800px;
@@ -545,11 +552,6 @@ nav ul li {
     background-color: #3badff;
     color: white;
     font-size: 20px;
-}
-
-.lecturer-list {
-    background-image: url('../images/student_quiz_bg.gif');
-    background-size: 100% 100%;
 }
 
 .quiz-creation {
@@ -777,7 +779,7 @@ nav ul li {
 .question-list {
     position: absolute;
     top: 18%;
-    left:20%;
+    left: 20%;
 }
 
 #quizNameForm {
@@ -872,13 +874,17 @@ table, th, td {
     text-align: center;
 }
 
-#editQuiz {
-    background-image: url('../images/student_quiz_bg.gif');
-    background-size: cover;
-    background-repeat: repeat;
-}
-
-#quizPlay {
-    background-image: url('../images/quiz_play.gif');
-    background-size: 100% 100%;
+#editQuestionForm {
+    font-size: 28px;
+    text-align: center;
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    top: 10%;
+    border: 15px #98d8e3;
+    border-radius: 20px;
+    padding: 50px;
+    margin: 20px;
+    background-color: #98d8e3;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
