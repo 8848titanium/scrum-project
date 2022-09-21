@@ -432,7 +432,7 @@ nav ul li {
 }
 
 #historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn,
-#editQuestionForm input[type="submit"],#nextBtn, #checkScoreBoard, #quizFinish input[type="button"]{
+#editQuestionForm input[type="submit"], #nextBtn, #checkScoreBoard, #quizFinish input[type="button"] {
     font-size: 18px;
     font-weight: bolder;
     background: #98d8e3;
@@ -744,9 +744,12 @@ nav ul li {
 }
 
 #quizFinish {
-    position: relative;
+    position: absolute;
     top: 20%;
+    left: 32%;
     text-align: center;
+    font-weight: bold;
+    font-size: 36px;
 }
 
 #choices {
@@ -803,23 +806,24 @@ nav ul li {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-#quizNameForm input[type="text"]{
-    font-size: 20px;
-    text-align: left;
-    padding-left: 10px;
-    border-radius: 10px;
-}
-
-#quizNameForm input[type="submit"]{
-    background-color: #98d8e3;
-}
-
 #quizNameForm {
     text-align: center;
     position: absolute;
     top: 3%;
     left: 30%;
     width: 400px;
+}
+
+#quizNameForm input[type="text"] {
+    font-size: 20px;
+    text-align: left;
+    padding-left: 10px;
+    border-radius: 10px;
+}
+
+#quizNameForm input[type="submit"]:hover {
+    font-weight: bolder;
+    cursor: pointer;
 }
 
 .singleQuestionEntry {
