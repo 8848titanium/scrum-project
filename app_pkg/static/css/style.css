@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    font-family: 'Lobster', 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Rubik", 'sans-serif';
 }
 
 #index, #about-us, #lecturerMain, #editQuiz, #quizHistory, #editQuestion, #studentMain, #quizPlay {
@@ -159,7 +159,7 @@ nav ul li {
     padding: 0;
     background-image: url("../images/loginbackground.png");
     background-size: 100% 100%;
-
+    font-family: "poppins", sans-serif;
 }
 
 #loginForm {
@@ -509,7 +509,7 @@ nav ul li {
     text-align: center;
     padding-top: 10%;
     border-radius: 0 0 40px 40px;
-
+    font-family: sans-serif;
     font-weight: bold;
     font-size: 30px;
     color: white;
