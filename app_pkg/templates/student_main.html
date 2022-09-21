@@ -1,35 +1,35 @@
 {% extends "base.html" %}
 {% block content %}
     <body id="studentMain">
-        <div class="header">
-            <nav>
-                <a href="/">
-                    <image src="../static/images/logo.png" class="logo"></image>
-                </a>
-                <h1><a href="/">Welcome {{ current_user.username }}</a></h1>
-            </nav>
-        </div>
-        <div class="quiz">
-            <h2>Recent Completed Quizzes</h2>
-            <div class="cards-layout">
-                {% if score_join_quiz %}
-                    {% for row in score_join_quiz %}
-                        <div class="cards">
-                            <div class="card">
-                                <p class="card_title">Quiz: {{ row[1].name }}</p>
-                                <p class="card_mark">Mark: {{ row[0].score }}/{{ num_of_questions[row[1].id] }}</p>
-                                <p class="card_score">Score: {{ row[0].rank_score }}</p>
-                            </div>
+    <div class="header">
+        <nav>
+            <a href="/">
+                <image src="../static/images/logo.png" class="logo"></image>
+            </a>
+            <h1><a href="/">Welcome {{ current_user.username }}</a></h1>
+        </nav>
+    </div>
+    <div class="quiz">
+        <h2>Recent Completed Quizzes</h2>
+        <div class="cards-layout">
+            {% if score_join_quiz %}
+                {% for row in score_join_quiz %}
+                    <div class="cards">
+                        <div class="card">
+                            <p class="card_title">Quiz: {{ row[1].name }}</p>
+                            <p class="card_mark">Mark: {{ row[0].score }}/{{ num_of_questions[row[1].id] }}</p>
+                            <p class="card_score">Score: {{ row[0].rank_score }}</p>
                         </div>
-                    {% endfor %}
-                {% endif %}
-            </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
-        <div class="dropdown">
-            <button class="drop-btn">{{ current_user.username }}</button>
-            <div class="dropdown-content">
-                <a href="{{ url_for("logout") }}">Log Out</a>
-            </div>
+    </div>
+    <div class="dropdown">
+        <button class="drop-btn">{{ current_user.username }}</button>
+        <div class="dropdown-content">
+            <a href="{{ url_for("logout") }}">Log Out</a>
         </div>
+    </div>
     </body>
 {% endblock %}

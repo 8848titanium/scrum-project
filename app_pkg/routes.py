@@ -3,7 +3,7 @@ import random
 import string
 import time
 
-from flask import render_template, request, flash, redirect, url_for
+from flask import render_template, request, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
 from flask_socketio import emit, send
 from sqlalchemy import desc

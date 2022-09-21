@@ -212,7 +212,7 @@
             }
         </script>
     </head>
-<body id="quizPlay">
+    <body id="quizPlay">
     <div id="waiting" style="position:relative;top:40px;">
         <div style="text-align: center;">
             <button id="startBtn">Let's Go!!!</button>
@@ -232,7 +232,8 @@
 
     <div id="onGoingQuestion" hidden>
         <div id="countdown">
-            <progress value="10" max="10" id="beginCountdown"></progress><span>  <span id="beginCountdownText"> 10</span>S Left!!!</span>
+            <progress value="10" max="10" id="beginCountdown"></progress>
+            <span>  <span id="beginCountdownText"> 10</span>S Left!!!</span>
         </div>
         <div style="text-align: center;font-size:60px;">Question: <span id="question"></span></div>
         <div id="choices">
@@ -272,5 +273,5 @@
     <audio controls hidden autoplay loop="loop">
         <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">
     </audio>
-</body>
+    </body>
 {% endblock %}

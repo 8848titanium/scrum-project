@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
     <body id="quizHistory">
-        <table id="scoreBoardTable">
+    <table id="scoreBoardTable">
+        <tr>
+            <th>Usernames</th>
+            <th>Marks</th>
+            <th>Scores</th>
+        </tr>
+        {% for row in score_join_user %}
             <tr>
-                <th>Usernames</th>
-                <th>Marks</th>
-                <th>Scores</th>
+                <td>{{ row[1].username }}</td>
+                <td>{{ row[0].score }}/{{ num_of_questions }}</td>
+                <td>{{ row[0].rank_score }}</td>
             </tr>
-            {% for row in score_join_user %}
-                <tr>
-                    <td>{{ row[1].username }}</td>
-                    <td>{{ row[0].score }}/{{ num_of_questions }}</td>
-                    <td>{{ row[0].rank_score }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <a href="javascript:history.go(-1)">
-            <button id="del-quiz-btn">Back to Quiz</button>
-        </a>
+        {% endfor %}
+    </table>
+    <a href="javascript:history.go(-1)">
+        <button id="del-quiz-btn">Back to Quiz</button>
+    </a>
     </body>
 {% endblock %}

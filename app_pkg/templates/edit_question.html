@@ -25,7 +25,7 @@
     </head>
     <body id="editQuestion">
     {% if question %}
-        <form id="editQuestionForm" name="question-form" action="" method="post" >
+        <form id="editQuestionForm" name="question-form" action="" method="post">
             {{ form.hidden_tag() }}
             <p>
                 {{ form.question.label }}<br>
@@ -70,7 +70,7 @@
                 {{ form.submit() }}
             </p>
 
-            <a href="/delete_question/{{question.id}}">
+            <a href="/delete_question/{{ question.id }}">
                 <input type="button" id="add-btn_start" value="Delete This Question">
             </a>
         </form>
