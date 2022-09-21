@@ -13,6 +13,9 @@
         <div id="questionList">
             {% if question_set %}
                 {% for a_question in question_set %}
+                {% endfor %}
+            {% endif %}
+        </div>
 
     <form name="quiz-name-form" id="quizNameForm" action="" method="post">
         {{ form.hidden_tag() }}
