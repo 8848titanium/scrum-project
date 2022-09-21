@@ -125,7 +125,7 @@
                     document.getElementById('D').value = current_question.choice_d;
                 })
                 socket.on("show-next-question", (rank_scores) => {
-                    document.getElementById('scoreBoardTable').innerHTML = "<tr><th>#</th><th>Usernames</th><th>Scores</th></tr>";
+                    document.getElementById('scoreBoardTable').innerHTML = "<caption>Score Board</caption><thead><tr><th>#</th><th>Usernames</th><th>Score</th></tr></thead>";
                     $('#scoreBoard').hide();
                     $('#nextBtn').hide();
                     socket.emit("ask-prevent-choice");
