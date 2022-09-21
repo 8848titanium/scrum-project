@@ -21,6 +21,7 @@ GAP_ANSWERING_TIME = 2
 
 question_launch_time = 0
 current_rank_scores = {}
+total_players = 0
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -225,6 +226,8 @@ def receive_grade():
     current_quiz.pin = None
     db.session.commit()
     global current_rank_scores
+    global total_players
+    total_players += 1
     current_rank_scores.pop(current_user.username)
     return "grade saved!"
 
@@ -256,20 +259,16 @@ def next_question(time_stamp):
     emit("show-next-question", current_rank_scores, broadcast=True)
 
 
-@socketio.on("check-scores-saved")
-def check_scores_saved():
-    global current_rank_scores
-    if not current_rank_scores:
-        emit("all-saved", broadcast=True)
-
-
 @socketio.on("ask-finish-quiz")
 def finish_quiz(quiz_id):
+    while current_rank_scores:
+        pass
     score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
-        Score.student_id == User.id).order_by(desc(Score.rank_score)).limit(3)
+        Score.student_id == User.id).order_by(desc(Score.rank_score)).limit(3 if total_players >= 3 else total_players)
     top_three = {}
     for row in score_join_user:
         top_three[row[1].username] = row[0].rank_score
+
     i = 1
     while len(top_three) < 3:
         top_three["Missing Player " + str(i)] = "Nothing"

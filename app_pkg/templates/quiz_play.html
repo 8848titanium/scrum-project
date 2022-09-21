@@ -40,18 +40,6 @@
                 return resultHash;
             }
 
-            function checkAllScoreSaved() {
-                while (true) {
-                    socket.emit("check-scores-saved");
-                    if (socket.on('all-saved', () => {
-                        return true;
-                    })) {
-                        break;
-                    }
-                }
-                return true;
-            }
-
             let questions = {{ the_quiz|safe }};
             let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
@@ -151,9 +139,7 @@
                                 })
                             })
                         }
-                        if (checkAllScoreSaved()) {
-                            socket.emit("ask-finish-quiz", "{{ quiz_id }}");
-                        }
+                        socket.emit("ask-finish-quiz", "{{ quiz_id }}");
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
