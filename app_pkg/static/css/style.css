@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Source Serif Pro', 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Rubik", 'sans-serif';
-
 }
 
 #index, #about-us, #lecturerMain, #editQuiz, #quizHistory, #editQuestion, #studentMain, #quizPlay {
@@ -276,7 +275,6 @@ nav ul li {
 }
 
 #signUpForm p {
-
     font-weight: bold;
 }
 
@@ -478,7 +476,6 @@ nav ul li {
 
 .cards-layout {
     display: flex;
-
     /* Put a card in the next row when previous cards take all width */
     flex-wrap: wrap;
 
@@ -926,7 +923,6 @@ table {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-
 #editQuestionForm input[type="submit"] {
     right: 20%;
     top: 5%;
@@ -961,7 +957,7 @@ table {
 
 #scoreBoardTable th,td {
     font-size: 28px;
-    border-radius: 0px;
+    border-radius: 0;
     border-spacing: 1px;
     width: 30%;
     text-align: center;
@@ -970,8 +966,7 @@ table {
 }
 
 #scoreBoardTable tr {
-    border: 1px;
-    border-color: white;
+    border: 1px white;
     color: #fff;
 }
 
