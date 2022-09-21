@@ -7,7 +7,7 @@ CREATE DATABASE IF NOT EXISTS `happylearning` DEFAULT CHARACTER SET UTF8MB4;
 # Demo
 USE happylearning;
 # Users
-# password hash stored in SHA256 with salted pbkdf2: sample accounts use 123 & 456 as password for lecturer and student respectively
+# password hash stored in SHA256 with salted pbkdf2: sample accounts use 12345678 & 87654321 as password for lecturer and student respectively
 INSERT INTO user(`id`, `username`, `email`, `password_hash`, `type`)
 VALUES (1, "Michael", "michael@mail.com",
         "pbkdf2:sha256:260000$sgDUxgpSQkBC9ozl$f733f607c4174b238b45d3471694ba846da4c10fd3e8252265f5700a0be4f2f0",
@@ -37,6 +37,6 @@ VALUES (3, 1, 'What is Scrum Cycle?', 'A secret formula of Singaporean donut',
         'None of Others', 'D');
 INSERT INTO question(`id`, `quiz_id`, `question`, `choice_a`, `choice_b`, `choice_c`, `choice_d`, `answer`)
 VALUES (4, 1, 'Do you think our site is awesome?', 'Hell yes, looks awesome on my 144P palm PDA',
-        'Nah, looks lame on my ProMotion screen', 'Whaat?', 'Duh....', 'A');
+        'Nah, looks lame on my ProMotion screen', 'What?', 'Duh....', 'A');
 INSERT INTO score(`id`, `quiz_id`, `score`, `rank_score`, `student_id`)
 VALUES (1, 1, 4, 3921, 2);
