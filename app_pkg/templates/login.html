@@ -4,7 +4,7 @@
     <div class="header">
         <nav>
             <a href="/">
-                <image src="../static/images/logo.png" class="logo"></image>
+                <image src="{{ url_for('static', filename='images/logo.png') }}" class="logo"></image>
             </a>
             <h1><a href="/">Happy Learning</a></h1>
             <label for="tips">{{ tips }}</label>
