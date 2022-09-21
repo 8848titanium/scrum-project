@@ -951,12 +951,33 @@ table {
 #scoreBoardTable caption {
     font-size: 2em;
     font-weight: bold;
-    margin: 1em 0;
 }
 
 #scoreBoardTable thead {
     background-color: #008c8c;
+    transparent: 60%;
     color: #fff;
+}
+
+#scoreBoardTable th,td {
+    font-size: 28px;
+    border-radius: 0px;
+    border-spacing: 1px;
+    width: 30%;
+    text-align: center;
+    border-color: white;
+    color: #fff;
+}
+
+#scoreBoardTable tr {
+    border: 1px;
+    border-color: white;
+    color: #fff;
+}
+
+#choices input[type="button"]{
+    word-wrap: break-word !important;
+    white-space: normal !important;
 }
 
 #quizFinish input[type="button"] {
