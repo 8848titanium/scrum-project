@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
 }
 
 #index, #about-us, #lecturerMain, #editQuiz, #quizHistory, #editQuestion, #studentMain, #quizPlay {
@@ -158,6 +159,7 @@ nav ul li {
     padding: 0;
     background-image: url("../images/loginbackground.png");
     background-size: 100% 100%;
+
 }
 
 #loginForm {
@@ -428,7 +430,8 @@ nav ul li {
     text-decoration: none;
 }
 
-#historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn,#editQuestionForm input[type="submit"],#nextBtn, #checkScoreBoard{
+#historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn,
+#editQuestionForm input[type="submit"],#nextBtn, #checkScoreBoard, #quizFinish input[type="button"]{
     font-size: 18px;
     font-weight: bolder;
     background: #98d8e3;
@@ -506,6 +509,7 @@ nav ul li {
     text-align: center;
     padding-top: 10%;
     border-radius: 0 0 40px 40px;
+
     font-weight: bold;
     font-size: 30px;
     color: white;
@@ -950,3 +954,7 @@ table {
     color: #fff;
 }
 
+#quizFinish input[type="button"] {
+    right: 5%;
+    bottom: 5%;
+}

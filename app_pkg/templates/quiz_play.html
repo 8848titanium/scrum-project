@@ -213,68 +213,71 @@
         </script>
     </head>
     <body id="quizPlay">
-    <div id="waiting" style="position:relative;top:40px;">
-        <div style="text-align: center;">
-            <button id="startBtn">Let's Go!!!</button>
-            {% if current_user.type == "lecturer" %}
-                <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
-                <div id="players"><p>Players:</p></div>
-            {% else %}
-                <p>Waiting for the lecturer to start the game...</p>
-            {% endif %}
+        <div id="waiting" style="position:relative;top:40px;">
+            <div style="text-align: center;">
+                <button id="startBtn">Let's Go!!!</button>
+                {% if current_user.type == "lecturer" %}
+                    <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
+                    <div id="players"><p>Players:</p></div>
+                {% else %}
+                    <p>Waiting for the lecturer to start the game...</p>
+                {% endif %}
+            </div>
         </div>
-    </div>
 
-    {% if current_user.type == "lecturer" %}
-        <input type="button" value="Check Scores" id="checkScoreBoard" hidden/>
-        <input type="button" value="Next" id="nextBtn" hidden/>
-    {% endif %}
+        {% if current_user.type == "lecturer" %}
+            <input type="button" value="Check Scores" id="checkScoreBoard" hidden/>
+            <input type="button" value="Next" id="nextBtn" hidden/>
+        {% endif %}
 
-    <div id="onGoingQuestion" hidden>
-        <div id="countdown">
-            <progress value="10" max="10" id="beginCountdown"></progress>
-            <span>  <span id="beginCountdownText"> 10</span>S Left!!!</span>
+        <div id="onGoingQuestion" hidden>
+            <div id="countdown">
+                <progress value="10" max="10" id="beginCountdown"></progress>
+                <span>  <span id="beginCountdownText"> 10</span>S Left!!!</span>
+            </div>
+            <div style="text-align: center;font-size:60px;">Question: <span id="question"></span></div>
+            <div id="choices">
+                <input type="button" id="A" value=""/>
+                <input type="button" id="B" value=""/>
+                <br>
+                <input type="button" id="C" value=""/>
+                <input type="button" id="D" value=""/>
+            </div>
         </div>
-        <div style="text-align: center;font-size:60px;">Question: <span id="question"></span></div>
-        <div id="choices">
-            <input type="button" id="A" value=""/>
-            <input type="button" id="B" value=""/><br>
-            <input type="button" id="C" value=""/>
-            <input type="button" id="D" value=""/>
-        </div>
-    </div>
 
-    <div id="quizFinish" hidden>Quiz Finished!<br>
-        <a href="{{ url_for("index") }}"><input type="button" value="Go back to Home page"></a>
-        <div id="champion">
-            <img src="../static/images/first1.png"><br>
-            <span id="champName"></span> won with <span id="champScore"></span>
+        <div id="quizFinish" hidden>Quiz Finished!<br>
+            <a href="{{ url_for("index") }}">
+                <input type="button" value="Go back to Home page">
+            </a>
+            <div id="champion">
+                <img src="../static/images/first1.png"><br>
+                <span id="champName"></span> won with <span id="champScore"></span>
+            </div>
+            <div id="firstRunnerUp">
+                <img src="../static/images/first2.png"><br>
+                <span id="secondName"></span> won with <span id="secondScore"></span>
+            </div>
+            <div id="secondRunnerUp">
+                <img src="../static/images/first3.png"><br>
+                <span id="thirdName"></span> won with <span id="thirdScore"></span>
+            </div>
         </div>
-        <div id="firstRunnerUp">
-            <img src="../static/images/first2.png"><br>
-            <span id="secondName"></span> won with <span id="secondScore"></span>
-        </div>
-        <div id="secondRunnerUp">
-            <img src="../static/images/first3.png"><br>
-            <span id="thirdName"></span> won with <span id="thirdScore"></span>
-        </div>
-    </div>
 
-    <div id="scoreBoard" hidden>
-        <table id="scoreBoardTable">
-            <caption>Score Board</caption>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Usernames</th>
-                    <th>Score</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+        <div id="scoreBoard" hidden>
+            <table id="scoreBoardTable">
+                <caption>Score Board</caption>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Usernames</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 
-    <audio controls hidden autoplay loop="loop">
-        <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">
-    </audio>
+        <audio controls hidden autoplay loop="loop">
+            <source src="../static/audio/student_quiz_music.mp3" type="audio/mpeg">
+        </audio>
     </body>
 {% endblock %}

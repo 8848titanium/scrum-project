@@ -6,7 +6,7 @@
             {{ form.hidden_tag() }}
             <p>
                 {{ form.name.label }}
-                {{ form.name(value=quiz.name) }}<br>
+                {{ form.name(value=quiz.name) }}
             </p>
             <p>{{ form.submit() }}</p>
         </form>
@@ -52,6 +52,5 @@
         <a href="/delete_quiz/?id={{ quiz.id }}">
             <button id="del-quiz-btn">Delete This Quiz</button>
         </a>
-
     </body>
 {% endblock %}
