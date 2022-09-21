@@ -17,14 +17,6 @@
             {% endif %}
         </div>
 
-    <form name="quiz-name-form" id="quizNameForm" action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.name.label }}<br>
-            {{ form.name(value=quiz.name) }}<br>
-        </p>
-        <p style="border-radius: 10px;">{{ form.submit() }}</p>
-    </form>
     <div id="questionList">
         {% if question_set %}
             {% for a_question in question_set %}
