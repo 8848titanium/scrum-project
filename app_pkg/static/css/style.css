@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Rubik", 'Roboto', 'sans-serif'
+    font-family: 'Lobster', 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Rubik", 'sans-serif';
 }
 
 #index, #about-us, #lecturerMain, #editQuiz, #quizHistory, #editQuestion, #studentMain, #quizPlay {
@@ -154,12 +154,11 @@ nav ul li {
     top: -25%;
 }
 
-#login {
+#login, #signUp {
     margin: 0;
     padding: 0;
     background-image: url("../images/loginbackground.png");
     background-size: 100% 100%;
-    background-position: center;
     font-family: "poppins", sans-serif;
 }
 
@@ -240,15 +239,6 @@ nav ul li {
 
 #loginForm a:hover {
     color: yellow;
-}
-
-#signUp {
-    margin: 0;
-    padding: 0;
-    background-image: url("../images/signupbackground.png");
-    background-size: 100% 100%;
-    background-position: center;
-    font-family: "poppins", sans-serif;
 }
 
 #signUp .header h5 {
@@ -436,7 +426,7 @@ nav ul li {
     font-size: 20px;
 }
 
-.quiz a{
+.quiz a {
     text-decoration: none;
 }
 
@@ -910,7 +900,9 @@ table, th, td {
 }
 
 table {
-    position: absolute; left: 35%; top: 10%;
+    position: absolute;
+    left: 35%;
+    top: 10%;
 }
 
 #editQuestionForm {
@@ -927,6 +919,7 @@ table {
     background-color: #98d8e3;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 
 #editQuestionForm input[type="submit"] {
     right: 20%;
@@ -948,3 +941,15 @@ table {
     font-size: 24px;
     text-align: left;
 }
+
+#scoreBoardTable caption {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+#scoreBoardTable thead {
+    background-color: #008c8c;
+    color: #fff;
+}
+
