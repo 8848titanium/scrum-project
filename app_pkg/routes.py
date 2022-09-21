@@ -21,7 +21,7 @@ GAP_ANSWERING_TIME = 2
 
 question_launch_time = 0
 current_rank_scores = {}
-total_players = 0
+total_players = []
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -227,7 +227,7 @@ def receive_grade():
     db.session.commit()
     global current_rank_scores
     global total_players
-    total_players += 1
+    total_players.append(current_user.id)
     current_rank_scores.pop(current_user.username)
     return "grade saved!"
 
@@ -264,7 +264,7 @@ def finish_quiz(quiz_id):
     while current_rank_scores:
         pass
     score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
-        Score.student_id == User.id).order_by(desc(Score.rank_score)).limit(3 if total_players >= 3 else total_players)
+        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(3 if len(total_players) >= 3 else len(total_players))
     top_three = {}
     for row in score_join_user:
         top_three[row[1].username] = row[0].rank_score
