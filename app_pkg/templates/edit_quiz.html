@@ -1,6 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
     <body id="editQuiz">
+        <form name="quiz-name-form" id="quizNameForm" action="" method="post">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.name.label }}<br>
+                {{ form.name(value=quiz.name) }}<br>
+            </p>
+            <p style="border-radius: 10px;">{{ form.submit() }}</p>
+        </form>
+        <div id="questionList">
+            {% if question_set %}
+                {% for a_question in question_set %}
+                    <div class="singleQuestionEntry">
+                    <a href="/edit_question/{{ quiz.id }}/?id={{ a_question.id }}"
+                       style="text-decoration: none; text-align: center;">
+                        <p>Question: {{ a_question.question }}</p>
+                        <p>A: {{ a_question.choice_a }}</p>
+                        <p>B: {{ a_question.choice_b }}</p>
+                        <p>C: {{ a_question.choice_c }}</p>
+                        <p>D: {{ a_question.choice_d }}</p>
+                        <p>Answer: {{ a_question.answer }}</p>
+                    </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
         <div class="header">
             <nav>
                 <a href="/">
@@ -18,36 +43,12 @@
         <a href="/quiz_play/{{ quiz.pin }}">
             <button id="add-btn_start">Start This Quiz</button>
         </a>
-        <br><br><br><br><br>
-        <form name="quiz-name-form" id="quizNameForm" action="" method="post">
-                {{ form.hidden_tag() }}
-                <p>
-                    {{ form.name.label }}<br>
-                    {{ form.name(value=quiz.name) }}<br>
-                </p>
-                <p>{{ form.submit() }}</p>
-        </form>
-        <div id="questionList">
-            {% if question_set %}
-                {% for a_question in question_set %}
-                    <div class="singleQuestionEntry">
-                    <a href="/edit_question/{{ quiz.id }}/?id={{ a_question.id }}"
-                       style="text-decoration: none;">
-                        <p>Question: {{ a_question.question }}</p>
-                        <p>A: {{ a_question.choice_a }}</p>
-                        <p>B: {{ a_question.choice_b }}</p>
-                        <p>C: {{ a_question.choice_c }}</p>
-                        <p>D: {{ a_question.choice_d }}</p>
-                        <p>Answer: {{ a_question.answer }}</p>
-                    </a>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
         <a href="{{ url_for("lecturer_main") }}">
             <button id="go-back-btn">Back to All Quizzes</button>
         </a>
         <a href="/delete_quiz/?id={{ quiz.id }}">
             <button id="del-quiz-btn">Delete This Quiz</button>
-        </a></body>
+        </a>
+        
+    </body>
 {% endblock %}

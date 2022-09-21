@@ -747,9 +747,8 @@ nav ul li {
 }
 
 #scoreBoard {
-    position: relative;
-    top: 20%;
-    left: 35%;
+
+    text-align: center;
 }
 
 #quizFinish {
