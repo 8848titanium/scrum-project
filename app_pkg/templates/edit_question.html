@@ -66,8 +66,13 @@
                     <span style="color: red;">[{{ error }}]</span>
                 {% endfor %}
             </p>
-            <p>{{ form.submit() }}</p>
-            <a href="/delete_question/{{question.id}}"><input type="button" id="deleteQuestionBtn" value="Delete This Question"></a>
+            <p>
+                {{ form.submit() }}
+            </p>
+
+            <a href="/delete_question/{{question.id}}">
+                <input type="button" id="add-btn_start" value="Delete This Question">
+            </a>
         </form>
         <a href="#">
             <button id="del-quiz-btn">Back to Quiz</button>
