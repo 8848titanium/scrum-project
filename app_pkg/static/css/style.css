@@ -436,6 +436,10 @@ nav ul li {
     font-size: 20px;
 }
 
+.quiz a{
+    text-decoration: none;
+}
+
 #historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn {
     font-size: 18px;
     font-weight: bolder;
@@ -507,6 +511,7 @@ nav ul li {
     cursor: pointer;
     transition: 0.4s;
     background-color: #98d8e3;
+    text-decoration: none;
 }
 
 .card .card_title, .card_mark, .card_score {

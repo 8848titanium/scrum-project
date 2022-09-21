@@ -11,14 +11,14 @@
         </div>
         <div class="quiz">
             <h2>Your Quizzes</h2>
-            <a href="{{ url_for('create_quiz') }}" style="text-decoration: none;">
+            <a href="{{ url_for('create_quiz') }}">
                 <button id="addQuizBtn">Add A Quiz</button>
             </a>
             <div class="cards-layout">
                 {% if quizzes %}
                     {% for quiz in quizzes %}
                         <div class="cards">
-                            <a href="/edit_quiz/{{ quiz.id }}" style="text-decoration: none;">
+                            <a href="/edit_quiz/{{ quiz.id }}">
                                 <div class="card">
                                     <p class="card_title">Quiz Name:<br>{{ quiz.name }}</p>
                                 </div>
