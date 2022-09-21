@@ -7,14 +7,14 @@
                 {{ form.name.label }}
                 {{ form.name(value=quiz.name) }}<br>
             </p>
-            <p style="border-radius: 10px;">{{ form.submit() }}</p>
+            <p>{{ form.submit() }}</p>
         </form>
         <div id="questionList">
             {% if question_set %}
                 {% for a_question in question_set %}
                     <div class="singleQuestionEntry">
                     <a href="/edit_question/{{ quiz.id }}/?id={{ a_question.id }}"
-                       style="text-decoration: none; text-align: center;">
+                       style="text-decoration: none;">
                         <p>Question: {{ a_question.question }}</p>
                         <p>A: {{ a_question.choice_a }}</p>
                         <p>B: {{ a_question.choice_b }}</p>
