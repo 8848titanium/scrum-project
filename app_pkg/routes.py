@@ -264,7 +264,8 @@ def finish_quiz(quiz_id):
     while current_rank_scores:
         pass
     score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
-        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(3 if len(total_players) >= 3 else len(total_players))
+        Score.student_id == User.id).filter(
+        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(3 if len(total_players) >= 3 else len(total_players)).all()
     top_three = {}
     for row in score_join_user:
         top_three[row[1].username] = row[0].rank_score

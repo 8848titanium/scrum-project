@@ -33,6 +33,12 @@ class RegistrationForm(FlaskForm):
     type = BooleanField()
     submit = SubmitField('Register and Login')
 
+    def validate_username(self, username):
+        self.username = self.username
+        user = User.query.filter_by(username=username.data).first()
+        if user is not None:
+            raise ValidationError('Please user a different username.')
+
     def validate_email(self, email):
         self.email = self.email
         user = User.query.filter_by(email=email.data).first()
