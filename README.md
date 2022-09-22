@@ -2,7 +2,7 @@
 
 ## Group A3 members:
 
-**Main Beck-end:**
+**Main Back-end:**
 
 * Jiawei Guo([@8848titanium](https://github.com/8848titanium))
 
