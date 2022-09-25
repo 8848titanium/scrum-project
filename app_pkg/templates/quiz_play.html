@@ -74,11 +74,11 @@
                     document.getElementById('beginCountdown').value = 10;
                     document.getElementById('beginCountdownText').innerText = "10";
                     document.getElementById(answer).setAttribute("class", "answer");
-                    if ("{{ current_user.type}}" === "student") {
-                        if (!(userChoice === undefined) && !(userChoice === answer)) {
+                    if ("{{ current_user.type}}" === "student" && !(userChoice === answer)) {
+                        if (!(userChoice === undefined)) {
                             document.getElementById(userChoice).setAttribute("class", "wrong");
                         } else {
-                            socket.emit("calculate-rank-score", questionLaunchTime, Date.now(), false);
+                            socket.emit("calculate-rank-score", questionLaunchTime, Date.now(), false, "{{ PIN }}");
                         }
                     }
                 })
@@ -149,7 +149,7 @@
                 socket.on("show-select-choice", (choice) => {
                     let isCorrect = choice === answer;
                     studentAnswers[currentQuestion.id] = isCorrect;
-                    socket.emit("calculate-rank-score", questionLaunchTime, Date.now(), isCorrect);
+                    socket.emit("calculate-rank-score", questionLaunchTime, Date.now(), isCorrect, "{{ PIN }}");
                     userChoice = choice;
                     document.getElementById(choice).setAttribute("class", "selected");
                     document.addEventListener("click", handler, true);
@@ -157,6 +157,9 @@
                 if ("{{ current_user.type }}" === "student") {
                     $('#startBtn').hide();
                 }
+                $('#exitRoomBtn').on('click', () => {
+                    socket.emit("leave", "{{ PIN }}");
+                })
                 $('#startBtn').on('click', () => {
                     socket.emit("ask-question-block", "{{ PIN }}");
                     socket.emit("ask-question-content", "{{ PIN }}");
@@ -199,6 +202,15 @@
     <body id="quizPlay">
     <div id="waiting" style="position:relative;top:40px;">
         <div style="text-align: center;">
+            {% if current_user.type == "lecturer" %}
+                <a href="/edit_quiz/{{ quiz_id }}">
+                    <button id="exitRoomBtn">Exit</button>
+                </a>
+            {% else %}
+                <a href="/index">
+                    <button id="exitRoomBtn">Exit</button>
+                </a>
+            {% endif %}
             <button id="startBtn">Let's Go!!!</button>
             {% if current_user.type == "lecturer" %}
                 <h3 id="quizPIN">The Game PIN: {{ PIN }}</h3>
