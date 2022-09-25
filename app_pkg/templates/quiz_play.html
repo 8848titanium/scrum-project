@@ -15,19 +15,17 @@
             Array.prototype.current = 0;</script>
         <script type="text/javascript">
             let socket = io.connect();
-            const abcd = ['A', 'B', 'C', 'D'];
+            const abcd = "ABCD";
 
             $(document).ready(() => {
-                socket.on('connect', () => {
+                socket.on("connect", () => {
                     socket.emit("join", "{{ PIN }}");
                 })
                 socket.on("disconnect", () => {
                     socket.emit("leave", "{{ PIN }}");
                 })
                 socket.on("message", (data) => {
-                    if ("{{ current_user.type }}" === "lecturer") {
-                        $('#players').append($('<p>').text(data));
-                    }
+                    $('#players').append($('<p>').text(data));
                 })
             })
 
@@ -44,19 +42,20 @@
             }
 
             let questions = {{ the_quiz|safe }};
-            let current_question = JSON.parse(JSON.stringify(questions[questions.current]));
+            let currentQuestion = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
-            let student_answers = {"quiz_id": {{quiz_id}}};
-            let user_choice;
+            let questionLaunchTime;
+            let userChoice;
+            let studentAnswers = {"quiz_id": {{quiz_id}}};
 
             $(window).on('load', () => {
                 socket.on("show-finish-quiz", (top_three) => {
                     $('#onGoingQuestion').hide();
                     $('#quizFinish').show();
-                    let the_tags = document.getElementById("quizFinish").getElementsByTagName("span");
+                    let theTags = document.getElementById("quizFinish").getElementsByTagName("span");
                     for (let i = 0; i < Object.keys(top_three).length * 2 - 1; i += 2) {
-                        the_tags[i].innerText = Object.keys(top_three)[i / 2];
-                        the_tags[i + 1].innerText = top_three[Object.keys(top_three)[i / 2]];
+                        theTags[i].innerText = Object.keys(top_three)[i / 2];
+                        theTags[i + 1].innerText = top_three[Object.keys(top_three)[i / 2]];
                     }
                 })
                 socket.on("show-question-block", () => {
@@ -76,66 +75,68 @@
                     document.getElementById('beginCountdownText').innerText = "10";
                     document.getElementById(answer).setAttribute("class", "answer");
                     if ("{{ current_user.type}}" === "student") {
-                        if (!(user_choice === undefined) && !(user_choice === answer)) {
-                            document.getElementById(user_choice).setAttribute("class", "wrong");
+                        if (!(userChoice === undefined) && !(userChoice === answer)) {
+                            document.getElementById(userChoice).setAttribute("class", "wrong");
                         } else {
-                            socket.emit("calculate-rank-score", "{{ current_user.username }}", Date.now(), true);
+                            socket.emit("calculate-rank-score", questionLaunchTime, Date.now(), false);
                         }
                     }
                 })
                 socket.on("receive-one-second", () => {
-                    let timeleft = Number(document.getElementById('beginCountdown').value);
-                    timeleft = Number(document.getElementById('beginCountdown').value) - 1;
+                    let timeLeft = Number(document.getElementById('beginCountdown').value);
+                    timeLeft = Number(document.getElementById('beginCountdown').value) - 1;
                     return new Promise((resolve, reject) => {
-                        document.getElementById('beginCountdown').value = timeleft;
-                        document.getElementById('beginCountdownText').textContent = timeleft.toString();
-                        if (timeleft === 0) {
+                        document.getElementById('beginCountdown').value = timeLeft;
+                        document.getElementById('beginCountdownText').textContent = timeLeft.toString();
+                        if (timeLeft === 0) {
                             socket.emit("ask-reset-countdown", "{{ PIN }}");
                         }
                     });
                 })
-                socket.on("show-populate-scoreboard", (rank_scores) => {
+                socket.on("show-populate-scoreboard", (rankScores) => {
                     $('#checkScoreBoard').hide();
                     $('#onGoingQuestion').hide();
                     $('#scoreBoard').show();
                     $('#nextBtn').show();
-                    rank_scores = getDescendingSortedHash(rank_scores);
+                    rankScores = getDescendingSortedHash(rankScores);
                     let html = "";
-                    for (let i = 0; i < Object.keys(rank_scores).length; i++) {
-                        html = "<tr><td>" + (i + 1) + "</td><td>" + Object.keys(rank_scores)[i] + "</td>" +
-                            "<td>" + rank_scores[Object.keys(rank_scores)[i]] + "</td></tr>";
+                    for (let i = 0; i < Object.keys(rankScores).length; i++) {
+                        html = "<tr><td>" + (i + 1) + "</td><td>" + Object.keys(rankScores)[i] + "</td>" +
+                            "<td>" + rankScores[Object.keys(rankScores)[i]] + "</td></tr>";
                         document.getElementById("scoreBoardTable").innerHTML += html;
                     }
                 })
                 socket.on("show-question-content", () => {
-                    answer = current_question.answer;
-                    document.getElementById('question').innerHTML = current_question.question;
-                    document.getElementById('A').value = current_question.choice_a;
-                    document.getElementById('B').value = current_question.choice_b;
-                    document.getElementById('C').value = current_question.choice_c;
-                    document.getElementById('D').value = current_question.choice_d;
+                    questionLaunchTime = Date.now();
+                    answer = currentQuestion.answer;
+                    document.getElementById('question').innerHTML = currentQuestion.question;
+                    document.getElementById('A').value = currentQuestion.choice_a;
+                    document.getElementById('B').value = currentQuestion.choice_b;
+                    document.getElementById('C').value = currentQuestion.choice_c;
+                    document.getElementById('D').value = currentQuestion.choice_d;
                 })
                 socket.on("show-next-question", (rank_scores) => {
+                    questionLaunchTime = Date.now();
                     document.getElementById('scoreBoardTable').innerHTML = "<caption>Score Board</caption><thead><tr><th>#</th><th>Usernames</th>" +
                         "<th>Score</th></tr></thead>";
                     $('#scoreBoard').hide();
                     $('#nextBtn').hide();
                     socket.emit("ask-prevent-choice", "{{ PIN }}");
-                    let next_question = questions.next();
-                    if (!!next_question) {
-                        current_question = JSON.parse(JSON.stringify(next_question));
+                    let nextQuestion = questions.next();
+                    if (!!nextQuestion) {
+                        currentQuestion = JSON.parse(JSON.stringify(nextQuestion));
                         for (let letter in abcd) {
                             document.getElementById(abcd[letter]).removeAttribute("class");
                         }
                         socket.emit("ask-question-block", "{{ PIN }}");
-                        socket.emit("ask-question-content", Date.now(), "{{ PIN }}");
+                        socket.emit("ask-question-content", "{{ PIN }}");
                     } else {
                         if ("{{ current_user.type }}" === "student") {
-                            student_answers["rank_score"] = rank_scores["{{ current_user.username }}"]
+                            studentAnswers["rank_score"] = rank_scores["{{ current_user.username }}"]
                             fetch(`/send_quiz_result`, {
                                 method: "POST",
                                 credentials: "include",
-                                body: JSON.stringify(student_answers),
+                                body: JSON.stringify(studentAnswers),
                                 cache: "no-cache",
                                 headers: new Headers({
                                     "content-type": "application/json"
@@ -146,13 +147,10 @@
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
-                    student_answers[current_question.id] = choice === answer;
-                    if (choice === answer) {
-                        socket.emit("calculate-rank-score", "{{ current_user.username }}", Date.now());
-                    } else {
-                        socket.emit("calculate-rank-score", "{{ current_user.username }}", Date.now(), true);
-                    }
-                    user_choice = choice;
+                    let isCorrect = choice === answer;
+                    studentAnswers[currentQuestion.id] = isCorrect;
+                    socket.emit("calculate-rank-score", questionLaunchTime, Date.now(), isCorrect);
+                    userChoice = choice;
                     document.getElementById(choice).setAttribute("class", "selected");
                     document.addEventListener("click", handler, true);
                 })
@@ -161,7 +159,7 @@
                 }
                 $('#startBtn').on('click', () => {
                     socket.emit("ask-question-block", "{{ PIN }}");
-                    socket.emit("ask-question-content", Date.now(), "{{ PIN }}");
+                    socket.emit("ask-question-content", "{{ PIN }}");
                     socket.emit("ask-countdown-block", "{{ PIN }}");
                     socket.emit("ask-countdown", "{{ PIN }}");
                 })
@@ -170,7 +168,7 @@
                 })
                 $('#nextBtn').on('click', () => {
                     $('#nextBtn').hide();
-                    socket.emit("ask-next-question", Date.now(), "{{ PIN }}");
+                    socket.emit("ask-next-question", "{{ PIN }}");
                     if (!(questions.current === (questions.length - 1))) {
                         socket.emit("ask-countdown-block", "{{ PIN }}");
                         socket.emit("ask-countdown", "{{ PIN }}");

@@ -39,4 +39,4 @@ INSERT INTO question(`id`, `quiz_id`, `question`, `choice_a`, `choice_b`, `choic
 VALUES (4, 1, 'Do you think our site is awesome?', 'Hell yes, looks awesome on my 144P palm PDA',
         'Nah, looks lame on my ProMotion screen', 'What?', 'Duh....', 'A');
 INSERT INTO score(`id`, `quiz_id`, `score`, `rank_score`, `student_id`)
-VALUES (1, 1, 4, 3921, 2);
+VALUES (1, 1, 3, 3921, 2);

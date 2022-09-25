@@ -19,7 +19,6 @@ PIN_LENGTH = 6
 COUNTDOWN = 10
 GAP_ANSWERING_TIME = 2
 
-question_launch_time = 0
 current_rank_scores = {}
 total_players = []
 
@@ -27,7 +26,7 @@ total_players = []
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    form = JoinQuizForm()  # arg.request - from url, url - ?  # 有form的时候就直接从forms.py里get前端input
+    form = JoinQuizForm()
     if form.validate_on_submit():
         quiz = Quiz.query.filter_by(pin=form.pin.data).first()  # get quiz from db
         if quiz:
@@ -225,20 +224,18 @@ def receive_grade():
     # reset pin after quiz finished
     current_quiz.pin = None
     db.session.commit()
-    global current_rank_scores
-    global total_players
     total_players.append(current_user.id)
     current_rank_scores.pop(current_user.username)
     return "grade saved!"
 
 
 @socketio.on('connect')
-def test_connect():
+def connect():
     print(f"{current_user.type} {current_user.username} connected.")
 
 
 @socketio.on('disconnect')
-def test_disconnect():
+def disconnect():
     print(f"{current_user.type} {current_user.username} disconnected.")
 
 
@@ -256,43 +253,19 @@ def on_leave(pin):
     send(f"Sneaky {current_user.username} has quietly left the room.", to=pin)
 
 
-@socketio.on('ask-question-block')
+@socketio.on("ask-question-block")
 def question_block(pin):
     emit("show-question-block", to=pin)
 
 
 @socketio.on("ask-question-content")
-def question_content(time_stamp, pin):
-    global question_launch_time
-    question_launch_time = time_stamp
+def question_content(pin):
     emit("show-question-content", to=pin)
 
 
 @socketio.on("ask-next-question")
-def next_question(time_stamp, pin):
-    global question_launch_time
-    global current_rank_scores
-    question_launch_time = time_stamp
+def next_question(pin):
     emit("show-next-question", current_rank_scores, to=pin)
-
-
-@socketio.on("ask-finish-quiz")
-def finish_quiz(quiz_id, pin):
-    while current_rank_scores:
-        pass
-    score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
-        Score.student_id == User.id).filter(
-        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(
-        3 if len(total_players) >= 3 else len(total_players)).all()
-    top_three = {}
-    for row in score_join_user:
-        top_three[row[1].username] = row[0].rank_score
-
-    i = 1
-    while len(top_three) < 3:
-        top_three["Missing Player " + str(i)] = "Nothing"
-        i += 1
-    emit("show-finish-quiz", top_three, to=pin)
 
 
 @socketio.on("ask-choice-A")
@@ -315,22 +288,6 @@ def choice_d():
     emit("show-select-choice", 'D')
 
 
-@socketio.on("calculate-rank-score")
-def calculate_rank_score(username, time_answered, is_wrong=False):
-    global current_rank_scores
-    rank_score = 0 if is_wrong else round(
-        ((COUNTDOWN + GAP_ANSWERING_TIME - (time_answered - question_launch_time) / 1000) / COUNTDOWN) * 1000)
-    if username not in current_rank_scores:
-        current_rank_scores[username] = 0
-    current_rank_scores[username] += rank_score
-
-
-@socketio.on("ask-scoreboard")
-def populate_scoreboard(pin):
-    global current_rank_scores
-    emit("show-populate-scoreboard", current_rank_scores, to=pin)
-
-
 @socketio.on("ask-prevent-choice")
 def prevent_choice(pin):
     emit("receive-enable-choice", to=pin)
@@ -351,3 +308,38 @@ def one_second(pin):
 @socketio.on("ask-reset-countdown")
 def reset_countdown(pin):
     emit("receive-reset-countdown", to=pin)
+
+
+@socketio.on("calculate-rank-score")
+def calculate_rank_score(question_launch_time, time_answered, is_correct):
+    username = current_user.username
+    rank_score = round(
+        ((COUNTDOWN + GAP_ANSWERING_TIME - (
+                    time_answered - question_launch_time) / 1000) / COUNTDOWN) * 1000) if is_correct else 0
+    if username not in current_rank_scores:
+        current_rank_scores[username] = 0
+    current_rank_scores[username] += rank_score
+
+
+@socketio.on("ask-scoreboard")
+def populate_scoreboard(pin):
+    emit("show-populate-scoreboard", current_rank_scores, to=pin)
+
+
+@socketio.on("ask-finish-quiz")
+def finish_quiz(quiz_id, pin):
+    while current_rank_scores:
+        pass
+    score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
+        Score.student_id == User.id).filter(
+        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(
+        3 if len(total_players) >= 3 else len(total_players)).all()
+    top_three = {}
+    for row in score_join_user:
+        top_three[row[1].username] = row[0].rank_score
+
+    i = 1
+    while len(top_three) < 3:
+        top_three["Missing Player " + str(i)] = "Nothing"
+        i += 1
+    emit("show-finish-quiz", top_three, to=pin)
