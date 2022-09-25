@@ -5,7 +5,7 @@ import time
 
 from flask import render_template, request, redirect, url_for
 from flask_login import current_user, login_user, logout_user, login_required
-from flask_socketio import emit, send
+from flask_socketio import emit, send, join_room, leave_room
 from sqlalchemy import desc
 from werkzeug.urls import url_parse
 
@@ -232,40 +232,58 @@ def receive_grade():
     return "grade saved!"
 
 
-@socketio.on('message')
-def handle_message(message):
-    print("Received message:" + message)
-    if message != "User connected!":
-        send(message, broadcast=True)
+@socketio.on('connect')
+def test_connect():
+    print(f"{current_user.type} {current_user.username} connected.")
+
+
+@socketio.on('disconnect')
+def test_disconnect():
+    print(f"{current_user.type} {current_user.username} disconnected.")
+
+
+@socketio.on('join')
+def on_join(pin):
+    join_room(pin)
+    if current_user.type == "lecturer":
+        send(f"Lecturer {current_user.username} initiates a game!", to=pin)
+    send(f"{current_user.type.capitalize()} {current_user.username} has slided into this game room.", to=pin)
+
+
+@socketio.on('leave')
+def on_leave(pin):
+    leave_room(pin)
+    send(f"Sneaky {current_user.username} has quietly left the room.", to=pin)
 
 
 @socketio.on('ask-question-block')
-def question_block():
-    emit("show-question-block", broadcast=True)
+def question_block(pin):
+    emit("show-question-block", to=pin)
 
 
 @socketio.on("ask-question-content")
-def question_content(time_stamp):
+def question_content(time_stamp, pin):
     global question_launch_time
     question_launch_time = time_stamp
-    emit("show-question-content", broadcast=True)
+    emit("show-question-content", to=pin)
 
 
 @socketio.on("ask-next-question")
-def next_question(time_stamp):
+def next_question(time_stamp, pin):
     global question_launch_time
     global current_rank_scores
     question_launch_time = time_stamp
-    emit("show-next-question", current_rank_scores, broadcast=True)
+    emit("show-next-question", current_rank_scores, to=pin)
 
 
 @socketio.on("ask-finish-quiz")
-def finish_quiz(quiz_id):
+def finish_quiz(quiz_id, pin):
     while current_rank_scores:
         pass
     score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
         Score.student_id == User.id).filter(
-        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(3 if len(total_players) >= 3 else len(total_players)).all()
+        Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(
+        3 if len(total_players) >= 3 else len(total_players)).all()
     top_three = {}
     for row in score_join_user:
         top_three[row[1].username] = row[0].rank_score
@@ -274,7 +292,7 @@ def finish_quiz(quiz_id):
     while len(top_three) < 3:
         top_three["Missing Player " + str(i)] = "Nothing"
         i += 1
-    emit("show-finish-quiz", top_three, broadcast=True)
+    emit("show-finish-quiz", top_three, to=pin)
 
 
 @socketio.on("ask-choice-A")
@@ -284,7 +302,7 @@ def choice_a():
 
 @socketio.on("ask-choice-B")
 def choice_b():
-    emit("show-select-choice", 'B', )
+    emit("show-select-choice", 'B')
 
 
 @socketio.on("ask-choice-C")
@@ -308,28 +326,28 @@ def calculate_rank_score(username, time_answered, is_wrong=False):
 
 
 @socketio.on("ask-scoreboard")
-def populate_scoreboard():
+def populate_scoreboard(pin):
     global current_rank_scores
-    emit("show-populate-scoreboard", current_rank_scores, broadcast=True)
+    emit("show-populate-scoreboard", current_rank_scores, to=pin)
 
 
 @socketio.on("ask-prevent-choice")
-def prevent_choice():
-    emit("receive-enable-choice", broadcast=True)
+def prevent_choice(pin):
+    emit("receive-enable-choice", to=pin)
 
 
 @socketio.on("ask-countdown-block")
-def show_countdown():
-    emit("show-countdown-block", broadcast=True)
+def show_countdown(pin):
+    emit("show-countdown-block", to=pin)
 
 
 @socketio.on("ask-countdown")
-def one_second():
+def one_second(pin):
     for i in range(COUNTDOWN, 0, -1):
         time.sleep(1)
-        emit("receive-one-second", broadcast=True)
+        emit("receive-one-second", to=pin)
 
 
 @socketio.on("ask-reset-countdown")
-def reset_countdown():
-    emit("receive-reset-countdown", broadcast=True)
+def reset_countdown(pin):
+    emit("receive-reset-countdown", to=pin)

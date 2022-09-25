@@ -19,9 +19,12 @@
 
             $(document).ready(() => {
                 socket.on('connect', () => {
-                    socket.send("User connected!");
+                    socket.emit("join", "{{ PIN }}");
                 })
-                socket.on('message', (data) => {
+                socket.on("disconnect", () => {
+                    socket.emit("leave", "{{ PIN }}");
+                })
+                socket.on("message", (data) => {
                     if ("{{ current_user.type }}" === "lecturer") {
                         $('#players').append($('<p>').text(data));
                     }
@@ -87,7 +90,7 @@
                         document.getElementById('beginCountdown').value = timeleft;
                         document.getElementById('beginCountdownText').textContent = timeleft.toString();
                         if (timeleft === 0) {
-                            socket.emit("ask-reset-countdown");
+                            socket.emit("ask-reset-countdown", "{{ PIN }}");
                         }
                     });
                 })
@@ -113,21 +116,19 @@
                     document.getElementById('D').value = current_question.choice_d;
                 })
                 socket.on("show-next-question", (rank_scores) => {
-                    html = "<caption>Score Board</caption><thead><tr><th>#</th><th>Usernames</th>" +
-                            "<th>Score</th></tr></thead>";
-                    document.getElementById('scoreBoardTable').innerHTML = html;
+                    document.getElementById('scoreBoardTable').innerHTML = "<caption>Score Board</caption><thead><tr><th>#</th><th>Usernames</th>" +
+                        "<th>Score</th></tr></thead>";
                     $('#scoreBoard').hide();
                     $('#nextBtn').hide();
-                    socket.emit("ask-prevent-choice");
+                    socket.emit("ask-prevent-choice", "{{ PIN }}");
                     let next_question = questions.next();
                     if (!!next_question) {
                         current_question = JSON.parse(JSON.stringify(next_question));
-                        document.getElementById("A").removeAttribute("class");
-                        document.getElementById("B").removeAttribute("class");
-                        document.getElementById("C").removeAttribute("class");
-                        document.getElementById("D").removeAttribute("class");
-                        socket.emit("ask-question-block");
-                        socket.emit("ask-question-content", Date.now());
+                        for (let letter in abcd) {
+                            document.getElementById(abcd[letter]).removeAttribute("class");
+                        }
+                        socket.emit("ask-question-block", "{{ PIN }}");
+                        socket.emit("ask-question-content", Date.now(), "{{ PIN }}");
                     } else {
                         if ("{{ current_user.type }}" === "student") {
                             student_answers["rank_score"] = rank_scores["{{ current_user.username }}"]
@@ -141,7 +142,7 @@
                                 })
                             })
                         }
-                        socket.emit("ask-finish-quiz", "{{ quiz_id }}");
+                        socket.emit("ask-finish-quiz", "{{ quiz_id }}", "{{ PIN }}");
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
@@ -155,27 +156,24 @@
                     document.getElementById(choice).setAttribute("class", "selected");
                     document.addEventListener("click", handler, true);
                 })
-                if ("{{ current_user.type }}" === "lecturer") {
-                    socket.send("Yeah-oo! Lecturer {{ current_user.username }} has initiated the game!\r");
-                } else {
+                if ("{{ current_user.type }}" === "student") {
                     $('#startBtn').hide();
-                    socket.send("Kaboom!!! Student {{ current_user.username }} has joined the game!\r");
                 }
                 $('#startBtn').on('click', () => {
-                    socket.emit("ask-question-block");
-                    socket.emit("ask-question-content", Date.now());
-                    socket.emit("ask-countdown-block");
-                    socket.emit("ask-countdown");
+                    socket.emit("ask-question-block", "{{ PIN }}");
+                    socket.emit("ask-question-content", Date.now(), "{{ PIN }}");
+                    socket.emit("ask-countdown-block", "{{ PIN }}");
+                    socket.emit("ask-countdown", "{{ PIN }}");
                 })
                 $('#checkScoreBoard').on('click', () => {
-                    socket.emit("ask-scoreboard");
+                    socket.emit("ask-scoreboard", "{{ PIN }}");
                 })
                 $('#nextBtn').on('click', () => {
                     $('#nextBtn').hide();
-                    socket.emit("ask-next-question", Date.now());
+                    socket.emit("ask-next-question", Date.now(), "{{ PIN }}");
                     if (!(questions.current === (questions.length - 1))) {
-                        socket.emit("ask-countdown-block");
-                        socket.emit("ask-countdown");
+                        socket.emit("ask-countdown-block", "{{ PIN }}");
+                        socket.emit("ask-countdown", "{{ PIN }}");
                     }
                 })
                 if ("{{ current_user.type }}" === "student") {
