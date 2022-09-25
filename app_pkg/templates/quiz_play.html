@@ -41,11 +41,16 @@
                 return resultHash;
             }
 
+            function handler(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
             let questions = {{ the_quiz|safe }};
             let currentQuestion = JSON.parse(JSON.stringify(questions[questions.current]));
             let answer;
             let questionLaunchTime;
             let userChoice;
+
             let studentAnswers = {"quiz_id": {{quiz_id}}};
 
             $(window).on('load', () => {
@@ -133,17 +138,10 @@
                     } else {
                         if ("{{ current_user.type }}" === "student") {
                             studentAnswers["rank_score"] = rank_scores["{{ current_user.username }}"]
-                            fetch(`/send_quiz_result`, {
-                                method: "POST",
-                                credentials: "include",
-                                body: JSON.stringify(studentAnswers),
-                                cache: "no-cache",
-                                headers: new Headers({
-                                    "content-type": "application/json"
-                                })
-                            })
+                            socket.emit("send-answer", studentAnswers, "{{ PIN }}");
+                        } else {
+                            socket.emit("ask-finish-quiz", "{{ quiz_id }}", "{{ PIN }}");
                         }
-                        socket.emit("ask-finish-quiz", "{{ quiz_id }}", "{{ PIN }}");
                     }
                 })
                 socket.on("show-select-choice", (choice) => {
@@ -154,9 +152,6 @@
                     document.getElementById(choice).setAttribute("class", "selected");
                     document.addEventListener("click", handler, true);
                 })
-                if ("{{ current_user.type }}" === "student") {
-                    $('#startBtn').hide();
-                }
                 $('#exitRoomBtn').on('click', () => {
                     socket.emit("leave", "{{ PIN }}");
                 })
@@ -178,6 +173,9 @@
                     }
                 })
                 if ("{{ current_user.type }}" === "student") {
+                    $('#startBtn').hide();
+                }
+                if ("{{ current_user.type }}" === "student") {
                     $('#A').on('click', () => {
                         socket.emit("ask-choice-A");
                     })
@@ -192,11 +190,6 @@
                     })
                 }
             })
-
-            function handler(e) {
-                e.stopPropagation();
-                e.preventDefault();
-            }
         </script>
     </head>
     <body id="quizPlay">

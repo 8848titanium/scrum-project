@@ -19,7 +19,6 @@ PIN_LENGTH = 6
 COUNTDOWN = 10
 GAP_ANSWERING_TIME = 2
 
-total_players = []
 room_to_player = {}
 
 
@@ -307,10 +306,29 @@ def populate_scoreboard(pin):
     emit("show-populate-scoreboard", room_to_player[pin], to=pin)
 
 
+@socketio.on("send-answer")
+def receive_grade(student_answers, pin):
+    print(student_answers)
+    quiz_id = student_answers.pop("quiz_id")
+    rank_score = student_answers.pop("rank_score")
+    current_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
+    total_mark = sum(student_answers.values())
+    if score:
+        score.score = total_mark
+        score.rank_score = rank_score
+    else:
+        score = Score(student_id=current_user.id, quiz_id=current_quiz.id, score=total_mark, rank_score=rank_score)
+        db.session.add(score)
+    db.session.commit()
+    room_to_player[pin][current_user.username] = None
+
+
 @socketio.on("ask-finish-quiz")
 def finish_quiz(quiz_id, pin):
-    while room_to_player[pin]:
+    while any(room_to_player[pin].values()):
         pass
+    total_players = [user.id for user in User.query.filter(User.username.in_(room_to_player[pin].keys()))]
     score_join_user = db.session.query(Score, User).filter(Score.quiz_id == quiz_id).filter(
         Score.student_id == User.id).filter(
         Score.student_id.in_(total_players)).filter(User.id.in_(total_players)).order_by(desc(Score.rank_score)).limit(
@@ -324,29 +342,8 @@ def finish_quiz(quiz_id, pin):
         top_three["Missing Player " + str(i)] = "Nothing"
         i += 1
     emit("show-finish-quiz", top_three, to=pin)
-    # print(room_to_player.pop(pin))
-    print(room_to_player)
-
-
-@app.route("/send_quiz_result", methods=["get", "post"])
-@login_required
-def receive_grade():
-    mark_on_questions = request.get_json()
-    quiz_id = mark_on_questions.pop("quiz_id")
-    rank_score = mark_on_questions.pop("rank_score")
-    current_quiz = Quiz.query.filter_by(id=quiz_id).first()
-    score = Score.query.filter_by(student_id=current_user.id, quiz_id=current_quiz.id).first()
-    total_mark = sum(mark_on_questions.values())
-    if score:
-        score.score = total_mark
-        score.rank_score = rank_score
-    else:
-        score = Score(student_id=current_user.id, quiz_id=current_quiz.id, score=total_mark, rank_score=rank_score)
-        db.session.add(score)
-    db.session.commit()
     # reset pin after quiz finished
-    total_players.append(current_user.id)
-    room_to_player[current_quiz.pin].pop(current_user.username)
-    # current_quiz.pin = None
-    # db.session.commit()
-    return "grade saved!"
+    Quiz.query.filter_by(id=quiz_id).first().pin = None
+    db.session.commit()
+    print(room_to_player.pop(pin))
+    print(room_to_player)
