@@ -429,7 +429,7 @@ nav ul li {
     text-decoration: none;
 }
 
-#historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #startBtn,
+#historyBtn, #addQuizBtn, #add-btn_start, #del-quiz-btn, #go-back-btn, #exitRoomBtn, #startBtn,
 #editQuestionForm input[type="submit"], #nextBtn, #checkScoreBoard, #quizFinish input[type="button"] {
     font-size: 18px;
     font-weight: bolder;
@@ -465,6 +465,11 @@ nav ul li {
 }
 
 #go-back-btn {
+    left: 5%;
+    bottom: 5%;
+}
+
+#exitRoomBtn {
     left: 5%;
     bottom: 5%;
 }
