@@ -1,4 +1,5 @@
-# This is a learning application developed by Group A3.
+# This is a Kahoot clone application developed by Group A3.
+## Site runs on Flask with socketio supports for multi-client interactions.
 
 ## Group A3 members:
 
@@ -25,6 +26,9 @@
 * Junwen Zhang([@zhangjunwenzzz](https://github.com/zhangjunwenzzz))
 * Jiawei Guo([@8848titanium](https://github.com/8848titanium))
 * Jiaqi Zhao([@LX-Vincent](https://github.com/LX-Vincent))
+
+**Production Site Deployment**
+* Jiawei Guo([@8848titanium](https://github.com/8848titanium))
 
 ## Requirements:
 
